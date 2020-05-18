@@ -1,0 +1,67 @@
+import com.diffplug.gradle.spotless.SpotlessPlugin
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
+
+plugins {
+    id("com.diffplug.gradle.spotless")
+}
+
+description = "Gradle Java Build Template"
+
+defaultTasks("build")
+
+val now: OffsetDateTime by extra(OffsetDateTime.now())
+extra["buildDate"] = DateTimeFormatter.ISO_LOCAL_DATE.format(now)
+extra["buildTime"] = DateTimeFormatter.ofPattern("HH:mm:ss.SSSZ").format(now)
+
+allprojects {
+    group = "io.mateo"
+
+    apply {
+        plugin<SpotlessPlugin>()
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor(60, TimeUnit.MINUTES)
+    }
+}
+
+subprojects {
+    spotless {
+        java {
+            licenseHeaderFile(rootProject.file("src/spotless/apache-license-2.0.java"), "(package|import|open|module)")
+            importOrderFile(rootProject.file("src/eclipse/eclipse.importorder"))
+            eclipse().configFile(rootProject.file("src/eclipse/eclipse-formatter-settings.xml"))
+            removeUnusedImports()
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
+        kotlin {
+            ktfmt()
+            endWithNewline()
+            trimTrailingWhitespace()
+        }
+        kotlinGradle {
+            ktlint()
+            endWithNewline()
+            trimTrailingWhitespace()
+        }
+    }
+}
+
+spotless {
+    kotlinGradle {
+        ktlint()
+        endWithNewline()
+        trimTrailingWhitespace()
+    }
+    format("documentation") {
+        target("**/*.adoc", "**/*.md")
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}
