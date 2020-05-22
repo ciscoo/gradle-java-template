@@ -1,0 +1,17 @@
+= Gradle Java Template
+
+Foundation for building either Java projects or Java libraries. As the name implies, it utilizes Gradle as the build tool.
+
+This project is primarily for personal projects, but others may find it useful.
+
+== Conventions
+
+The majority of the build logic is contained within the https://docs.gradle.org/current/userguide/organizing_gradle_projects.html#sec:build_sources[`buildSrc`] directory. Many of conventions here are based on the conventions from JUnit, Spring Boot, Spring Framework, and personal opinons gathered from professional work.
+
+== Getting Started
+
+Clone or download a zip and update the following:
+
+* Root project name in `settings.gradle.kts`
+* Project description in `build.gradle.kts`
+* POM configuration in `PublishingConventionsPlugin`
