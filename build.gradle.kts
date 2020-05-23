@@ -11,8 +11,8 @@ description = "Gradle Java Build Template"
 defaultTasks("build")
 
 val now: OffsetDateTime by extra(OffsetDateTime.now())
-extra["buildDate"] = DateTimeFormatter.ISO_LOCAL_DATE.format(now)
-extra["buildTime"] = DateTimeFormatter.ofPattern("HH:mm:ss.SSSZ").format(now)
+val buildDate: String by extra(DateTimeFormatter.ISO_LOCAL_DATE.format(now))
+val buildTime: String by extra(DateTimeFormatter.ofPattern("HH:mm:ss.SSSZ").format(now))
 
 allprojects {
     group = "io.mateo"
