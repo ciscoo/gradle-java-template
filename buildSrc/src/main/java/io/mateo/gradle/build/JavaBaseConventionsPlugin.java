@@ -45,7 +45,7 @@ public class JavaBaseConventionsPlugin implements Plugin<Project> {
 				jar.metaInf((metaInf) -> copyLegalFiles(evaluated, metaInf));
 				jar.manifest((manifest) -> {
 					Map<String, Object> attributes = new TreeMap<>();
-					ExtraPropertiesExtension extra = evaluated.getExtensions().getExtraProperties();
+					ExtraPropertiesExtension extra = evaluated.getRootProject().getExtensions().getExtraProperties();
 					attributes.put("Automatic-Module-Name", evaluated.getName().replace("-", "."));
 					attributes.put("Build-Date", extra.get("buildDate"));
 					attributes.put("Build-Time", extra.get("buildTime"));
