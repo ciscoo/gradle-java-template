@@ -134,11 +134,10 @@ public class JavaBaseConventionsPlugin implements Plugin<Project> {
 		return textResource;
 	}
 
+	@SuppressWarnings("ResultOfMethodCallIgnored") // file rename
 	private File createLegalFile(File source, String filename) {
 		File legalFile = new File(source.getParentFile(), filename);
-		if (!source.renameTo(legalFile)) {
-			throw new GradleException("Failed to rename " + source.getName() + " to " + legalFile.getName());
-		}
+		source.renameTo(legalFile);
 		return legalFile;
 	}
 }
