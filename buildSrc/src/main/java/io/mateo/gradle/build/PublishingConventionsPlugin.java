@@ -40,7 +40,6 @@ public class PublishingConventionsPlugin implements Plugin<Project> {
 	private void configurePublishedArtifacts(Project project) {
 		project.getExtensions().configure(PublishingExtension.class, (publishing) -> {
 			publishing.getPublications().named(MAVEN_PUBLICATION_NAME, MavenPublication.class, (maven) -> {
-				maven.from(project.getComponents().getByName("java"));
 				maven.versionMapping((vm) -> vm.allVariants(VariantVersionMappingStrategy::fromResolutionResult));
 				maven.pom((pom) -> pom.getDescription().set(project.provider(() -> "Module " + project.getName())));
 			});
