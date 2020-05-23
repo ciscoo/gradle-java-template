@@ -40,15 +40,19 @@ subprojects {
             trimTrailingWhitespace()
             endWithNewline()
         }
-        kotlin {
-            ktfmt()
-            endWithNewline()
-            trimTrailingWhitespace()
-        }
         kotlinGradle {
             ktlint()
             endWithNewline()
             trimTrailingWhitespace()
+        }
+    }
+    if (pluginManager.hasPlugin("org.jetbrains.kotlin.jvm")) {
+        spotless {
+            kotlin {
+                ktfmt()
+                endWithNewline()
+                trimTrailingWhitespace()
+            }
         }
     }
 }
