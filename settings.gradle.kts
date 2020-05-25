@@ -1,5 +1,6 @@
 pluginManagement {
     plugins {
+        id("nebula.release") version "15.0.1"
         id("com.diffplug.gradle.spotless") version "3.30.0"
     }
 }

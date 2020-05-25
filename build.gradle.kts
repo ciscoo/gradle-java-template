@@ -3,6 +3,7 @@ import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
 plugins {
+    id("nebula.release")
     id("com.diffplug.gradle.spotless")
 }
 
