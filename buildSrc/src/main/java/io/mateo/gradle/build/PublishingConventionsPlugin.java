@@ -25,6 +25,8 @@ public class PublishingConventionsPlugin implements Plugin<Project> {
 	@Override
 	public void apply(Project project) {
 		PluginManager pluginManager = project.getPluginManager();
+		pluginManager.apply(MavenPublishPlugin.class);
+		pluginManager.apply(SigningPlugin.class);
 		project.getPluginManager().withPlugin("maven-publish", (plugin) -> {
 			ensureBuildBeforePublish(project);
 			configurePublications(project);
@@ -33,8 +35,6 @@ public class PublishingConventionsPlugin implements Plugin<Project> {
 		project.getPluginManager().withPlugin("signing", (plugin) -> {
 			configureSigningTasks(project);
 		});
-		pluginManager.apply(MavenPublishPlugin.class);
-		pluginManager.apply(SigningPlugin.class);
 	}
 
 	private void configurePublishedArtifacts(Project project) {
