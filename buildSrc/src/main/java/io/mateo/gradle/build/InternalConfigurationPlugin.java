@@ -5,8 +5,20 @@ import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.ConfigurationContainer;
+import org.gradle.api.plugins.JavaPlugin;
+import org.gradle.api.specs.Spec;
+
+import java.util.List;
 
 public class InternalConfigurationPlugin implements Plugin<Project> {
+
+	private static final Spec<Configuration> ALL_CLASSPATH_SPEC = (configuration) -> configuration.getName()
+			.endsWith("Classpath");
+
+	private static final Spec<Configuration> ANNOTATION_PROCESSOR_SPEC = (
+			configuration) -> JavaPlugin.ANNOTATION_PROCESSOR_CONFIGURATION_NAME.equals(configuration.getName());
+
+	private static final List<Spec<Configuration>> SPECS = List.of(ALL_CLASSPATH_SPEC, ANNOTATION_PROCESSOR_SPEC);
 
 	@Override
 	public void apply(Project project) {
@@ -21,8 +33,8 @@ public class InternalConfigurationPlugin implements Plugin<Project> {
 					internal.setCanBeConsumed(false);
 					internal.setCanBeResolved(false);
 				});
-		configurations.matching((configuration) -> configuration.getName().endsWith("Classpath"))
-				.configureEach((configuration) -> configuration.extendsFrom(internalConfiguration.get()));
+		SPECS.forEach((spec) -> configurations.matching(spec)
+				.configureEach((configuration) -> configuration.extendsFrom(internalConfiguration.get())));
 	}
 
 }
