@@ -1,13 +1,12 @@
 package io.mateo.gradle.build;
 
 import org.apache.commons.lang3.SystemUtils;
-import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.gradle.api.file.CopySpec;
 import org.gradle.api.plugins.ExtraPropertiesExtension;
 import org.gradle.api.plugins.JavaPluginExtension;
-import org.gradle.api.resources.TextResource;
+import org.gradle.api.tasks.Copy;
+import org.gradle.api.tasks.TaskProvider;
 import org.gradle.api.tasks.bundling.Jar;
 import org.gradle.api.tasks.compile.JavaCompile;
 import org.gradle.api.tasks.javadoc.Javadoc;
@@ -17,14 +16,10 @@ import org.gradle.external.javadoc.StandardJavadocDocletOptions;
 import org.gradle.testretry.TestRetryPlugin;
 import org.gradle.testretry.TestRetryTaskExtension;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import static java.util.Objects.requireNonNull;
 
 public class JavaBaseConventionsPlugin implements Plugin<Project> {
 
@@ -40,9 +35,14 @@ public class JavaBaseConventionsPlugin implements Plugin<Project> {
 	}
 
 	private void configureJarManifestConventions(Project project) {
+		TaskProvider<Copy> copyLegalFiles = project.getTasks().register("copyLegalFiles", Copy.class, (copy) -> {
+			copy.from(Path.of(project.getRootProject().file("buildSrc/src/main/resources").toURI()));
+			copy.include("NOTICE.txt", "LICENSE.txt");
+			copy.into(project.getLayout().getBuildDirectory().dir("legal"));
+		});
 		project.afterEvaluate((evaluated) -> {
 			evaluated.getTasks().withType(Jar.class).configureEach((jar) -> {
-				jar.metaInf((metaInf) -> copyLegalFiles(evaluated, metaInf));
+				jar.metaInf((metaInf) -> metaInf.from(copyLegalFiles));
 				jar.manifest((manifest) -> {
 					Map<String, Object> attributes = new TreeMap<>();
 					ExtraPropertiesExtension extra = evaluated.getRootProject().getExtensions().getExtraProperties();
@@ -112,32 +112,4 @@ public class JavaBaseConventionsPlugin implements Plugin<Project> {
 		});
 	}
 
-	private void copyLegalFiles(Project project, CopySpec metaInf) {
-		copyLegalFile(project, metaInf, "NOTICE.txt");
-		copyLegalFile(project, metaInf, "LICENSE.txt");
-	}
-
-	private void copyLegalFile(Project project, CopySpec metaInf, String filename) {
-		URL url = requireNonNull(getClass().getClassLoader().getResource(filename),
-				"Legal file does not exist: " + filename);
-		TextResource textResource = createLegalTextResource(project, url, filename);
-		metaInf.from(createLegalFile(textResource.asFile(), filename));
-	}
-
-	private TextResource createLegalTextResource(Project project, URL url, String filename) {
-		TextResource textResource;
-		try {
-			textResource = project.getResources().getText().fromUri(url.toURI());
-		} catch (URISyntaxException ex) {
-			throw new GradleException("Failed to copy " + filename, ex);
-		}
-		return textResource;
-	}
-
-	@SuppressWarnings("ResultOfMethodCallIgnored") // file rename
-	private File createLegalFile(File source, String filename) {
-		File legalFile = new File(source.getParentFile(), filename);
-		source.renameTo(legalFile);
-		return legalFile;
-	}
 }
