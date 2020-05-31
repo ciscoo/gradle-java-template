@@ -13,6 +13,7 @@ java {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72")
     implementation("org.gradle:test-retry-gradle-plugin:1.1.5")
     implementation("com.diffplug.spotless:spotless-plugin-gradle:3.30.0")
     implementation("commons-io:commons-io:2.4")
@@ -31,6 +32,10 @@ gradlePlugin {
     val javaLibraryConventions by plugins.creating {
         id = "io.mateo.java-library-conventions"
         implementationClass = "io.mateo.gradle.build.JavaLibraryConventionsPlugin"
+    }
+    val kotlinConventions by plugins.creating {
+        id = "io.mateo.kotlin-conventions"
+        implementationClass = "io.mateo.gradle.build.KotlinConventionsPlugin"
     }
     val publishedPlugin by plugins.creating {
         id = "io.mateo.published-artifact"
