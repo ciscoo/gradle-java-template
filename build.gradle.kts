@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter
 
 plugins {
     id("nebula.release")
-    id("com.diffplug.gradle.spotless")
+    id("com.diffplug.spotless")
 }
 
 description = "Gradle Java Build Template"
