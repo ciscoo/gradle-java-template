@@ -1,4 +1,3 @@
-import com.diffplug.gradle.spotless.SpotlessPlugin
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
@@ -19,7 +18,7 @@ allprojects {
     group = "io.mateo"
 
     apply {
-        plugin<SpotlessPlugin>()
+        plugin("com.diffplug.spotless")
     }
 
     repositories {
