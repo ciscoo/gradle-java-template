@@ -1,6 +1,6 @@
 plugins {
     `java-gradle-plugin`
-    id("com.diffplug.gradle.spotless") version "3.30.0"
+    id("com.diffplug.spotless") version "5.3.0"
 }
 
 repositories {
