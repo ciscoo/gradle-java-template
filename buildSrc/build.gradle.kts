@@ -14,7 +14,7 @@ java {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72")
-    implementation("org.gradle:test-retry-gradle-plugin:1.1.8")
+    implementation("org.gradle:test-retry-gradle-plugin:1.1.9")
     implementation("com.diffplug.spotless:spotless-plugin-gradle:5.1.1")
     implementation("commons-io:commons-io:2.7")
     implementation("org.apache.commons:commons-lang3:3.10")
