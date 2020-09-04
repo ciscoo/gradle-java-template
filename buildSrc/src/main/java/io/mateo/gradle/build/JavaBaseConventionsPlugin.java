@@ -98,6 +98,9 @@ public class JavaBaseConventionsPlugin implements Plugin<Project> {
 	private void configureJavaCompileConventions(Project project) {
 		project.getTasks().withType(JavaCompile.class).configureEach((compile) -> {
 			compile.getOptions().setEncoding("UTF-8");
+			if (Versions.jvmTarget.isJava9Compatible()) {
+				compile.getOptions().getRelease().set(Integer.valueOf(Versions.jvmTarget.getMajorVersion()));
+			}
 			// Useful for Spring libraries
 			List<String> compilerArgs = compile.getOptions().getCompilerArgs();
 			if (!compilerArgs.contains("-parameters")) {
@@ -108,7 +111,9 @@ public class JavaBaseConventionsPlugin implements Plugin<Project> {
 
 	private void configureJavaExtension(Project project) {
 		project.getExtensions().configure(JavaPluginExtension.class, (java) -> {
-			java.setSourceCompatibility(Versions.jvmTarget);
+			if (!Versions.jvmTarget.isJava9Compatible()) {
+				java.setSourceCompatibility(Versions.jvmTarget);
+			}
 		});
 	}
 
