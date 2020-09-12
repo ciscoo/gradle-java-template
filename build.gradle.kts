@@ -20,7 +20,7 @@ allprojects {
         mavenCentral()
     }
 
-    configurations.all {
+    configurations.configureEach {
         resolutionStrategy.cacheChangingModulesFor(60, TimeUnit.MINUTES)
     }
 }
