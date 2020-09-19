@@ -7,7 +7,7 @@ import java.util.Locale
 
 pluginManager.withPlugin("java-base") {
 	configure<JavaPluginExtension> {
-		if (Versions.jvmTarget.isJava9Compatible) {
+		if (!Versions.jvmTarget.isJava9Compatible) {
 			sourceCompatibility = Versions.jvmTarget
 		}
 	}
