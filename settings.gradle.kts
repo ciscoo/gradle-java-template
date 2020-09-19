@@ -1,7 +1,7 @@
 pluginManagement {
     plugins {
         id("nebula.release") version "15.1.0"
-        id("com.diffplug.spotless") version "5.5.0"
+        id("com.diffplug.spotless") version "5.5.2"
     }
 }
 
