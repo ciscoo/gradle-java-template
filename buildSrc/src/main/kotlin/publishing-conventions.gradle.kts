@@ -1,10 +1,11 @@
 pluginManager.withPlugin("maven-publish") {
 	tasks {
+		val buildTask = named(LifecycleBasePlugin.BUILD_TASK_NAME)
 		withType<PublishToMavenRepository>().configureEach {
-			dependsOn(named(LifecycleBasePlugin.BUILD_TASK_NAME))
+			dependsOn(buildTask)
 		}
 		withType<PublishToMavenLocal>().configureEach {
-			dependsOn(named(LifecycleBasePlugin.BUILD_TASK_NAME))
+			dependsOn(buildTask)
 		}
 	}
 	configure<PublishingExtension> {
