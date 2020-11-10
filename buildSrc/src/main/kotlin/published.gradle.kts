@@ -8,10 +8,10 @@ pluginManager.withPlugin("maven-publish") {
 		publications {
 			named<MavenPublication>("maven") {
 				if (isJavaProject) {
-					components.matching { name == "java" }.configureEach { from(this) }
+					components.matching { it.name == "java" }.configureEach { from(this) }
 				}
 				if (isJavaPlatform) {
-					components.matching { name == "javaPlatform"}.configureEach { from(this) }
+					components.matching { it.name == "javaPlatform"}.configureEach { from(this) }
 				}
 			}
 		}
