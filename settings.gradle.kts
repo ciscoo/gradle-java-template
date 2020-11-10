@@ -1,6 +1,6 @@
 pluginManagement {
     plugins {
-        id("com.diffplug.spotless") version "5.6.1"
+        id("com.diffplug.spotless") version "5.7.0"
     }
 }
 
