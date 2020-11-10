@@ -1,5 +1,4 @@
 plugins {
-    id("nebula.release")
     id("com.diffplug.spotless")
 }
 
