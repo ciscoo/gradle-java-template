@@ -25,7 +25,7 @@ spotless {
         endWithNewline()
     }
     kotlin {
-        indentWithTabs()
+        indentWithSpaces(4)
         endWithNewline()
         trimTrailingWhitespace()
         targetExclude("build/")
