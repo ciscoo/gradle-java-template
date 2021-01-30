@@ -1,24 +1,27 @@
-pluginManager.apply("java-base-conventions")
-pluginManager.withPlugin("java-library") {
-	configure<JavaPluginExtension> {
-		withJavadocJar()
-		withSourcesJar()
-	}
-	// https://docs.oracle.com/en/java/javase/14/docs/specs/man/javac.html
-	tasks {
-		named<JavaCompile>(JavaPlugin.COMPILE_JAVA_TASK_NAME) {
-			options.compilerArgs.addAll(listOf("-Xlint:all", "-Werror"))
-		}
-		named<JavaCompile>(JavaPlugin.COMPILE_TEST_JAVA_TASK_NAME) {
-			options.compilerArgs.addAll(listOf("-Xlint", "-Xlint:-overrides", "-Werror", "-parameters"))
-		}
-	}
+plugins {
+	id("java-conventions")
+	`java-library`
 }
 
-pluginManager.withPlugin("java-test-fixtures") {
-	components.named<AdhocComponentWithVariants>("java") {
-		listOf("testFixturesApiElements", "testFixturesRuntimeElements").forEach {
-			withVariantsFromConfiguration(configurations.getByName(it)) { skip() }
-		}
+java {
+	withJavadocJar()
+	withSourcesJar()
+}
+
+tasks {
+	// https://docs.oracle.com/en/java/javase/15/docs/specs/man/javac.html
+	compileJava {
+		options.compilerArgs.addAll(listOf(
+			"-Xlint:all", // Enable all warnings.
+			"-Werror" // Terminates compilation when warnings occur.
+		))
+	}
+	compileTestJava {
+		options.compilerArgs.addAll(listOf(
+			"-Xlint", // Enable all recommended warnings.
+			"-Xlint:-overrides", // Warns about issues related to method overrides.
+			"-Werror",
+			"-parameters" // Generates metadata for reflection on method parameters.
+		))
 	}
 }
