@@ -14,9 +14,8 @@ val rootProperties = `java.util`.Properties().apply {
 
 dependencies {
     implementation(kotlin("gradle-plugin"))
-    implementation("org.gradle:test-retry-gradle-plugin:1.1.9")
+    implementation("org.gradle:test-retry-gradle-plugin:${rootProperties["gradle-test-retry.version"]}")
     implementation("com.diffplug.spotless:spotless-plugin-gradle:${rootProperties["spotless.version"]}")
-    implementation("org.apache.commons:commons-lang3:3.11")
 }
 
 spotless {
