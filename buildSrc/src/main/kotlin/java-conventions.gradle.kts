@@ -5,6 +5,7 @@ import java.util.Locale
 
 plugins {
     id("spotless-conventions")
+    id("internal-configuration")
     id("org.gradle.test-retry") apply false
     java
 }
