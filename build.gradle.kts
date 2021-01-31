@@ -11,10 +11,6 @@ val versions: Versions by extra(Versions(project))
 allprojects {
     group = "io.mateo"
 
-    repositories {
-        mavenCentral()
-    }
-
     configurations.configureEach {
         resolutionStrategy.cacheChangingModulesFor(60, TimeUnit.MINUTES)
     }

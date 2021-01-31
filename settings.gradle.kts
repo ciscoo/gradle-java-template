@@ -7,3 +7,9 @@ rootProject.children.forEach {
         require(buildFile.isFile) { "$buildFile must exist" }
     }
 }
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
