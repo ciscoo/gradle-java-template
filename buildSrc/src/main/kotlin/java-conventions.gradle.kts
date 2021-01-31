@@ -10,6 +10,11 @@ plugins {
     java
 }
 
+configurations.configureEach {
+    resolutionStrategy.cacheDynamicVersionsFor(0, TimeUnit.SECONDS)
+    resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
+}
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(Versions.jvmTarget.majorVersion.toInt()))
