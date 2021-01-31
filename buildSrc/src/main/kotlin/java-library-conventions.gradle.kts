@@ -8,6 +8,10 @@ java {
     withSourcesJar()
 }
 
+dependencies {
+    "internal"(platform(project(":dependencies")))
+}
+
 tasks {
     // https://docs.oracle.com/en/java/javase/15/docs/specs/man/javac.html
     compileJava {
