@@ -18,6 +18,10 @@ dependencies {
     implementation("com.diffplug.spotless:spotless-plugin-gradle:${rootProperties["spotless.version"]}")
 }
 
+kotlinDslPluginOptions {
+    experimentalWarning.set(false)
+}
+
 spotless {
     kotlinGradle {
         ktlint()
