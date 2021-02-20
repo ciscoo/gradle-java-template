@@ -45,12 +45,14 @@ publishing {
                     }
                 }
             }
-            versionMapping {
-                usage(Usage.JAVA_API) {
-                    fromResolutionOf(JavaPlugin.RUNTIME_CLASSPATH_CONFIGURATION_NAME)
-                }
-                usage(Usage.JAVA_RUNTIME) {
-                    fromResolutionResult()
+            if (pluginManager.hasPlugin("java")) {
+                versionMapping {
+                    usage(Usage.JAVA_API) {
+                        fromResolutionOf(JavaPlugin.RUNTIME_CLASSPATH_CONFIGURATION_NAME)
+                    }
+                    usage(Usage.JAVA_RUNTIME) {
+                        fromResolutionResult()
+                    }
                 }
             }
         }
