@@ -11,8 +11,10 @@ plugins {
 
 configurations {
     configureEach {
-        resolutionStrategy.cacheDynamicVersionsFor(0, TimeUnit.SECONDS)
-        resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
+        resolutionStrategy {
+            cacheDynamicVersionsFor(0, TimeUnit.SECONDS)
+            cacheChangingModulesFor(0, TimeUnit.SECONDS)
+        }
     }
     val internal by registering {
         isVisible = false
