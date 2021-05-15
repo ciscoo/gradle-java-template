@@ -5,14 +5,26 @@ import java.util.Locale
 
 plugins {
     id("spotless-conventions")
-    id("internal-configuration")
     id("org.gradle.test-retry") apply false
     java
 }
 
-configurations.configureEach {
-    resolutionStrategy.cacheDynamicVersionsFor(0, TimeUnit.SECONDS)
-    resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
+configurations {
+    configureEach {
+        resolutionStrategy.cacheDynamicVersionsFor(0, TimeUnit.SECONDS)
+        resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS)
+    }
+    val internal by registering {
+        isVisible = false
+        isCanBeConsumed = false
+        isCanBeResolved = false
+    }
+    matching { it.name.endsWith("Classpath") }.configureEach {
+        extendsFrom(internal.get())
+    }
+    matching { it.name == JavaPlugin.ANNOTATION_PROCESSOR_CONFIGURATION_NAME }.configureEach {
+        extendsFrom(internal.get())
+    }
 }
 
 java {
