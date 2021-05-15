@@ -13,7 +13,7 @@ dependencies {
 }
 
 tasks {
-    // https://docs.oracle.com/en/java/javase/15/docs/specs/man/javac.html
+    // https://docs.oracle.com/en/java/javase/16/docs/specs/man/javac.html
     compileJava {
         options.compilerArgs.addAll(listOf(
             "-Xlint:all", // Enable all warnings.

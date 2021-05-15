@@ -43,7 +43,7 @@ java {
                 }
             }
         }
-        // https://docs.oracle.com/en/java/javase/15/docs/specs/man/javadoc.html
+        // https://docs.oracle.com/en/java/javase/16/docs/specs/man/javadoc.html
         withType<Javadoc>().configureEach {
             options {
                 memberLevel = JavadocMemberLevel.PROTECTED
