@@ -17,21 +17,3 @@ dependencies {
     implementation("org.gradle:test-retry-gradle-plugin:${rootProperties["gradle-test-retry.version"]}")
     implementation("com.diffplug.spotless:spotless-plugin-gradle:${rootProperties["spotless.version"]}")
 }
-
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
-}
-
-spotless {
-    kotlinGradle {
-        ktlint()
-        trimTrailingWhitespace()
-        endWithNewline()
-    }
-    kotlin {
-        indentWithSpaces(4)
-        endWithNewline()
-        trimTrailingWhitespace()
-        targetExclude("build/")
-    }
-}

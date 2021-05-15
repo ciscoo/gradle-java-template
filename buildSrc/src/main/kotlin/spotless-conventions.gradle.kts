@@ -3,11 +3,6 @@ plugins {
 }
 
 spotless {
-    kotlinGradle {
-        ktlint()
-        endWithNewline()
-        trimTrailingWhitespace()
-    }
     format("documentation") {
         target("**/*.adoc", "**/*.md")
         trimTrailingWhitespace()
