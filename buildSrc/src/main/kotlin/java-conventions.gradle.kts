@@ -9,6 +9,8 @@ plugins {
     java
 }
 
+group = "io.mateo"
+
 configurations {
     configureEach {
         resolutionStrategy {
