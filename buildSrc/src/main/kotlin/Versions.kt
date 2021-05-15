@@ -12,7 +12,7 @@ class Versions(private val project: Project) {
     operator fun get(name: String) = project.extra.get("$name.version") as String
 
     companion object {
-        val jvmTarget = JavaVersion.VERSION_15
+        val jvmTarget = JavaVersion.VERSION_16
         val jvmReleaseTarget = JavaVersion.VERSION_1_8
     }
 
