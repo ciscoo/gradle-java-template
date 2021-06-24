@@ -14,4 +14,4 @@ Clone or download a zip and update the following:
 
 * Root project name in `settings.gradle.kts`
 * Project description in `build.gradle.kts`
-* POM configuration in `publishing-conventions.gradle.kts`
+* POM configuration in `MavenPublishingConventions`

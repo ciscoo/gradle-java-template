@@ -1,5 +1,7 @@
+import io.mateo.build.Versions
+
 plugins {
-    `spotless-conventions`
+    id("io.mateo.build.code-style-conventions")
 }
 
 description = "Gradle Java Build Template"
