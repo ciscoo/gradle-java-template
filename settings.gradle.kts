@@ -1,3 +1,5 @@
+import org.gradle.api.internal.FeaturePreviews
+
 rootProject.name = "gradle-java-template"
 
 include("dependencies")
@@ -13,5 +15,11 @@ rootProject.children.forEach {
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
+    }
+}
+
+FeaturePreviews.Feature.values().forEach { feature ->
+    if (feature.isActive) {
+        enableFeaturePreview(feature.name)
     }
 }
