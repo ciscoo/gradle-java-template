@@ -14,6 +14,18 @@ dependencies {
     implementation(libs.gradle.springFormat)
 }
 
+spotless {
+    java {
+        licenseHeaderFile(file("../src/spotless/apache-license-2.0.java"))
+    }
+}
+
+tasks {
+    checkFormat {
+        dependsOn(spotlessCheck)
+    }
+}
+
 gradlePlugin {
     plugins {
         register("codeStyleConventions") {
