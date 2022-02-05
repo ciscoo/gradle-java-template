@@ -1,5 +1,3 @@
-import io.mateo.build.Versions
-
 plugins {
     id("io.mateo.build.code-style-conventions")
 }
