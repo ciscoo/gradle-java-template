@@ -7,5 +7,6 @@ javaPlatform {
 }
 
 dependencies {
-    // ...
+    api(platform(libs.springBootBom))
+    api(platform(libs.springCloudBom))
 }

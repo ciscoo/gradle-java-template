@@ -15,6 +15,10 @@ rootProject.children.forEach {
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
+        maven {
+            name = "springMilestone"
+            url = uri("https://repo.spring.io/milestone")
+        }
     }
 }
 
