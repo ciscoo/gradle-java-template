@@ -114,7 +114,6 @@ public class JavaConventions implements Plugin<Project> {
 	}
 
 	private void configureJavaConventions(Project project) {
-		project.setGroup("io.mateo");
 		project.getTasks().withType(JavaCompile.class, (compileJava) -> {
 			CompileOptions options = compileJava.getOptions();
 			options.setEncoding(StandardCharsets.UTF_8.toString());
