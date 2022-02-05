@@ -1,0 +1,10 @@
+[versions]
+spring-boot = "3.0.0-M1"
+spring-cloud = "2022.0.0-M1"
+spotless = "6.2.1"
+
+[libraries]
+gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
+
+[plugins]
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
