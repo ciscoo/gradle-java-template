@@ -1,5 +1,6 @@
 plugins {
     id("java-gradle-plugin")
+    id("io.spring.javaformat")
     alias(libs.plugins.spotless)
 }
 
@@ -10,6 +11,7 @@ repositories {
 
 dependencies {
     implementation(libs.gradle.spotless)
+    implementation(libs.gradle.springFormat)
 }
 
 gradlePlugin {
