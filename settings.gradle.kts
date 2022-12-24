@@ -1,5 +1,9 @@
 import org.gradle.api.internal.FeaturePreviews
 
+pluginManagement {
+    includeBuild("gradle/build-logic")
+}
+
 rootProject.name = "gradle-java-template"
 
 include("dependencies")
