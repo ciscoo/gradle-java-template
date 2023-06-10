@@ -1,10 +1,3 @@
-// https://youtrack.jetbrains.com/issue/KTIJ-19369.
-@Suppress(
-    "DSL_SCOPE_VIOLATION",
-    "MISSING_DEPENDENCY_CLASS",
-    "UNRESOLVED_REFERENCE_WRONG_RECEIVER",
-    "FUNCTION_CALL_EXPECTED"
-)
 plugins {
     id("java-gradle-plugin")
     alias(libs.plugins.springJavaFormat)
@@ -58,5 +51,4 @@ tasks {
     checkFormat {
         dependsOn(spotlessCheck)
     }
-
 }
