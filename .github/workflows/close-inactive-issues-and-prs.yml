@@ -1,0 +1,31 @@
+name: Close inactive issues and PRs
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+jobs:
+  close-issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v8
+        with:
+          only-labels: "status: waiting-for-feedback"
+          days-before-stale: 14
+          days-before-close: 21
+          stale-issue-label: "status: stale"
+          stale-pr-label: "status: stale"
+          stale-issue-message: >
+            If you would like the issue to be processed, please provide the requested information.
+            If the information is not provided within the next 3 weeks, this issue will be closed.
+          close-issue-message: >
+            Closing due to lack of requested feedback.
+            If you would like to proceed with your contribution, please provide the requested information and the issue will be reopened.
+          stale-pr-message: >
+            If you would like pull request to proceed, please provide the requested information or make the requested changes.
+            If the information is not provided or the requested changes are not made within the next 3 weeks, this pull request will not proceed and will be closed.
+          close-pr-message: >
+            Closing due to lack of requested feedback.
+            If you would like to proceed with your contribution, please provide the requested information or make the requested changes, and the pull request will be reopened.
