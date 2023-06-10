@@ -34,7 +34,7 @@ import org.gradle.language.base.plugins.LifecycleBasePlugin;
 /**
  * Conventions for publishing artifacts.
  */
-public class MavenPublishingConventions implements Plugin<Project> {
+public abstract class MavenPublishingConventions implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {

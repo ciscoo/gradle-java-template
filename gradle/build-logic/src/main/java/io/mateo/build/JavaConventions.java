@@ -42,7 +42,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Conventions for compiling Java sources.
  */
-public class JavaConventions implements Plugin<Project> {
+public abstract class JavaConventions implements Plugin<Project> {
 
 	/**
 	 * Compiler arguments for all {@link JavaCompile} task types.

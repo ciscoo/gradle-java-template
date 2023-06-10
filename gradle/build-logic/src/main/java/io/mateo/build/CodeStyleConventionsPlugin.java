@@ -27,7 +27,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * Conventions for code style.
  */
-public class CodeStyleConventionsPlugin implements Plugin<Project> {
+public abstract class CodeStyleConventionsPlugin implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {

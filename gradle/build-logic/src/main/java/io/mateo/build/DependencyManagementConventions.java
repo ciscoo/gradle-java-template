@@ -25,7 +25,7 @@ import org.gradle.api.plugins.JavaPlugin;
 /**
  * Dependency management conventions without forcing dependency constraints on consumers.
  */
-public class DependencyManagementConventions implements Plugin<Project> {
+public abstract class DependencyManagementConventions implements Plugin<Project> {
 
 	/**
 	 * The name of the configuration use to declare dependencies internal of a project.

@@ -27,7 +27,7 @@ import java.util.Collections;
 /**
  * Conventions for compiling Java library sources.
  */
-public class JavaLibraryConventions implements Plugin<Project> {
+public abstract class JavaLibraryConventions implements Plugin<Project> {
 
 	@Override
 	public void apply(Project project) {
