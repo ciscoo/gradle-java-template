@@ -15,7 +15,6 @@
  */
 package io.mateo.build;
 
-import org.gradle.api.NamedDomainObjectProvider;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Configuration;
@@ -35,16 +34,16 @@ public abstract class DependencyManagementConventions implements Plugin<Project>
 	@Override
 	public void apply(Project project) {
 		ConfigurationContainer configurations = project.getConfigurations();
-		NamedDomainObjectProvider<Configuration> dependencyManagement = configurations
-				.register(DEPENDENCY_MANAGEMENT_CONFIGURATION_NAME, (configuration) -> {
+		Configuration dependencyManagement = configurations.create(DEPENDENCY_MANAGEMENT_CONFIGURATION_NAME,
+				configuration -> {
 					configuration.setVisible(false);
 					configuration.setCanBeConsumed(false);
 					configuration.setCanBeResolved(false);
 				});
 		configurations
-				.matching(configuration -> configuration.getName().endsWith("Classpath")
-						|| JavaPlugin.ANNOTATION_PROCESSOR_CONFIGURATION_NAME.equals(configuration.getName()))
-				.configureEach(configuration -> configuration.extendsFrom(dependencyManagement.get()));
+			.matching(configuration -> configuration.getName().endsWith("Classpath")
+					|| JavaPlugin.ANNOTATION_PROCESSOR_CONFIGURATION_NAME.equals(configuration.getName()))
+			.configureEach(configuration -> configuration.extendsFrom(dependencyManagement));
 	}
 
 }

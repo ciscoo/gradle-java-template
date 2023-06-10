@@ -42,8 +42,8 @@ public abstract class CodeStyleConventionsPlugin implements Plugin<Project> {
 	}
 
 	private void configureSpringJavaFormat(Project project) {
-		project.getTasks().named(CheckFormat.NAME,
-				checkFormat -> checkFormat.dependsOn(project.getTasks().named("spotlessCheck")));
+		project.getTasks()
+			.named(CheckFormat.NAME, checkFormat -> checkFormat.dependsOn(project.getTasks().named("spotlessCheck")));
 		project.getTasks().withType(Format.class, format -> format.setEncoding(StandardCharsets.UTF_8.name()));
 	}
 
@@ -58,12 +58,12 @@ public abstract class CodeStyleConventionsPlugin implements Plugin<Project> {
 	}
 
 	private void configureSpotlessDocumentationFormat(Project project) {
-		project.getExtensions().configure(SpotlessExtension.class,
-				spotless -> spotless.format("documentation", documentation -> {
-					documentation.target("**/*.adoc", "**/*.md");
-					documentation.trimTrailingWhitespace();
-					documentation.endWithNewline();
-				}));
+		project.getExtensions()
+			.configure(SpotlessExtension.class, spotless -> spotless.format("documentation", documentation -> {
+				documentation.target("**/*.adoc", "**/*.md");
+				documentation.trimTrailingWhitespace();
+				documentation.endWithNewline();
+			}));
 	}
 
 }

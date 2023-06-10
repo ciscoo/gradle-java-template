@@ -30,7 +30,7 @@ public abstract class JavaLibrarySettingsConventions implements Plugin<Settings>
 
 	private void configureDefaultRepositories(Settings settings) {
 		settings.dependencyResolutionManagement(dependencyResolutionManagement -> dependencyResolutionManagement
-				.repositories(RepositoryHandler::mavenCentral));
+			.repositories(RepositoryHandler::mavenCentral));
 	}
 
 	private void enableAllActiveFeatures(Settings settings) {

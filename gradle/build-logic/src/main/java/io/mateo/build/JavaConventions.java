@@ -81,8 +81,8 @@ public abstract class JavaConventions implements Plugin<Project> {
 		PluginManager pluginManager = project.getPluginManager();
 		pluginManager.apply("java");
 		pluginManager.apply("io.mateo.build.code-style-conventions");
-		JavaToolchainExtension extension = project.getExtensions().create("javaToolchain",
-				JavaToolchainExtension.class);
+		JavaToolchainExtension extension = project.getExtensions()
+			.create("javaToolchain", JavaToolchainExtension.class);
 		disableCachingUnstableDependencies(project);
 		configureToolchainConventions(project, extension);
 		configureJavaCompileConventions(project, extension);
@@ -121,7 +121,7 @@ public abstract class JavaConventions implements Plugin<Project> {
 
 		// Shared configuration for all Java sources.
 		tasks.withType(JavaCompile.class)
-				.configureEach(task -> task.getOptions().setEncoding(StandardCharsets.UTF_8.name()));
+			.configureEach(task -> task.getOptions().setEncoding(StandardCharsets.UTF_8.name()));
 
 		// Configuration for the main Java source; generally only
 		// one exists named 'compileJava'.
@@ -160,16 +160,17 @@ public abstract class JavaConventions implements Plugin<Project> {
 
 		TaskContainer tasks = project.getTasks();
 
-		tasks.withType(JavaExec.class).configureEach(
-				task -> task.getJavaLauncher().set(javaToolchainService.launcherFor(extension.getToolchain())));
+		tasks.withType(JavaExec.class)
+			.configureEach(
+					task -> task.getJavaLauncher().set(javaToolchainService.launcherFor(extension.getToolchain())));
 	}
 
 	private void disableCachingUnstableDependencies(Project project) {
 		project.getConfigurations()
-				.configureEach(configuration -> configuration.resolutionStrategy(resolutionStrategy -> {
-					resolutionStrategy.cacheDynamicVersionsFor(0, TimeUnit.SECONDS);
-					resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS);
-				}));
+			.configureEach(configuration -> configuration.resolutionStrategy(resolutionStrategy -> {
+				resolutionStrategy.cacheDynamicVersionsFor(0, TimeUnit.SECONDS);
+				resolutionStrategy.cacheChangingModulesFor(0, TimeUnit.SECONDS);
+			}));
 	}
 
 }

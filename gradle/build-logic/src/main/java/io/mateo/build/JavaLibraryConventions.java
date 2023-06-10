@@ -41,8 +41,8 @@ public abstract class JavaLibraryConventions implements Plugin<Project> {
 
 	private void dependOnInternalPlatform(Project project) {
 		DependencyHandler dependencies = project.getDependencies();
-		Dependency dependenciesDependency = project.getDependencies()
-				.platform(dependencies.project(Collections.singletonMap("path", ":dependencies")));
+		Dependency dependenciesDependency = dependencies
+			.platform(dependencies.project(Collections.singletonMap("path", ":dependencies")));
 		dependencies.add(DependencyManagementConventions.DEPENDENCY_MANAGEMENT_CONFIGURATION_NAME,
 				dependenciesDependency);
 	}
