@@ -1,6 +1,5 @@
 plugins {
     id("java-gradle-plugin")
-    alias(libs.plugins.springJavaFormat)
     alias(libs.plugins.spotless)
 }
 
@@ -18,7 +17,6 @@ spotless {
 
 dependencies {
     implementation(platform(libs.springBootBom))
-    implementation(libs.gradle.springJavaFormat)
     implementation(libs.gradle.spotless)
 }
 
@@ -44,11 +42,5 @@ gradlePlugin {
             id = "io.mateo.build.maven-publishing-conventions"
             implementationClass = "io.mateo.build.MavenPublishingConventions"
         }
-    }
-}
-
-tasks {
-    checkFormat {
-        dependsOn(spotlessCheck)
     }
 }

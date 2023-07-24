@@ -1,15 +1,12 @@
 [versions]
 spring-boot = "3.1.0"
 spring-cloud = "2022.0.3"
-spring-format = "0.0.39"
 spotless = "6.19.0"
 
 [libraries]
 springBootBom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
 springCloudBom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
 gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
-gradle-springJavaFormat = { module = "io.spring.javaformat:spring-javaformat-gradle-plugin", version.ref = "spring-format" }
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-springJavaFormat = { id = "io.spring.javaformat", version.ref = "spring.format" }

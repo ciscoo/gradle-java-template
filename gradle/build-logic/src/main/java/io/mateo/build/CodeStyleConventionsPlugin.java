@@ -16,8 +16,7 @@
 package io.mateo.build;
 
 import com.diffplug.gradle.spotless.SpotlessExtension;
-import io.spring.javaformat.gradle.tasks.CheckFormat;
-import io.spring.javaformat.gradle.tasks.Format;
+import com.diffplug.spotless.LineEnding;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.PluginManager;
@@ -33,18 +32,18 @@ public abstract class CodeStyleConventionsPlugin implements Plugin<Project> {
 	public void apply(Project project) {
 		PluginManager pluginManager = project.getPluginManager();
 		pluginManager.apply("com.diffplug.spotless");
-		pluginManager.apply("io.spring.javaformat");
+		configureSpotlessGlobalDefaults(project);
 		pluginManager.withPlugin("java", plugin -> {
 			configureSpotlessJavaFormat(project);
-			configureSpringJavaFormat(project);
 		});
 		configureSpotlessDocumentationFormat(project);
 	}
 
-	private void configureSpringJavaFormat(Project project) {
-		project.getTasks()
-			.named(CheckFormat.NAME, checkFormat -> checkFormat.dependsOn(project.getTasks().named("spotlessCheck")));
-		project.getTasks().withType(Format.class, format -> format.setEncoding(StandardCharsets.UTF_8.name()));
+	private void configureSpotlessGlobalDefaults(Project project) {
+		project.getExtensions().configure(SpotlessExtension.class, spotless -> {
+			spotless.encoding(StandardCharsets.UTF_8);
+			spotless.setLineEndings(LineEnding.UNIX);
+		});
 	}
 
 	private void configureSpotlessJavaFormat(Project project) {
@@ -54,6 +53,7 @@ public abstract class CodeStyleConventionsPlugin implements Plugin<Project> {
 			java.removeUnusedImports();
 			java.trimTrailingWhitespace();
 			java.endWithNewline();
+			java.palantirJavaFormat();
 		}));
 	}
 
