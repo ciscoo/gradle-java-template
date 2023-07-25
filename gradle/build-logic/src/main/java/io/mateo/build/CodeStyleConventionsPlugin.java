@@ -48,8 +48,10 @@ public abstract class CodeStyleConventionsPlugin implements Plugin<Project> {
 
 	private void configureSpotlessJavaFormat(Project project) {
 		project.getExtensions().configure(SpotlessExtension.class, spotless -> spotless.java(java -> {
-			java.licenseHeaderFile(getClass().getClassLoader().getResource("spotless/apache-license-2.0.java"),
-					"(package|import|open|module)");
+			java.licenseHeaderFile(project.getRootProject()
+					.getLayout()
+					.getProjectDirectory()
+					.file("gradle/config/spotless/apache-license-2.0.java"), "(package|import|open|module)");
 			java.removeUnusedImports();
 			java.trimTrailingWhitespace();
 			java.endWithNewline();
