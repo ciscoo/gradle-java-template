@@ -22,23 +22,22 @@ import org.gradle.api.internal.FeaturePreviews;
 
 public abstract class JavaLibrarySettingsConventions implements Plugin<Settings> {
 
-	@Override
-	public void apply(Settings settings) {
-		enableAllActiveFeatures(settings);
-		configureDefaultRepositories(settings);
-	}
+    @Override
+    public void apply(Settings settings) {
+        enableAllActiveFeatures(settings);
+        configureDefaultRepositories(settings);
+    }
 
-	private void configureDefaultRepositories(Settings settings) {
-		settings.dependencyResolutionManagement(dependencyResolutionManagement -> dependencyResolutionManagement
-			.repositories(RepositoryHandler::mavenCentral));
-	}
+    private void configureDefaultRepositories(Settings settings) {
+        settings.dependencyResolutionManagement(dependencyResolutionManagement ->
+                dependencyResolutionManagement.repositories(RepositoryHandler::mavenCentral));
+    }
 
-	private void enableAllActiveFeatures(Settings settings) {
-		for (FeaturePreviews.Feature feature : FeaturePreviews.Feature.values()) {
-			if (feature.isActive()) {
-				settings.enableFeaturePreview(feature.name());
-			}
-		}
-	}
-
+    private void enableAllActiveFeatures(Settings settings) {
+        for (FeaturePreviews.Feature feature : FeaturePreviews.Feature.values()) {
+            if (feature.isActive()) {
+                settings.enableFeaturePreview(feature.name());
+            }
+        }
+    }
 }

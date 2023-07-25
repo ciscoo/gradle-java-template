@@ -26,24 +26,23 @@ import org.gradle.api.plugins.JavaPlugin;
  */
 public abstract class DependencyManagementConventions implements Plugin<Project> {
 
-	/**
-	 * The name of the configuration use to declare dependencies internal of a project.
-	 */
-	public static final String DEPENDENCY_MANAGEMENT_CONFIGURATION_NAME = "dependencyManagement";
+    /**
+     * The name of the configuration use to declare dependencies internal of a project.
+     */
+    public static final String DEPENDENCY_MANAGEMENT_CONFIGURATION_NAME = "dependencyManagement";
 
-	@Override
-	public void apply(Project project) {
-		ConfigurationContainer configurations = project.getConfigurations();
-		Configuration dependencyManagement = configurations.create(DEPENDENCY_MANAGEMENT_CONFIGURATION_NAME,
-				configuration -> {
-					configuration.setVisible(false);
-					configuration.setCanBeConsumed(false);
-					configuration.setCanBeResolved(false);
-				});
-		configurations
-			.matching(configuration -> configuration.getName().endsWith("Classpath")
-					|| JavaPlugin.ANNOTATION_PROCESSOR_CONFIGURATION_NAME.equals(configuration.getName()))
-			.configureEach(configuration -> configuration.extendsFrom(dependencyManagement));
-	}
-
+    @Override
+    public void apply(Project project) {
+        ConfigurationContainer configurations = project.getConfigurations();
+        Configuration dependencyManagement =
+                configurations.create(DEPENDENCY_MANAGEMENT_CONFIGURATION_NAME, configuration -> {
+                    configuration.setVisible(false);
+                    configuration.setCanBeConsumed(false);
+                    configuration.setCanBeResolved(false);
+                });
+        configurations
+                .matching(configuration -> configuration.getName().endsWith("Classpath")
+                        || JavaPlugin.ANNOTATION_PROCESSOR_CONFIGURATION_NAME.equals(configuration.getName()))
+                .configureEach(configuration -> configuration.extendsFrom(dependencyManagement));
+    }
 }

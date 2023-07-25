@@ -11,7 +11,11 @@ java {
 
 spotless {
     java {
-        licenseHeaderFile(layout.projectDirectory.file("src/main/resources/spotless/apache-license-2.0.java"))
+        licenseHeaderFile(layout.projectDirectory.file("../config/spotless/apache-license-2.0.java"))
+        removeUnusedImports()
+        endWithNewline()
+        trimTrailingWhitespace()
+        palantirJavaFormat()
     }
 }
 

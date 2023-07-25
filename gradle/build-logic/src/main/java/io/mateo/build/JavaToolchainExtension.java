@@ -21,27 +21,26 @@ import org.gradle.jvm.toolchain.JavaLanguageVersion;
 
 public abstract class JavaToolchainExtension {
 
-	public JavaToolchainExtension() {
-		getTargetVersion().convention(JavaLanguageVersion.of(17));
-		getReleaseVersion().convention(getTargetVersion());
-	}
+    public JavaToolchainExtension() {
+        getTargetVersion().convention(JavaLanguageVersion.of(17));
+        getReleaseVersion().convention(getTargetVersion());
+    }
 
-	/**
-	 * Java language version to use for {@link JavaPluginExtension#getToolchain()}. The
-	 * language version will also be used for test compilation and
-	 * {@link org.gradle.api.tasks.JavaExec} task types.
-	 * <p>
-	 * The convention is Java 17.
-	 */
-	public abstract Property<JavaLanguageVersion> getTargetVersion();
+    /**
+     * Java language version to use for {@link JavaPluginExtension#getToolchain()}. The
+     * language version will also be used for test compilation and
+     * {@link org.gradle.api.tasks.JavaExec} task types.
+     * <p>
+     * The convention is Java 17.
+     */
+    public abstract Property<JavaLanguageVersion> getTargetVersion();
 
-	/**
-	 * Java language version to use for compiling artifacts for public consumption. If
-	 * releasing artifacts that support older versions of Java, then this should be
-	 * configured to the minimum supported version.
-	 * <p>
-	 * The convention is {@link #getTargetVersion()}.
-	 */
-	public abstract Property<JavaLanguageVersion> getReleaseVersion();
-
+    /**
+     * Java language version to use for compiling artifacts for public consumption. If
+     * releasing artifacts that support older versions of Java, then this should be
+     * configured to the minimum supported version.
+     * <p>
+     * The convention is {@link #getTargetVersion()}.
+     */
+    public abstract Property<JavaLanguageVersion> getReleaseVersion();
 }

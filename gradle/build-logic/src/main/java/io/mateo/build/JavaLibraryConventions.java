@@ -15,6 +15,7 @@
  */
 package io.mateo.build;
 
+import java.util.Collections;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.artifacts.Dependency;
@@ -22,36 +23,33 @@ import org.gradle.api.artifacts.dsl.DependencyHandler;
 import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.plugins.PluginManager;
 
-import java.util.Collections;
-
 /**
  * Conventions for compiling Java library sources.
  */
 public abstract class JavaLibraryConventions implements Plugin<Project> {
 
-	@Override
-	public void apply(Project project) {
-		PluginManager pluginManager = project.getPluginManager();
-		pluginManager.apply("java-library");
-		pluginManager.apply("io.mateo.build.java-conventions");
-		pluginManager.apply("io.mateo.build.dependency-management-conventions");
-		configureDocumentationSources(project);
-		dependOnInternalPlatform(project);
-	}
+    @Override
+    public void apply(Project project) {
+        PluginManager pluginManager = project.getPluginManager();
+        pluginManager.apply("java-library");
+        pluginManager.apply("io.mateo.build.java-conventions");
+        pluginManager.apply("io.mateo.build.dependency-management-conventions");
+        configureDocumentationSources(project);
+        dependOnInternalPlatform(project);
+    }
 
-	private void dependOnInternalPlatform(Project project) {
-		DependencyHandler dependencies = project.getDependencies();
-		Dependency dependenciesDependency = dependencies
-			.platform(dependencies.project(Collections.singletonMap("path", ":dependencies")));
-		dependencies.add(DependencyManagementConventions.DEPENDENCY_MANAGEMENT_CONFIGURATION_NAME,
-				dependenciesDependency);
-	}
+    private void dependOnInternalPlatform(Project project) {
+        DependencyHandler dependencies = project.getDependencies();
+        Dependency dependenciesDependency =
+                dependencies.platform(dependencies.project(Collections.singletonMap("path", ":dependencies")));
+        dependencies.add(
+                DependencyManagementConventions.DEPENDENCY_MANAGEMENT_CONFIGURATION_NAME, dependenciesDependency);
+    }
 
-	private void configureDocumentationSources(Project project) {
-		project.getExtensions().configure(JavaPluginExtension.class, java -> {
-			java.withSourcesJar();
-			java.withJavadocJar();
-		});
-	}
-
+    private void configureDocumentationSources(Project project) {
+        project.getExtensions().configure(JavaPluginExtension.class, java -> {
+            java.withSourcesJar();
+            java.withJavadocJar();
+        });
+    }
 }

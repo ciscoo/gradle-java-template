@@ -17,55 +17,60 @@ package io.mateo.build;
 
 import com.diffplug.gradle.spotless.SpotlessExtension;
 import com.diffplug.spotless.LineEnding;
+import java.nio.charset.StandardCharsets;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.PluginManager;
-
-import java.nio.charset.StandardCharsets;
 
 /**
  * Conventions for code style.
  */
 public abstract class CodeStyleConventionsPlugin implements Plugin<Project> {
 
-	@Override
-	public void apply(Project project) {
-		PluginManager pluginManager = project.getPluginManager();
-		pluginManager.apply("com.diffplug.spotless");
-		configureSpotlessGlobalDefaults(project);
-		pluginManager.withPlugin("java", plugin -> {
-			configureSpotlessJavaFormat(project);
-		});
-		configureSpotlessDocumentationFormat(project);
-	}
+    @Override
+    public void apply(Project project) {
+        PluginManager pluginManager = project.getPluginManager();
+        pluginManager.apply("com.diffplug.spotless");
+        configureSpotlessGlobalDefaults(project);
+        pluginManager.withPlugin("java", plugin -> {
+            configureSpotlessJavaFormat(project);
+        });
+        configureSpotlessDocumentationFormat(project);
+    }
 
-	private void configureSpotlessGlobalDefaults(Project project) {
-		project.getExtensions().configure(SpotlessExtension.class, spotless -> {
-			spotless.encoding(StandardCharsets.UTF_8);
-			spotless.setLineEndings(LineEnding.UNIX);
-		});
-	}
+    private void configureSpotlessGlobalDefaults(Project project) {
+        project.getExtensions().configure(SpotlessExtension.class, spotless -> {
+            spotless.encoding(StandardCharsets.UTF_8);
+            spotless.setLineEndings(LineEnding.UNIX);
+        });
+    }
 
-	private void configureSpotlessJavaFormat(Project project) {
-		project.getExtensions().configure(SpotlessExtension.class, spotless -> spotless.java(java -> {
-			java.licenseHeaderFile(project.getRootProject()
-					.getLayout()
-					.getProjectDirectory()
-					.file("gradle/config/spotless/apache-license-2.0.java"), "(package|import|open|module)");
-			java.removeUnusedImports();
-			java.trimTrailingWhitespace();
-			java.endWithNewline();
-			java.palantirJavaFormat();
-		}));
-	}
+    private void configureSpotlessJavaFormat(Project project) {
+        project.getExtensions()
+                .configure(
+                        SpotlessExtension.class,
+                        spotless -> spotless.java(java -> {
+                            java.licenseHeaderFile(
+                                    project.getRootProject()
+                                            .getLayout()
+                                            .getProjectDirectory()
+                                            .file("gradle/config/spotless/apache-license-2.0.java"),
+                                    "(package|import|open|module)");
+                            java.removeUnusedImports();
+                            java.trimTrailingWhitespace();
+                            java.endWithNewline();
+                            java.palantirJavaFormat();
+                        }));
+    }
 
-	private void configureSpotlessDocumentationFormat(Project project) {
-		project.getExtensions()
-			.configure(SpotlessExtension.class, spotless -> spotless.format("documentation", documentation -> {
-				documentation.target("**/*.adoc", "**/*.md");
-				documentation.trimTrailingWhitespace();
-				documentation.endWithNewline();
-			}));
-	}
-
+    private void configureSpotlessDocumentationFormat(Project project) {
+        project.getExtensions()
+                .configure(
+                        SpotlessExtension.class,
+                        spotless -> spotless.format("documentation", documentation -> {
+                            documentation.target("**/*.adoc", "**/*.md");
+                            documentation.trimTrailingWhitespace();
+                            documentation.endWithNewline();
+                        }));
+    }
 }
