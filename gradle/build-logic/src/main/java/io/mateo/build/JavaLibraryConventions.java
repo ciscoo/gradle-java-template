@@ -15,11 +15,8 @@
  */
 package io.mateo.build;
 
-import java.util.Collections;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
-import org.gradle.api.artifacts.Dependency;
-import org.gradle.api.artifacts.dsl.DependencyHandler;
 import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.plugins.PluginManager;
 
@@ -35,15 +32,6 @@ public abstract class JavaLibraryConventions implements Plugin<Project> {
         pluginManager.apply("io.mateo.build.java-conventions");
         pluginManager.apply("io.mateo.build.dependency-management-conventions");
         configureDocumentationSources(project);
-        dependOnInternalPlatform(project);
-    }
-
-    private void dependOnInternalPlatform(Project project) {
-        DependencyHandler dependencies = project.getDependencies();
-        Dependency dependenciesDependency =
-                dependencies.platform(dependencies.project(Collections.singletonMap("path", ":dependencies")));
-        dependencies.add(
-                DependencyManagementConventions.DEPENDENCY_MANAGEMENT_CONFIGURATION_NAME, dependenciesDependency);
     }
 
     private void configureDocumentationSources(Project project) {
