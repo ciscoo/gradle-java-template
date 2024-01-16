@@ -1,12 +1,23 @@
+// https://youtrack.jetbrains.com/issue/KT-63165
+@file:Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
+
+import org.jetbrains.kotlin.gradle.plugin.diagnostics.CheckKotlinGradlePluginConfigurationErrors
+import org.jetbrains.kotlin.gradle.plugin.diagnostics.kotlinToolingDiagnosticsCollectorProvider
+
 plugins {
-    id("java-gradle-plugin")
+    `kotlin-dsl`
     alias(libs.plugins.spotless)
 }
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
+}
+
+repositories {
+    mavenCentral()
+    gradlePluginPortal()
 }
 
 spotless {
@@ -20,31 +31,9 @@ spotless {
 }
 
 dependencies {
-    implementation(platform(libs.springBootBom))
     implementation(libs.gradle.spotless)
 }
 
-gradlePlugin {
-    plugins {
-        register("codeStyleConventions") {
-            id = "io.mateo.build.code-style-conventions"
-            implementationClass = "io.mateo.build.CodeStyleConventionsPlugin"
-        }
-        register("dependencyManagementConventions") {
-            id = "io.mateo.build.dependency-management-conventions"
-            implementationClass = "io.mateo.build.DependencyManagementConventions"
-        }
-        register("javaConventions") {
-            id = "io.mateo.build.java-conventions"
-            implementationClass = "io.mateo.build.JavaConventions"
-        }
-        register("javaLibraryConventions") {
-            id = "io.mateo.build.java-library-conventions"
-            implementationClass = "io.mateo.build.JavaLibraryConventions"
-        }
-        register("mavenPublishingConventions") {
-            id = "io.mateo.build.maven-publishing-conventions"
-            implementationClass = "io.mateo.build.MavenPublishingConventions"
-        }
-    }
+tasks.withType<CheckKotlinGradlePluginConfigurationErrors>().configureEach {
+    usesService(project.kotlinToolingDiagnosticsCollectorProvider)
 }
