@@ -60,8 +60,19 @@ tasks {
     }
 }
 
+val libs = versionCatalogs.named("libs")
+
 testing.suites.configureEach {
     if (this is JvmTestSuite) {
+        libs.findVersion("junit").ifPresent {
+            // Automatically adds org.junit.jupiter:junit-jupiter to implementation configuration
+            useJUnitJupiter(it.requiredVersion)
+        }
+        dependencies {
+            libs.findLibrary("junitPlatformLauncher").ifPresent {
+                runtimeOnly(it)
+            }
+        }
         tasks.named(sources.compileJavaTaskName, JavaCompile::class) {
             options.compilerArgs.addAll(commonCompilerArgs + "-parameters")
         }
