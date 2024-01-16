@@ -6,6 +6,8 @@ plugins {
     id("io.mateo.build.code-style-conventions")
 }
 
+group = "io.mateo"
+
 configurations.configureEach {
     resolutionStrategy {
         cacheDynamicVersionsFor(0, TimeUnit.SECONDS)
