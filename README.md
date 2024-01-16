@@ -15,5 +15,5 @@ opinions gathered from open source and professional work.
 Clone or download a zip and update the following:
 
 * Root project name in `settings.gradle.kts`
-* Project description in `build.gradle.kts`
-* POM configuration in `MavenPublishingConventions`
+* Project description each project Gradle file
+* POM configuration in `io.mateo.build.maven-publishing-conventions.gradle.kts`
