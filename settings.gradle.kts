@@ -1,5 +1,3 @@
-import org.gradle.api.internal.FeaturePreviews
-
 pluginManagement {
     includeBuild("gradle/build-logic")
 }
@@ -26,8 +24,5 @@ dependencyResolutionManagement {
     }
 }
 
-FeaturePreviews.Feature.values().forEach { feature ->
-    if (feature.isActive) {
-        enableFeaturePreview(feature.name)
-    }
-}
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
