@@ -4,7 +4,11 @@ inputs:
   arguments:
     required: true
     description: Gradle arguments
-    default: check
+    default: build
+  dependency-graph:
+    required: false
+    description: Whether to enable GitHub Dependency Graph support
+    default: disabled
 runs:
   using: "composite"
   steps:
@@ -17,6 +21,7 @@ runs:
       env:
         JAVA_HOME: ${{ steps.setup-gradle-jdk.outputs.path }}
       with:
+        dependency-graph: ${{ inputs.dependency-graph }}
         arguments: |
           -Porg.gradle.java.installations.auto-download=false
           javaToolchains

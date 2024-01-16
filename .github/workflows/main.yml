@@ -11,13 +11,17 @@ on:
 jobs:
   Linux:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # required for submitting a dependency graph
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Main Build
-        uses: ./.github/actions/run-gradle
+      - name: Build
+        uses: ./.github/actions/main-build
+        with:
+          dependency-graph: generate-and-submit
 
   Windows:
     runs-on: windows-latest
@@ -26,7 +30,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Main Build
+      - name: Build
         uses: ./.github/actions/run-gradle
 
   macOS:
@@ -36,5 +40,23 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Main Build
+      - name: Build
         uses: ./.github/actions/run-gradle
+
+  publish_artifacts:
+    name: Publish Snapshot Artifacts
+    needs: linux
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.repository == 'fmateo/gradle-java-template' && (startsWith(github.ref, 'refs/heads/releases/') || github.ref == 'refs/heads/main')
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Publish
+        uses: ./.github/actions/run-gradle
+        env:
+          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
+        with:
+          arguments: publish -x check
