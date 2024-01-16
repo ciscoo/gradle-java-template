@@ -1,16 +1,16 @@
-= Gradle Java Template
+# Gradle Java Template
 
-Foundation for building either Java projects or Java libraries.
+Template for building Java projects or Java libraries.
 
 This project is primarily for personal projects, but others may find it useful.
 
-== Conventions
+## Conventions
 
 The majority of the build logic is contained within an included build `build-logic` within `./gradle/build-logic`.
-Many of conventions here are based on the conventions from JUnit, Spring Boot, Spring Framework, Micronaut, and personal
+Many of conventions are based on the conventions from JUnit, Spring Boot, Spring Framework, Micronaut, and personal
 opinions gathered from open source and professional work.
 
-== Getting Started
+## Getting Started
 
 Clone or download a zip and update the following:
 
