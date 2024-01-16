@@ -69,6 +69,9 @@ testing.suites.configureEach {
             useJUnitJupiter(it.requiredVersion)
         }
         dependencies {
+            libs.findLibrary("assertjCore").ifPresent {
+                implementation(it)
+            }
             libs.findLibrary("junitPlatformLauncher").ifPresent {
                 runtimeOnly(it)
             }
