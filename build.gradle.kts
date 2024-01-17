@@ -5,3 +5,7 @@ plugins {
 description = "Gradle Java Build Template"
 
 defaultTasks("build")
+
+tasks.check {
+    dependsOn(gradle.includedBuild("build-logic").task(":check"))
+}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 the original author or authors.
+ * Copyright 2024 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,11 @@
  */
 package io.mateo.build.task;
 
-import javax.inject.Inject;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import javax.inject.Inject;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.file.RegularFileProperty;
@@ -27,10 +29,6 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.util.GradleVersion;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 /**
  * Task to generate project metadata for use with documentation sources.
@@ -42,7 +40,9 @@ public abstract class GenerateGradleProjectMetadata extends DefaultTask {
     @Inject
     public GenerateGradleProjectMetadata(ProjectLayout layout, ProviderFactory providers) {
         getGeneratedMetadata().set(layout.getBuildDirectory().file("gradle-project-metadata.json"));
-        getProperties().put("version", providers.provider(() -> getProject().getVersion().toString()));
+        getProperties().put("version", providers.provider(() -> getProject()
+                .getVersion()
+                .toString()));
         getProperties().put("gradleVersion", GradleVersion.current().getVersion());
     }
 
@@ -55,7 +55,7 @@ public abstract class GenerateGradleProjectMetadata extends DefaultTask {
     @TaskAction
     public void writeMetadata() throws IOException {
         Path path = this.getGeneratedMetadata().get().getAsFile().toPath().toAbsolutePath();
-        MAPPER.writerWithDefaultPrettyPrinter().writeValue(Files.newBufferedWriter(path), this.getProperties().get());
+        MAPPER.writerWithDefaultPrettyPrinter()
+                .writeValue(Files.newBufferedWriter(path), this.getProperties().get());
     }
-
 }
