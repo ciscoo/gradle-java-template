@@ -16,20 +16,28 @@
 package io.mateo.build.task;
 
 import javax.inject.Inject;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.provider.MapProperty;
-import org.gradle.api.provider.Property;
 import org.gradle.api.provider.ProviderFactory;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.OutputFile;
+import org.gradle.api.tasks.TaskAction;
 import org.gradle.util.GradleVersion;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * Task to generate project metadata for use with documentation sources.
  */
 public abstract class GenerateGradleProjectMetadata extends DefaultTask {
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @Inject
     public GenerateGradleProjectMetadata(ProjectLayout layout, ProviderFactory providers) {
@@ -43,5 +51,11 @@ public abstract class GenerateGradleProjectMetadata extends DefaultTask {
 
     @Input
     public abstract MapProperty<String, Object> getProperties();
+
+    @TaskAction
+    public void writeMetadata() throws IOException {
+        Path path = this.getGeneratedMetadata().get().getAsFile().toPath().toAbsolutePath();
+        MAPPER.writerWithDefaultPrettyPrinter().writeValue(Files.newBufferedWriter(path), this.getProperties().get());
+    }
 
 }

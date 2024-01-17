@@ -10,6 +10,7 @@ springCloudBom = { module = "org.springframework.cloud:spring-cloud-dependencies
 junitBom = { module = "org.junit:junit-bom", version.ref = "junit" }
 junitPlatformLauncher = { module = "org.junit.platform:junit-platform-launcher" }
 assertjCore = { module = "org.assertj:assertj-core", version = "3.25.1" }
+jackson = { module = "com.fasterxml.jackson.core:jackson-databind", version = "2.16.1" }
 gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 
 [plugins]
