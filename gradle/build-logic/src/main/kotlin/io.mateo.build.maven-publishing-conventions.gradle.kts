@@ -3,7 +3,7 @@ plugins {
     `maven-publish`
 }
 
-val  publicationName = "mavenJava"
+val publicationName = "mavenJava"
 
 publishing {
     publications {

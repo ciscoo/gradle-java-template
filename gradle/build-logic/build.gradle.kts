@@ -28,6 +28,12 @@ spotless {
         trimTrailingWhitespace()
         palantirJavaFormat()
     }
+    kotlin {
+        endWithNewline()
+        trimTrailingWhitespace()
+        ktfmt()
+        targetExclude("**/build/**")
+    }
 }
 
 dependencies {

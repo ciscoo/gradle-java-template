@@ -12,12 +12,14 @@ spotless {
 pluginManager.withPlugin("java") {
     spotless {
         java {
-            licenseHeaderFile(layout.projectDirectory.file("gradle/config/spotless/apache-license-2.0.java"), "(package|import|open|module)")
+            licenseHeaderFile(
+                layout.projectDirectory.file("gradle/config/spotless/apache-license-2.0.java"),
+                "(package|import|open|module)",
+            )
             removeUnusedImports()
             endWithNewline()
             trimTrailingWhitespace()
             palantirJavaFormat()
-
         }
     }
 }

@@ -23,13 +23,19 @@ java {
     }
 }
 
-val commonCompilerArgs = listOf(
-        "-Xlint:all", // Enables all warnings
-        "-Xlint:-processing", // Disable warnings related to annotation processing
-        "-Xlint:-classfile", // Disable warning about issues related to classfile contents
-        "-Xlint:-serial", // Disable warning about serializable classes that do not provide a serial version ID
-        "-Werror", // Terminates compilation when warnings occur
-)
+val commonCompilerArgs =
+    listOf(
+        // Enables all warnings
+        "-Xlint:all",
+        // Disable warnings related to annotation processing
+        "-Xlint:-processing",
+        // Disable warning about issues related to classfile contents
+        "-Xlint:-classfile",
+        // Disable warning about serializable classes that do not provide a serial version ID
+        "-Xlint:-serial",
+        // Terminates compilation when warnings occur
+        "-Werror",
+    )
 
 tasks {
     withType(JavaExec::class).configureEach {
