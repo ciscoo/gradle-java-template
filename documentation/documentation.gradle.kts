@@ -3,6 +3,7 @@ import io.mateo.build.task.GenerateGradleProjectMetadata
 
 plugins {
     base
+    id("com.diffplug.spotless")
     alias(libs.plugins.node)
 }
 
@@ -30,5 +31,19 @@ tasks {
         dependsOn(npmInstall)
         inputs.files(generateGradleProjectMetadata)
         args = listOf("run", "docs:preview")
+    }
+    val prettierCheck by registering(NpmTask::class) {
+        dependsOn(npmInstall)
+        args = listOf("run", "prettier:check")
+    }
+    val prettierWrite by registering(NpmTask::class) {
+        dependsOn(npmInstall)
+        args = listOf("run", "prettier:write")
+    }
+    spotlessCheck {
+        dependsOn(prettierCheck)
+    }
+    spotlessApply {
+        finalizedBy(prettierWrite)
     }
 }
