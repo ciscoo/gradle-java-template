@@ -31,7 +31,6 @@ spotless {
     kotlin {
         endWithNewline()
         trimTrailingWhitespace()
-        ktfmt()
         targetExclude("**/build/**")
     }
 }
