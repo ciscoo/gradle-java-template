@@ -43,7 +43,7 @@ jobs:
       - name: Build
         uses: ./.github/actions/run-gradle
 
-  publish_artifacts:
+  publish_snapshot:
     name: Publish Snapshot Artifacts
     needs: linux
     runs-on: ubuntu-latest
