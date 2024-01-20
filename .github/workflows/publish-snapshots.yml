@@ -18,8 +18,11 @@ jobs:
   publish_snapshot:
     name: Publish Snapshot Artifacts
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+#    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
+      - name: test output
+        run: |
+          echo "${{ github.event.workflow_run.conclusion }}"
       - name: Check out repository
         uses: actions/checkout@v4
         with:
