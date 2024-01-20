@@ -1,0 +1,60 @@
+name: Snapshot Publication
+
+on:
+  push:
+    branches:
+      - main
+  workflow_run:
+    workflows:
+      - main
+    types:
+      - completed
+
+concurrency:
+  group: publish-snapshot
+  cancel-in-progress: true
+
+jobs:
+  publish_snapshot:
+    name: Publish Snapshot Artifacts
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Publish
+        uses: ./.github/actions/run-gradle
+        env:
+          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
+        with:
+          arguments: publishAllPublicationsToSonatypeSnapshotsRepository -x check
+
+  update_snapshot_documentation:
+    name: Update Snapshot Documentation
+    needs: [publish_snapshot]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Build Snapshot Documentation
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: vitePressBuild -PsnapshotDocsBuild
+      - name: Configure Pages
+        uses: actions/configure-pages@v4
+      - name: Prepare Snapshot Documentation
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: prepareSnapshotDocs
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./build/gh-pages-snapshot
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

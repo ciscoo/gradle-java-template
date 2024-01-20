@@ -42,24 +42,3 @@ jobs:
           fetch-depth: 1
       - name: Build
         uses: ./.github/actions/run-gradle
-
-  publish_snapshot:
-    name: Publish Snapshot Artifacts
-    needs: linux
-    runs-on: ubuntu-latest
-    concurrency:
-      group: publish-snapshot
-      cancel-in-progress: true
-    if: github.event_name == 'push' && github.repository == 'fmateo/gradle-java-template' && (startsWith(github.ref, 'refs/heads/releases/') || github.ref == 'refs/heads/main')
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - name: Publish
-        uses: ./.github/actions/run-gradle
-        env:
-          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
-          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
-        with:
-          arguments: publishAllPublicationsToSonatypeSnapshotsRepository -x check
