@@ -7,6 +7,7 @@ spotless {
         target("**/*.md", "**/*.adoc")
         targetExclude("**/node_modules/**", "**/.gradle/**")
     }
+
 }
 
 pluginManager.withPlugin("java") {
