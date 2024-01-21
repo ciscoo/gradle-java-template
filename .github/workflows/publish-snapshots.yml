@@ -2,11 +2,8 @@ name: Snapshot Publication
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - 'Main Build'
-    types:
-      - completed
+  schedule:
+    - cron:  '0 0 * * *'
 
 concurrency:
   group: publish-snapshot
@@ -16,11 +13,7 @@ jobs:
   publish_snapshot:
     name: Publish Snapshot Artifacts
     runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.event == 'push' &&
-      github.ref == 'refs/heads/main')
+    if: github.repository == 'ciscoo/gradle-java-template' && github.ref == 'refs/heads/main'
     steps:
       - name: Dump GitHub context
         env:
