@@ -16,7 +16,7 @@ jobs:
     name: Publish Snapshot Artifacts
     runs-on: ubuntu-latest
     if: |
-      github github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'push' &&
       github.ref == 'refs/heads/main'
     steps:
