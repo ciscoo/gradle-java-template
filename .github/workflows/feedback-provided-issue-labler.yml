@@ -21,6 +21,7 @@ jobs:
               issue_number: context.issue.number,
             })
             const labelName = 'status: waiting-for-feedback'
+            console.log(issue)
             const hasRequiredLabel = issue.data.labels.filter(label => label.name === labelName).length === 1
             if (hasRequiredLabel) {
               console.log("Has label")
