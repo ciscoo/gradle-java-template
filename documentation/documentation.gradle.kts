@@ -14,6 +14,10 @@ node {
     download.set(providers.environmentVariable("CI").orElse("false").map { it.toBoolean() })
 }
 
+spotless {
+
+}
+
 tasks {
     val generateGradleProjectMetadata by registering(GenerateGradleProjectMetadata::class)
     val vitePressDev by registering(NpmTask::class) {
