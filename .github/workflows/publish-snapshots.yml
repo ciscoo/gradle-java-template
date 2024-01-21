@@ -20,9 +20,11 @@ jobs:
     runs-on: ubuntu-latest
 #    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: test output
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
-          echo "${{ github.event.workflow_run.conclusion }}"
+          echo "$GITHUB_CONTEXT"
       - name: Check out repository
         uses: actions/checkout@v4
         with:
