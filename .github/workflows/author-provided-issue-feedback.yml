@@ -35,4 +35,10 @@ jobs:
                 issue_number: context.issue.number,
                 name: labelName
               })
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: ["status: feedback-provided"]
+              })
             }
