@@ -22,6 +22,12 @@ jobs:
               repo: context.repo.repo,
               issue_number: context.issue.number,
             })
+            const sbIssue = await github.rest.issues.get({
+              owner: 'spring-projects',
+              repo: 'spring-boot',
+              issue_number: 38920,
+            })
+            console.log(sbIssue.data)
             const labelName = 'status: waiting-for-feedback'
             const hasRequiredLabel = issue.data.labels.filter(label => label.name === labelName).length === 1
             if (hasRequiredLabel) {
