@@ -1,4 +1,4 @@
-name: Feedback Provided Issue Labeler
+name: Author Provided Issue Feedback
 
 on:
   issue_comment:
@@ -15,23 +15,24 @@ jobs:
         with:
           retries: 3
           script: |
-            console.log(context.repo)
-            console.log(context.issue)
             const issue = await github.rest.issues.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
             })
-            const sbIssue = await github.rest.issues.get({
-              owner: 'spring-projects',
-              repo: 'spring-boot',
-              issue_number: 38920,
-            })
-            console.log(sbIssue.data)
+            const issueAuthorId = issue.user.id
+            const commenterId = context.payload.comment.user.id
+            // Only remove the label if the original author comments
+            if (issueAuthorId !== commenterId) {
+              return
+            }
             const labelName = 'status: waiting-for-feedback'
             const hasRequiredLabel = issue.data.labels.filter(label => label.name === labelName).length === 1
             if (hasRequiredLabel) {
-              console.log(context)
-              console.log('------------------------------------------------------------------------------------------')
-              console.log(context.payload)
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                name: labelName
+              })
             }
