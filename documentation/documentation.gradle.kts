@@ -16,6 +16,9 @@ node {
 
 tasks {
     val generateGradleProjectMetadata by registering(GenerateGradleProjectMetadata::class)
+    npmInstall {
+        outputs.dir(layout.projectDirectory.dir("node_modules"))
+    }
     val vitePressDev by registering(NpmTask::class) {
         dependsOn(npmInstall)
         inputs.files(generateGradleProjectMetadata)
@@ -39,6 +42,9 @@ tasks {
     val prettierWrite by registering(NpmTask::class) {
         dependsOn(npmInstall)
         args = listOf("run", "prettier:write")
+    }
+    clean {
+        delete(npmInstall)
     }
     spotlessCheck {
         dependsOn(prettierCheck)
