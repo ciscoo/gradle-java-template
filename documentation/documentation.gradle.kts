@@ -11,7 +11,7 @@ node {
     version.set(provider {
         layout.projectDirectory.file(".nvmrc").asFile.readText().drop(1).trim()
     })
-    download.set(providers.environmentVariable("CI").orElse("false").map { it.toBoolean() })
+    download = true
 }
 
 tasks {
