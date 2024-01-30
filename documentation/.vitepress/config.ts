@@ -1,6 +1,10 @@
 import { defineConfig } from "vitepress";
+import { readGradleMetadata } from "./gradle"
+
+const gradleMetadata = readGradleMetadata()
 
 export default defineConfig({
+  base: `/gradle-java-template/docs/${gradleMetadata.docsVersion}`,
   outDir: "build/vitepress-dist",
   lang: "en-US",
   title: "Gradle Java Template",

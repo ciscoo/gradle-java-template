@@ -9,6 +9,7 @@
     "prettier:write": "prettier . --write"
   },
   "devDependencies": {
+    "@types/node": "^20.11.10",
     "prettier": "3.2.2",
     "vitepress": "^1.0.0-rc.36"
   }
