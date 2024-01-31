@@ -44,7 +44,8 @@ tasks {
         outputs.dir(layout.buildDirectory.dir("vitepress-dist"))
         outputs.upToDateWhen {
             // Force rerun since the base URL needs to contain 'current'
-            // in order for navigation to work correctly
+            // in order for navigation to work correctly. For snapshots,
+            // the version is always 'snapshot'.
             !replaceCurrentDocs
         }
     }
