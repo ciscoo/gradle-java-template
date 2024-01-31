@@ -29,7 +29,7 @@ jobs:
 
   update_snapshot_documentation:
     name: Update Snapshot Documentation
-#    needs: [publish_snapshot] TODO: Enable when project is created
+    needs: [publish_snapshot]
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
