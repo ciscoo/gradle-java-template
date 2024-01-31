@@ -50,7 +50,7 @@ jobs:
         with:
           arguments: prepareVersionedDocs
       - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./documentation/build/ghpages-docs
       - name: Deploy to GitHub Pages
