@@ -24,12 +24,12 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
-        with:
-          arguments: publishAllPublicationsToSonatypeSnapshotsRepository -x check
+#        with: TODO: Enable when project is created
+#          arguments: publishAllPublicationsToSonatypeSnapshotsRepository -x check
 
   update_snapshot_documentation:
     name: Update Snapshot Documentation
-    needs: [publish_snapshot]
+#    needs: [publish_snapshot] TODO: Enable when project is created
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -45,7 +45,7 @@ jobs:
       - name: Prepare Snapshot Documentation
         uses: ./.github/actions/run-gradle
         with:
-          arguments: prepareSnapshotDocs
+          arguments: prepareVersionedDocs
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v2
         with:
