@@ -9,11 +9,11 @@ concurrency:
   group: publish-snapshot
   cancel-in-progress: true
 
-permissions:
-  id-token: write
-
 jobs:
   publish_snapshot:
+    permissions:
+      pages: write
+      id-token: write
     name: Publish Snapshot Artifacts
     runs-on: ubuntu-latest
     if: github.repository == 'ciscoo/gradle-java-template' && github.ref == 'refs/heads/main'
