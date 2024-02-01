@@ -15,4 +15,5 @@ gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", ver
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+gradleGitPublish = { id = "org.ajoberstar.git-publish", version = "4.2.1" }
 node = { id = "com.github.node-gradle.node", version = "7.0.1" }

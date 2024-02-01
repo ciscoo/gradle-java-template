@@ -31,27 +31,22 @@ jobs:
     name: Update Snapshot Documentation
     needs: [publish_snapshot]
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Build Snapshot Documentation
+      - name: Build Documentation
         uses: ./.github/actions/run-gradle
         with:
-          arguments: vitePressBuild -PsnapshotDocsBuild
-      - name: Configure Pages
-        uses: actions/configure-pages@v4
-      - name: Prepare Snapshot Documentation
+          arguments: vitePressBuild
+      - name: Prepare Versioned Documentation
         uses: ./.github/actions/run-gradle
         with:
           arguments: prepareVersionedDocs
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Publish Documentation
+        uses: ./.github/actions/run-gradle
+        env:
+          GRGIT_USER: ${{ secrets.GITHUB_TOKEN }}
         with:
-          path: ./documentation/build/ghpages-docs
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+          arguments: gitPublishPush

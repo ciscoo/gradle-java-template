@@ -1,10 +1,12 @@
 import com.github.gradle.node.npm.task.NpmTask
 import io.mateo.build.task.GenerateGradleProjectMetadata
+import org.ajoberstar.gradle.git.publish.GitPublication
 
 plugins {
     base
     id("com.diffplug.spotless")
     alias(libs.plugins.node)
+    alias(libs.plugins.gradleGitPublish)
 }
 
 val snapshot = rootProject.version.toString().contains("SNAPSHOT")
@@ -23,6 +25,22 @@ node {
         layout.projectDirectory.file(".nvmrc").asFile.readText().drop(1).trim()
     })
     download = true
+}
+
+gitPublish {
+    repoUri = "https://github.com/ciscoo/gradle-java-template.git"
+    branch = "gh-pages"
+    contents {
+        from(docsDir)
+        into("docs")
+    }
+    preserve {
+        include("**/*")
+        exclude("docs/$docsVersion/**")
+        if (replaceCurrentDocs) {
+            exclude("docs/current/**")
+        }
+    }
 }
 
 tasks {
