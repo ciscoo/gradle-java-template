@@ -24,5 +24,4 @@ runs:
         dependency-graph: ${{ inputs.dependency-graph }}
         arguments: |
           -Porg.gradle.java.installations.auto-download=false
-          javaToolchains
           ${{ inputs.arguments }}
