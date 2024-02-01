@@ -46,7 +46,5 @@ jobs:
           arguments: prepareVersionedDocs
       - name: Publish Documentation
         uses: ./.github/actions/run-gradle
-        env:
-          GRGIT_USER: ${{ secrets.GITHUB_TOKEN }}
         with:
-          arguments: gitPublishPush
+          arguments: -Dorg.ajoberstar.grgit.auth.username=${{ secrets.GITHUB_TOKEN }} gitPublishPush
