@@ -1,6 +1,5 @@
 import com.github.gradle.node.npm.task.NpmTask
 import io.mateo.build.task.GenerateGradleProjectMetadata
-import org.ajoberstar.gradle.git.publish.GitPublication
 
 plugins {
     base
