@@ -47,4 +47,4 @@ jobs:
       - name: Publish Documentation
         uses: ./.github/actions/run-gradle
         with:
-          arguments: -Dorg.ajoberstar.grgit.auth.username=${{ secrets.GITHUB_TOKEN }} gitPublishPush
+          arguments: -Dorg.ajoberstar.grgit.auth.username=${{ secrets.GITHUB_TOKEN }} gitPublishPush --info
