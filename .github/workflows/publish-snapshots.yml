@@ -49,4 +49,4 @@ jobs:
         env:
           GRGIT_USER: ${{ secrets.GH_TOKEN }}
         with:
-          arguments: gitPublishPush --info
+          arguments: gitPublishPush
