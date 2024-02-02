@@ -12,7 +12,7 @@ plugins {
 val snapshot = rootProject.version.toString().contains("SNAPSHOT")
 val replaceCurrentDocs = project.hasProperty("replaceCurrentDocs")
 val docsVersion = if (snapshot) {
-    "snapshot"
+    "current-SNAPSHOT"
 } else if (replaceCurrentDocs) {
     "current"
 } else {
