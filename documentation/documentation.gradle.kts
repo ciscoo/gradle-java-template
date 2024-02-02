@@ -90,15 +90,6 @@ tasks {
             replaceCurrentDocs
         }
     }
-    gitPublishReset {
-        usesService(grgitService)
-    }
-    gitPublishCommit {
-        usesService(grgitService)
-    }
-    gitPublishPush {
-        usesService(grgitService)
-    }
     clean {
         delete(npmInstall)
     }
