@@ -25,3 +25,4 @@ runs:
         arguments: |
           -Porg.gradle.java.installations.auto-download=false
           ${{ inputs.arguments }}
+          --warning-mode all
