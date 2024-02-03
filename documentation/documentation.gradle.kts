@@ -90,6 +90,16 @@ tasks {
             replaceCurrentDocs
         }
     }
+    val mainGrgitService = gradle.sharedServices.registrations["git-publish-main-grgit"].service
+    gitPublishReset {
+        usesService(mainGrgitService)
+    }
+    gitPublishCommit {
+        usesService(mainGrgitService)
+    }
+    gitPublishPush {
+        usesService(mainGrgitService)
+    }
     clean {
         delete(npmInstall)
     }
