@@ -62,10 +62,10 @@ tasks {
         args = listOf("run", "docs:build")
         outputs.dir(layout.buildDirectory.dir("vitepress-dist"))
         outputs.upToDateWhen {
-            // Force rerun since the base URL needs to contain 'current'
-            // in order for navigation to work correctly. For snapshots,
-            // the version is always 'snapshot'.
-            !replaceCurrentDocs
+            // Force rerun always since the base URL needs
+            // to contain the correct version in order for
+            // navigation to work correctly.
+            false
         }
     }
     val vitePressPreview by registering(NpmTask::class) {
