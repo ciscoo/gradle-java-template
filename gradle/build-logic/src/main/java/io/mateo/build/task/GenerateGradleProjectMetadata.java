@@ -39,6 +39,7 @@ public abstract class GenerateGradleProjectMetadata extends DefaultTask {
 
     @Inject
     public GenerateGradleProjectMetadata(ProjectLayout layout, ProviderFactory providers) {
+        setDescription("Generate project metadata to use in the VitePress build.");
         getGeneratedMetadata().set(layout.getBuildDirectory().file("gradle-project-metadata.json"));
         getProperties().put("version", providers.provider(() -> getProject()
                 .getVersion()
