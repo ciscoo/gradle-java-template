@@ -22,7 +22,7 @@ repositories {
 
 spotless {
     java {
-        licenseHeaderFile(layout.projectDirectory.file("../config/spotless/apache-license-2.0.java"))
+        licenseHeaderFile(layout.projectDirectory.file("../gradle/config/spotless/apache-license-2.0.java"))
         removeUnusedImports()
         endWithNewline()
         trimTrailingWhitespace()

@@ -1,7 +1,3 @@
-pluginManagement {
-    includeBuild("gradle/build-logic")
-}
-
 rootProject.name = "gradle-java-template"
 
 include("documentation")
