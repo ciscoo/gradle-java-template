@@ -19,9 +19,7 @@ val docsVersion = if (snapshot) {
 val docsDir = layout.buildDirectory.dir("ghpages-docs")
 
 node {
-    version.set(provider {
-        layout.projectDirectory.file(".nvmrc").asFile.readText().drop(1).trim()
-    })
+    version = provider { layout.projectDirectory.file(".nvmrc").asFile.readText().drop(1).trim() }
     download = true
 }
 
