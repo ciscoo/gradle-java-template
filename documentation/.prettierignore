@@ -1,5 +1,0 @@
-.vitepress/cache
-node_modules
-.gradle
-package-lock.json
-build
