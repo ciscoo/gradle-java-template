@@ -2,14 +2,6 @@ rootProject.name = "gradle-java-template"
 
 include("documentation")
 
-// Enforce build file uses Kotlin DSL and name is the project name
-rootProject.children.forEach {
-    with(it) {
-        buildFileName = "$name.gradle.kts"
-        require(buildFile.isFile) { "$buildFile must exist" }
-    }
-}
-
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
@@ -18,6 +10,23 @@ dependencyResolutionManagement {
             url = uri("https://repo.spring.io/milestone")
         }
     }
+}
+
+fun ProjectDescriptor.ensureBuildFileExists() {
+    buildFileName = "$name.gradle.kts"
+    require(buildFile.isFile) { "$buildFile must exist" }
+}
+
+fun requireBuildFileName(projectDescriptor: ProjectDescriptor) {
+    projectDescriptor.ensureBuildFileExists()
+    projectDescriptor.children.forEach {
+        requireBuildFileName(it)
+    }
+}
+
+rootProject.children.forEach {
+    it.ensureBuildFileExists()
+    requireBuildFileName(it)
 }
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
