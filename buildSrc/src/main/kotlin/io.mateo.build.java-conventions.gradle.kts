@@ -38,10 +38,10 @@ val commonCompilerArgs =
     )
 
 tasks {
-    withType(JavaExec::class).configureEach {
+    withType<JavaExec>().configureEach {
         javaLauncher = javaToolchains.launcherFor(java.toolchain)
     }
-    withType(JavaCompile::class).configureEach {
+    withType<JavaCompile>().configureEach {
         options.encoding = StandardCharsets.UTF_8.name()
     }
     named { it == sourceSets.main.get().compileJavaTaskName }.configureEach {
@@ -54,7 +54,7 @@ tasks {
             }
         }
     }
-    withType(Javadoc::class).configureEach {
+    withType<Javadoc>().configureEach {
         with(options as StandardJavadocDocletOptions) {
             memberLevel = JavadocMemberLevel.PROTECTED
             header = project.name
