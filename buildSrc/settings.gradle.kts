@@ -5,7 +5,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "build-logic"
+rootProject.name = "buildSrc"
 
 dependencyResolutionManagement {
     versionCatalogs {
