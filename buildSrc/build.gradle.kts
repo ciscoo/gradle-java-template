@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.plugin.diagnostics.kotlinToolingDiagnosticsCo
 
 plugins {
     `kotlin-dsl`
-    alias(libs.plugins.spotless)
+    alias(libs.plugins.build.spotless)
 }
 
 java {
