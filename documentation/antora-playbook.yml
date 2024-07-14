@@ -1,13 +1,14 @@
 site:
-  title: Antora Docs
-  start_page: component-b::index.adoc
+  title: Gradle Java Template
+  robots: allow
 content:
   sources:
-    - url: https://gitlab.com/antora/demo/demo-component-a.git
-      branches: HEAD
-    - url: https://gitlab.com/antora/demo/demo-component-b.git
-      branches: [v2.0, v1.0]
-      start_path: docs
+    - url: https://github.com/ciscoo/gradle-java-template
+      branches:
+        - main
+        - "{1..9}.+({0..9}).x"
+      tags: "v{1..9}.+({0..9}).+({0..9})?(-{rc,beta}*)"
+      start_path: documentation
 ui:
   bundle:
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
