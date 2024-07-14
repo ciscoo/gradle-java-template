@@ -1,5 +1,3 @@
-import io.mateo.build.task.GenerateGradleProjectMetadata
-
 plugins {
     base
     id("com.diffplug.spotless")
@@ -40,9 +38,6 @@ gitPublish {
 }
 
 tasks {
-    val generateGradleProjectMetadata by registering(GenerateGradleProjectMetadata::class) {
-        properties.put("docsVersion", docsVersion)
-    }
     npmInstall {
         outputs.dir(layout.projectDirectory.dir("node_modules"))
     }
