@@ -13,9 +13,11 @@ node {
 
 tasks {
     clean {
-        delete(npmInstall)
-        delete(nodeSetup)
-        delete(npmSetup)
+        if (providers.gradleProperty("cleanNode").isPresent) {
+            delete(npmInstall)
+            delete(nodeSetup)
+            delete(npmSetup)
+        }
     }
     val prettierCheck by registering(NpmTask::class) {
         inputs.files(npmSetup)
