@@ -27,7 +27,6 @@ tasks {
     }
     withType(NpmTask::class.java).configureEach {
         if (name == npmInstall.name) {
-            println("skipping npmInstall task")
             return@configureEach
         }
         inputs.files(npmInstall)
