@@ -5,6 +5,10 @@ const gradleMetadata = readGradleMetadata();
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: `/gradle-java-template`,
+  outDir: "build/vitepress-dist",
+  lastUpdated: true,
+  cleanUrls: true,
   title: "Gradle Java Template",
   description: "A VitePress Site",
   themeConfig: {
