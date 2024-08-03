@@ -20,13 +20,18 @@ tasks {
         }
     }
     val prettierCheck by registering(NpmTask::class) {
-        inputs.files(npmSetup)
-        dependsOn(npmInstall)
         args = listOf("run", "prettier:check")
     }
     val prettierWrite by registering(NpmTask::class) {
-        inputs.files(npmSetup)
         args = listOf("run", "prettier:write")
+    }
+    withType(NpmTask::class.java).configureEach {
+        if (name == npmInstall.name) {
+            println("skipping npmInstall task")
+            return@configureEach
+        }
+        inputs.files(npmInstall)
+        inputs.files(npmSetup)
     }
     spotlessCheck {
         finalizedBy(prettierCheck)
