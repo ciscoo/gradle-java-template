@@ -1,3 +1,0 @@
-= Gradle Java Template
-
-Sample documentation for Gradle Java template
