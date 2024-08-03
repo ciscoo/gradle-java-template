@@ -18,12 +18,7 @@ export default defineConfig({
     },
   },
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: "Home", link: "/" },
-      { text: "Examples", link: "/markdown-examples" },
-    ],
-
+    nav: nav(),
     sidebar: [
       {
         text: "Examples",
@@ -39,3 +34,23 @@ export default defineConfig({
     ],
   },
 });
+
+function nav(): DefaultTheme.NavItem[] {
+  return [
+    { text: "Home", link: "/" },
+    { text: "Examples", link: "/markdown-examples" },
+    {
+      text: `${gradleMetadata.version}`,
+      items: [
+        {
+          text: "Release Notes",
+          link: "/release-notes",
+        },
+        {
+          text: "Contributing",
+          link: "https://github.com/ciscoo/gradle-java-template/CONTRIBUTING.md",
+        },
+      ],
+    },
+  ];
+}
