@@ -9,6 +9,8 @@ spotless {
     }
 }
 
+val libs = versionCatalogs.named("libs")
+
 pluginManager.withPlugin("java") {
     spotless {
         java {
@@ -19,7 +21,9 @@ pluginManager.withPlugin("java") {
             removeUnusedImports()
             endWithNewline()
             trimTrailingWhitespace()
-            palantirJavaFormat()
+            libs.findLibrary("gradle.plantirJavaFormat").ifPresent {
+                palantirJavaFormat(it.get().version)
+            }
         }
     }
 }

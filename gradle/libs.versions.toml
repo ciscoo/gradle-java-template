@@ -12,6 +12,7 @@ junitPlatformLauncher = { module = "org.junit.platform:junit-platform-launcher" 
 assertjCore = { module = "org.assertj:assertj-core", version = "3.26.0" }
 jackson = { module = "com.fasterxml.jackson.core:jackson-databind", version = "2.17.1" }
 gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
+gradle-plantirJavaFormat = { module = "com.palantir.javaformat:palantir-java-format", version = "2.48.0" }
 
 [plugins]
 build-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
