@@ -13,8 +13,8 @@ node {
 
 tasks {
     clean {
+        delete(layout.buildDirectory.dir("node_modules"))
         if (providers.gradleProperty("cleanNode").isPresent) {
-            delete(layout.buildDirectory.dir("node_modules"))
             delete(nodeSetup)
             delete(npmSetup)
         }
