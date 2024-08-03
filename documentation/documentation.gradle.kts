@@ -19,6 +19,7 @@ tasks {
             delete(npmSetup)
         }
     }
+    val generateGradleProjectMetadata by registering(io.mateo.build.task.GenerateGradleProjectMetadata::class)
     val prettierCheck by registering(NpmTask::class) {
         args = listOf("run", "prettier:check")
     }
