@@ -12,13 +12,6 @@ node {
 }
 
 tasks {
-    clean {
-        delete(layout.buildDirectory.dir("node_modules"))
-        if (providers.gradleProperty("cleanNode").isPresent) {
-            delete(nodeSetup)
-            delete(npmSetup)
-        }
-    }
     val generateGradleProjectMetadata by registering(io.mateo.build.task.GenerateGradleProjectMetadata::class)
     val vitePressDev by registering(NpmTask::class) {
         description = "Start VitePress dev server."
@@ -55,5 +48,12 @@ tasks {
     }
     spotlessApply {
         dependsOn(prettierWrite)
+    }
+    clean {
+        delete(layout.buildDirectory.dir("node_modules"))
+        if (providers.gradleProperty("cleanNode").isPresent) {
+            delete(nodeSetup)
+            delete(npmSetup)
+        }
     }
 }
