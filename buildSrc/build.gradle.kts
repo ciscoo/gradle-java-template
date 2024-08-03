@@ -37,6 +37,7 @@ spotless {
 
 dependencies {
     implementation(libs.gradle.spotless)
+    implementation(libs.jackson)
 }
 
 tasks.withType<CheckKotlinGradlePluginConfigurationErrors>().configureEach {
