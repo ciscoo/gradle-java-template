@@ -54,6 +54,9 @@ tasks {
         dependsOn(prettierWrite)
     }
     clean {
+        delete(vitePressDev)
+        delete(vitePressBuild)
+        delete(vitePressPreview)
         delete(layout.buildDirectory.dir("node_modules"))
         if (providers.gradleProperty("cleanNode").isPresent) {
             delete(nodeSetup)
