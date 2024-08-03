@@ -20,6 +20,23 @@ tasks {
         }
     }
     val generateGradleProjectMetadata by registering(io.mateo.build.task.GenerateGradleProjectMetadata::class)
+    val vitePressDev by registering(NpmTask::class) {
+        description = "Start VitePress dev server."
+        inputs.files(generateGradleProjectMetadata)
+        args = listOf("run", "docs:dev")
+    }
+    val vitePressBuild by registering(NpmTask::class) {
+        description = "Build the VitePress site for production."
+        inputs.files(generateGradleProjectMetadata)
+        args = listOf("run", "docs:build")
+        outputs.dir(layout.buildDirectory.dir("vitepress-dist"))
+    }
+    val vitePressPreview by registering(NpmTask::class) {
+        description = "Locally preview the production build."
+        dependsOn(npmInstall)
+        inputs.files(generateGradleProjectMetadata)
+        args = listOf("run", "docs:preview")
+    }
     val prettierCheck by registering(NpmTask::class) {
         args = listOf("run", "prettier:check")
     }
