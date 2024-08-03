@@ -11,6 +11,12 @@ export default defineConfig({
   cleanUrls: true,
   title: "Gradle Java Template",
   description: "A VitePress Site",
+  vite: {
+    define: {
+      __PROJECT_VERSION__: `"${gradleMetadata.version}"`,
+      __GRADLE_VERSION__: `"${gradleMetadata.gradleVersion}"`,
+    },
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
