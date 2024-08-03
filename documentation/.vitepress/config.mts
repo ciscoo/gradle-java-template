@@ -1,4 +1,7 @@
 import { defineConfig } from "vitepress";
+import { readGradleMetadata } from "./gradle.mjs";
+
+const gradleMetadata = readGradleMetadata();
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
