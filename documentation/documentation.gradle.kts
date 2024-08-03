@@ -33,9 +33,9 @@ tasks {
         inputs.files(npmSetup)
     }
     spotlessCheck {
-        finalizedBy(prettierCheck)
+        dependsOn(prettierCheck)
     }
     spotlessApply {
-        finalizedBy(prettierWrite)
+        dependsOn(prettierWrite)
     }
 }
