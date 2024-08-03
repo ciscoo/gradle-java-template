@@ -1,6 +1,7 @@
 plugins {
     base
     alias(libs.plugins.spotless)
+    alias(libs.plugins.node)
 }
 
 node {
