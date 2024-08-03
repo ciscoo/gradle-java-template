@@ -17,6 +17,8 @@ tasks {
     }
     clean {
         delete(npmInstall)
+        delete(nodeSetup)
+        delete(npmSetup)
     }
     val prettierCheck by registering(NpmTask::class) {
         inputs.files(npmSetup)
