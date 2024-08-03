@@ -12,9 +12,6 @@ node {
 }
 
 tasks {
-    npmInstall {
-        outputs.dir(layout.projectDirectory.dir("node_modules"))
-    }
     clean {
         delete(npmInstall)
         delete(nodeSetup)
