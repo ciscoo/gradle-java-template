@@ -15,7 +15,7 @@ pluginManager.withPlugin("java") {
     spotless {
         java {
             licenseHeaderFile(
-                layout.projectDirectory.file("gradle/config/spotless/apache-license-2.0.java"),
+                rootProject.layout.projectDirectory.file("gradle/config/spotless/apache-license-2.0.java"),
                 "(package|import|open|module)",
             )
             removeUnusedImports()
