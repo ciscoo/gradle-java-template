@@ -1,7 +1,7 @@
 import com.github.gradle.node.npm.task.NpmTask
 
 plugins {
-    base
+    id("io.mateo.build.java-conventions")
     alias(libs.plugins.spotless)
     alias(libs.plugins.node)
 }
