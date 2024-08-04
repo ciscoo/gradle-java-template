@@ -30,7 +30,10 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/ciscoo/gradle-java-template" },
+      {
+        icon: "github",
+        link: "https://github.com/ciscoo/gradle-java-template",
+      },
     ],
   },
 });
