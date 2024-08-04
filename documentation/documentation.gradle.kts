@@ -12,6 +12,7 @@ node {
 }
 
 tasks {
+    val generateSnippets by registering(io.mateo.build.task.GenerateSnippets::class)
     val generateGradleProjectMetadata by registering(io.mateo.build.task.GenerateGradleProjectMetadata::class)
     val vitePressDev by registering(NpmTask::class) {
         description = "Start VitePress dev server."
@@ -43,6 +44,7 @@ tasks {
         if (!name.startsWith("vite")) {
             return@configureEach
         }
+        inputs.files(generateSnippets)
         inputs.files(generateGradleProjectMetadata)
         inputs.dir(layout.projectDirectory.dir(".vitepress"))
         outputs.dir(layout.projectDirectory.dir(".vitepress/cache"))
