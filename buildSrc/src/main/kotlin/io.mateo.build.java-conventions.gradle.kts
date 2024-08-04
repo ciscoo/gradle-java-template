@@ -8,6 +8,10 @@ plugins {
 
 group = "io.mateo"
 
+repositories {
+    mavenCentral()
+}
+
 configurations.configureEach {
     resolutionStrategy {
         cacheDynamicVersionsFor(0, TimeUnit.SECONDS)
