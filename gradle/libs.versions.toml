@@ -1,6 +1,6 @@
 [versions]
 spring-boot = "3.3.2"
-spring-cloud = "2023.0.2"
+spring-cloud = "2023.0.3"
 junit = "5.10.3"
 spotless = "6.25.0"
 
