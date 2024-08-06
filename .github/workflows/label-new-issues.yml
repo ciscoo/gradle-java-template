@@ -14,6 +14,7 @@ jobs:
           script: |
             const { payload } = context
             const { issue } = payload
+            console.log(issue)
             if (issue.author_association === "OWNER") {
               return
             }
