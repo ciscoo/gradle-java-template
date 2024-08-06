@@ -2,8 +2,6 @@ name: Snapshot Publication
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron:  '0 0 * * *'
 
 concurrency:
   group: publish-snapshot
@@ -26,27 +24,3 @@ jobs:
           ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
 #        with: TODO: Enable when project is created
 #          arguments: publishAllPublicationsToSonatypeSnapshotsRepository -x check
-
-  update_snapshot_documentation:
-    name: Update Snapshot Documentation
-    needs: [publish_snapshot]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - name: Build Documentation
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: vitePressBuild
-      - name: Prepare Versioned Documentation
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: prepareVersionedDocs
-      - name: Publish Documentation
-        uses: ./.github/actions/run-gradle
-        env:
-          GRGIT_USER: ${{ secrets.GH_TOKEN }}
-        with:
-          arguments: gitPublishPush
