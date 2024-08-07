@@ -8,7 +8,9 @@ inputs:
     description: The Java distribution to use for the build.
     required: true
 outputs:
-  path: ${{ steps.setup-java.outputs.path }}
+  path:
+    description: Path to where the Java environment has been installed (same as $JAVA_HOME).
+    value: ${{ steps.setup-java.outputs.path }}
 runs:
   using: "composite"
   steps:
