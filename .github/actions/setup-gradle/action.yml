@@ -10,7 +10,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: ./.github/actions/prepare-java
+    - uses: ./.github/actions/setup-java
       id: setup-java
       with:
         java-version: ${{ inputs.java-version }}
