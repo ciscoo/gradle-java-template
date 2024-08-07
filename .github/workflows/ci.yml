@@ -1,0 +1,39 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+jobs:
+  ci:
+    name: "${{ matrix.os.name}} | Java ${{ matrix.java.version}}"
+    runs-on: ${{ matrix.os.id }}
+    if: ${{ github.repository == 'ciscoo/gradle-java-template' }}
+    strategy:
+      matrix:
+        os:
+          - id: ubuntu-latest
+            name: Linux
+          - id: windows-latest
+            name: Windows
+          - id: macos-latest
+            name: macOS
+        java:
+          - version: 17
+          - version: 21
+          - version: 22
+    steps:
+      - name: Prepare Windows runner
+        if: ${{ runner.os == 'Windows' }}
+        run: |
+          git config --global core.autocrlf true
+          git config --global core.longPaths true
+      - name: Check Out Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Build
+        uses: ./.github/actions/run-gradle
+        with:
+          java-version: ${{ matrix.java.version }}
