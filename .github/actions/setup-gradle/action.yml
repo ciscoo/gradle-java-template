@@ -28,6 +28,7 @@ runs:
         echo "systemProp.org.gradle.java.installations.auto-detect=false" >> $HOME/.gradle/gradle.properties
         echo "systemProp.org.gradle.java.installations.auto-download=false" >> $HOME/.gradle/gradle.properties
         echo "systemProp.org.gradle.java.installations.paths=${{ steps.setup-java.outputs.path }}" >> $HOME/.gradle/gradle.properties
+        cat $HOME/.gradle/gradle.properties
     - name: Display Java Toolchain Information
       shell: bash
       run: ./gradlew -q javaToolchains
