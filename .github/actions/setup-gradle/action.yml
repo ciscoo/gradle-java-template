@@ -19,16 +19,6 @@ runs:
       uses: gradle/actions/setup-gradle@v4
       with:
         allow-snapshot-wrappers: true
-    - name: Configure Gradle Properties
-      shell: bash
-      run: |
-        mkdir -p $HOME/.gradle
-        echo "systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false" >> $HOME/.gradle/gradle.properties
-        echo "org.gradle.daemon=false" >> $HOME/.gradle/gradle.properties
-        echo "org.gradle.java.installations.auto-detect=false" >> $HOME/.gradle/gradle.properties
-        echo "org.gradle.java.installations.auto-download=false" >> $HOME/.gradle/gradle.properties
-        echo "org.gradle.java.installations.paths=${{ steps.setup-java.outputs.path }}" >> $HOME/.gradle/gradle.properties
-        cat $HOME/.gradle/gradle.properties
     - name: Display Java Toolchain Information
       shell: bash
       run: ./gradlew -q javaToolchains
