@@ -1,28 +1,27 @@
 name: Run Gradle
-description: Sets up Java and runs Gradle
+description: Runs a Gradle task
 inputs:
   arguments:
-    required: true
-    description: Gradle arguments
-    default: build
-  dependency-graph:
+    description: Gradle arguments for the build.
     required: false
-    description: Whether to enable GitHub Dependency Graph support
-    default: disabled
+    default: build
+  java-version:
+    description: The Java version to compile and test with.
+    required: false
+    default: "17"
+  java-distribution:
+    description: The Java distribution to use for the build.
+    required: false
+    default: temurin
 runs:
-  using: "composite"
+  using: composite
   steps:
-    - uses: actions/setup-java@v4
-      id: setup-java
+    - uses: ./.github/actions/setup-gradle
+      id: setup-gradle
       with:
-        distribution: temurin
-        java-version: 21
-    - uses: gradle/gradle-build-action@v3
-      env:
-        JAVA_HOME: ${{ steps.setup-gradle-jdk.outputs.path }}
-      with:
-        dependency-graph: ${{ inputs.dependency-graph }}
-        arguments: |
-          -Porg.gradle.java.installations.auto-download=false
-          ${{ inputs.arguments }}
-          --warning-mode all
+        java-version: ${{ inputs.java-version }}
+        java-distribution: ${{ inputs.java-distribution }}
+    - name: Run Gradle
+      id: gradle-run
+      shell: bash
+      run: ./gradlew ${{ inputs.arguments }}

@@ -1,0 +1,33 @@
+name: Prepare Gradle
+description: Prepares Gradle for a GitHub Action.
+inputs:
+  java-version:
+    description: The Java version to compile and test with.
+    required: true
+  java-distribution:
+    description: The Java distribution to use for the build.
+    required: true
+runs:
+  using: composite
+  steps:
+    - uses: ./.github/actions/prepare-java
+      id: setup-java
+      with:
+        java-version: ${{ inputs.java-version }}
+        java-distribution: ${{ inputs.java-distribution }}
+    - name: Set up Gradle
+      uses: gradle/actions/setup-gradle@v4
+      with:
+        allow-snapshot-wrappers: true
+    - name: Configure Gradle Properties
+      shell: bash
+      run: |
+        mkdir -p $HOME/.gradle
+        echo "systemProp.org.gradle.internal.launcher.welcomeMessageEnabled=false" >> $HOME/.gradle/gradle.properties
+        echo "org.gradle.daemon=false" >> $HOME/.gradle/gradle.properties
+        echo "systemProp.org.gradle.java.installations.auto-detect=false" >> $HOME/.gradle/gradle.properties
+        echo "systemProp.org.gradle.java.installations.auto-download=false" >> $HOME/.gradle/gradle.properties
+        echo "systemProp.org.gradle.java.installations.paths=${{ steps.setup-java.outputs.path }}" >> $HOME/.gradle/gradle.properties
+    - name: Display Java Toolchain Information
+      shell: bash
+      run: ./gradlew -q javaToolchains
