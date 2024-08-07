@@ -15,6 +15,7 @@ jobs:
             const { payload } = context
             const { issue } = payload
             if (issue.author_association === "OWNER") {
+              console.log(`Ignore applying 'status: new' label to issue since author association is ${issue.author_association}.`) 
               return
             }
             const { repository } = payload
