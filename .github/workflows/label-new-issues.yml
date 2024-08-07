@@ -20,8 +20,10 @@ jobs:
             }
             const { repository } = payload
             github.rest.issues.addLabels({
-              issue_number: issue.number,
               owner: repository.owner.login,
               repo: repository.name
-              labels: "status: new"
+              issue_number: issue.number,
+              labels: [
+                { name: "status: new" }
+              ]
             })
