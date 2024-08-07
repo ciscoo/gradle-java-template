@@ -12,19 +12,14 @@ jobs:
       - uses: actions/github-script@v7
         with:
           script: |
-            console.log(JSON.stringify(context))
-#            const { payload } = context
-#            const { issue } = payload
-#            console.log(issue)
-#            if (issue.author_association === "OWNER") {
-#              return
-#            }
-#            const { repository } = payload
-#            github.rest.issues.addLabels({
-#              owner: repository.owner.login,
-#              repo: repository.name
-#              issue_number: issue.number,
-#              labels: [
-#                { name: "status: new" }
-#              ]
-#            })
+            const { payload } = context
+            const { issue } = payload
+            if (issue.author_association === "OWNER") {
+              return
+            }
+            github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+              issue_number: issue.number,
+              labels: [ "status: new" ]
+            })
