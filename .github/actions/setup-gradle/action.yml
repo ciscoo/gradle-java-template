@@ -8,7 +8,7 @@ inputs:
     description: The Java distribution to use for the build.
     required: true
 runs:
-  using: composite
+  using: "composite"
   steps:
     - uses: ./.github/actions/prepare-java
       id: setup-java

@@ -10,7 +10,7 @@ inputs:
 outputs:
   path: ${{ steps.setup-java.outputs.path }}
 runs:
-  using: composite
+  using: "composite"
   steps:
     - name: "Set up Java ${{ inputs.java-version }} ${{ inputs.java-distribution }}"
       id: setup-java
