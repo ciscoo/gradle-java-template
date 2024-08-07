@@ -22,7 +22,7 @@ import org.gradle.jvm.toolchain.JavaLanguageVersion;
 public abstract class JavaToolchainExtension {
 
     public JavaToolchainExtension() {
-        getTargetVersion().convention(JavaLanguageVersion.of(21));
+        getTargetVersion().convention(JavaLanguageVersion.of(17));
         getReleaseVersion().convention(getTargetVersion());
     }
 
