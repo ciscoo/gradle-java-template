@@ -23,5 +23,5 @@ jobs:
               issue_number: issue.number,
               owner: repository.owner.login,
               repo: repository.name
-              labels: ["status: new"]
+              labels: "status: new"
             })
