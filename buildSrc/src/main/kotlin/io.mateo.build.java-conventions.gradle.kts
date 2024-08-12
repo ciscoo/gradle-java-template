@@ -37,6 +37,10 @@ val commonCompilerArgs =
 val extension = extensions.getByType(JavaToolchainExtension::class.java)
 
 tasks {
+    withType(Jar::class.java).configureEach {
+        from(rootProject.layout.projectDirectory.file("LICENSE.txt")) {
+            into("META-INF")
+        }
     }
     withType<JavaCompile>().configureEach {
         options.encoding = StandardCharsets.UTF_8.name()
