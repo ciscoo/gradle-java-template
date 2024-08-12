@@ -7,6 +7,13 @@ spotless {
         target("**/*.md", "**/*.adoc")
         targetExclude("**/node_modules/**", "**/.gradle/**")
     }
+    kotlinGradle {
+        endWithNewline()
+        trimTrailingWhitespace()
+        libs.findVersion("kitlint").ifPresent {
+            ktlint(it.requiredVersion)
+        }
+    }
 }
 
 val libs = versionCatalogs.named("libs")
