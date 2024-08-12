@@ -3,6 +3,7 @@ import java.nio.charset.StandardCharsets
 
 plugins {
     java
+    id("io.mateo.build.java-toolchain-conventions")
     id("io.mateo.build.code-style-conventions")
 }
 
@@ -16,14 +17,6 @@ configurations.configureEach {
     resolutionStrategy {
         cacheDynamicVersionsFor(0, TimeUnit.SECONDS)
         cacheChangingModulesFor(0, TimeUnit.SECONDS)
-    }
-}
-
-val javaToolchain = extensions.create("javaToolchain", JavaToolchainExtension::class)
-
-java {
-    toolchain {
-        languageVersion = javaToolchain.targetVersion
     }
 }
 
@@ -41,18 +34,17 @@ val commonCompilerArgs =
         "-Werror",
     )
 
+val extension = extensions.getByType(JavaToolchainExtension::class.java)
+
 tasks {
-    withType<JavaExec>().configureEach {
-        javaLauncher = javaToolchains.launcherFor(java.toolchain)
     }
     withType<JavaCompile>().configureEach {
         options.encoding = StandardCharsets.UTF_8.name()
     }
-    named { it == sourceSets.main.get().compileJavaTaskName }.configureEach {
-        this as JavaCompile
+    compileJava {
         with(options) {
             compilerArgs.addAll(commonCompilerArgs)
-            release = javaToolchain.releaseVersion.map { it.asInt() }
+            release = extension.releaseVersion.map { it.asInt() }
             if (!compilerArgs.contains("-parameters")) {
                 compilerArgs.add("-parameters")
             }
@@ -62,7 +54,7 @@ tasks {
         with(options as StandardJavadocDocletOptions) {
             memberLevel = JavadocMemberLevel.PROTECTED
             header = project.name
-            source = javaToolchain.releaseVersion.get().toString()
+            source = extension.releaseVersion.get().toString()
             encoding = StandardCharsets.UTF_8.name()
             // https://docs.oracle.com/en/java/javase/21/docs/specs/man/javadoc.html
             addBooleanOption("Xdoclint:all", true)
@@ -89,6 +81,7 @@ testing.suites.configureEach {
             }
         }
         tasks.named(sources.compileJavaTaskName, JavaCompile::class) {
+            options.release = extension.targetVersion.map { it.asInt() }
             options.compilerArgs.addAll(commonCompilerArgs + "-parameters")
         }
     }
