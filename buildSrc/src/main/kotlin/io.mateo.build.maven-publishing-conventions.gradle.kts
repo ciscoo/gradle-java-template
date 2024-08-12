@@ -10,11 +10,12 @@ publishing {
         register(publicationName, MavenPublication::class) {
             pom {
                 name = provider { project.name }
-                description = provider {
-                    requireNotNull(project.description) {
-                        "Description must not be null for project '${project.name}'"
+                description =
+                    provider {
+                        requireNotNull(project.description) {
+                            "Description must not be null for project '${project.name}'"
+                        }
                     }
-                }
                 url = "https://github.com/ciscoo/gradle-java-template"
                 scm {
                     connection = "scm:git:git://github.com/ciscoo/gradle-java-template.git"
