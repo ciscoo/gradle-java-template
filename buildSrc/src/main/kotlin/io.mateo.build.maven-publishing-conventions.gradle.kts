@@ -1,6 +1,7 @@
 plugins {
     id("java") apply false
     `maven-publish`
+    signing
 }
 
 val publicationName = "mavenJava"
@@ -66,4 +67,13 @@ tasks {
     withType<PublishToMavenLocal>().configureEach {
         dependsOn(build)
     }
+}
+
+signing {
+    useInMemoryPgpKeys(
+        providers.environmentVariable("PGP_SIGNING_KEY").orNull,
+        providers.environmentVariable("PGP_SIGNING_KEY_PASSPHRASE").orNull,
+    )
+    sign(publishing.publications)
+    isRequired = !project.version.toString().contains("SNAPSHOT")
 }
