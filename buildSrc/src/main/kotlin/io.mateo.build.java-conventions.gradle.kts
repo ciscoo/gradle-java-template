@@ -50,13 +50,15 @@ tasks {
             }
         }
     }
-    withType<Javadoc>().configureEach {
-        with(options as StandardJavadocDocletOptions) {
+    javadoc {
+        options {
             memberLevel = JavadocMemberLevel.PROTECTED
             header = project.name
             source = extension.releaseVersion.get().toString()
             encoding = StandardCharsets.UTF_8.name()
-            // https://docs.oracle.com/en/java/javase/21/docs/specs/man/javadoc.html
+            locale = `java.util`.Locale.ENGLISH.language
+            this as StandardJavadocDocletOptions
+            // https://docs.oracle.com/en/java/javase/17/docs/specs/man/javadoc.html
             addBooleanOption("Xdoclint:all", true)
             use()
             noTimestamp()
