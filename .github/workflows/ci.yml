@@ -44,5 +44,5 @@ jobs:
         uses: ./.github/actions/run-gradle
         with:
           java-version: ${{ matrix.java.version }}
-          java-distribution: ${{ matrix.java.version }}
+          java-distribution: ${{ matrix.java.distribution || 'temurin' }}
           java-early-access: ${{ matrix.java.early-access }}
