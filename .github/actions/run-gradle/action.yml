@@ -23,9 +23,8 @@ runs:
     - uses: ./.github/actions/setup-gradle
       id: setup-gradle
       with:
-        java-version: ${{ inputs.java-version }}
-        java-distribution: |
-          ${{ inputs.java-early-access == 'true' && format('{0}-ea', inputs.java-version) || inputs.java-version }}
+        java-version: ${{ inputs.java-early-access == 'true' && format('{0}-ea', inputs.java-version) || inputs.java-version }}
+        java-distribution: ${{ inputs.java-distribution }}
     - name: Run Gradle
       id: gradle-run
       shell: bash
