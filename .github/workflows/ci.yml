@@ -21,14 +21,22 @@ jobs:
             name: macOS
         java:
           - version: 17
+            toolchain: false
           - version: 21
-          - version: 22
+            toolchain: true
+          - version: 23
+            toolchain: true
+            early-access: true
+          - version: 24
+            toolchain: true
+            early-access: true
     steps:
       - name: Prepare Windows runner
         if: ${{ runner.os == 'Windows' }}
         run: |
           git config --global core.autocrlf true
           git config --global core.longPaths true
+          Stop-Service -name Docker
       - name: Check Out Repository
         uses: actions/checkout@v4
         with:
@@ -37,3 +45,5 @@ jobs:
         uses: ./.github/actions/run-gradle
         with:
           java-version: ${{ matrix.java.version }}
+          java-distribution: ${{ matrix.java.version }}
+          java-early-access: ${{ matrix.java.early-access }}

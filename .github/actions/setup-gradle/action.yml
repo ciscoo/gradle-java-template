@@ -7,6 +7,10 @@ inputs:
   java-distribution:
     description: The Java distribution to use for the build.
     required: true
+  java-toolchain:
+    description: Whether a Java toolchain should be used.
+    required: false
+    default: "false"
 runs:
   using: "composite"
   steps:
@@ -19,6 +23,13 @@ runs:
       uses: gradle/actions/setup-gradle@v4
       with:
         allow-snapshot-wrappers: true
+    - name: Set up Toolchain
+      if: ${{ inputs.java-toolchain == 'true' }}
+      shell: bash
+      run: |
+        echo systemProp.org.gradle.java.installations.auto-detect=false >> $HOME/.gradle/gradle.properties
+        echo systemProp.org.gradle.java.installations.auto-download=false >> $HOME/.gradle/gradle.properties
+        echo "JDK${{ inputs.java-distribution }}=$JAVA_HOME" >> $GITHUB_ENV
     - name: Display Java Toolchain Information
       shell: bash
       run: ./gradlew -q javaToolchains

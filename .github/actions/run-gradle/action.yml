@@ -13,6 +13,10 @@ inputs:
     description: The Java distribution to use for the build.
     required: false
     default: temurin
+  java-early-access:
+    description: Whether the Java distribution is early access.
+    required: false
+    default: "false"
 runs:
   using: "composite"
   steps:
@@ -20,7 +24,8 @@ runs:
       id: setup-gradle
       with:
         java-version: ${{ inputs.java-version }}
-        java-distribution: ${{ inputs.java-distribution }}
+        java-distribution: |
+          ${{ inputs.java-early-access == 'true' && format('{0}-ea', inputs.java-version) || inputs.java-version }}
     - name: Run Gradle
       id: gradle-run
       shell: bash
