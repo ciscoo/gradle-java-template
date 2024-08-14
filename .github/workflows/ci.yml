@@ -27,9 +27,6 @@ jobs:
           - version: 23
             toolchain: true
             early-access: true
-          - version: 24
-            toolchain: true
-            early-access: true
     steps:
       - name: Prepare Windows runner
         if: ${{ runner.os == 'Windows' }}
