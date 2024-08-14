@@ -26,6 +26,7 @@ jobs:
             toolchain: true
           - version: 23
             toolchain: true
+            early-access: true
           - version: 24
             toolchain: true
             early-access: true
