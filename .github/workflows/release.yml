@@ -1,0 +1,32 @@
+name: Release
+on:
+  push:
+    tags:
+      - v1.0.[0-9]+
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version of the release; must match the version defined in gradle.properties
+        required: true
+        type: string
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+jobs:
+  Linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Build
+        id: build
+        uses: ./.github/actions/run-gradle
+        with:
+          java-version: '21'
+      - name: Publish to Maven Central
+        if: steps.build.outcome == 'success'
+        uses: ./.github/actions/run-gradle
+        with:
+          java-version: '21'
+          arguments: publishToSonatype closeSonatypeStagingRepository
