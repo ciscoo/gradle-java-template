@@ -36,7 +36,7 @@ runs:
         echo org.gradle.java.installations.auto-detect=false >> $HOME/.gradle/gradle.properties
         echo org.gradle.java.installations.auto-download=false >> $HOME/.gradle/gradle.properties
         echo "JDK${{ inputs.java-version }}=$JAVA_HOME" >> $GITHUB_ENV
-        echo JDK${{ inputs.java-version }
+        echo "JDK${{ inputs.java-version }}"
     - name: Display Java Toolchain Information
       shell: bash
       run: ./gradlew -q javaToolchains
