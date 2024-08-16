@@ -6,8 +6,6 @@ on:
   pull_request:
     branches:
       - '*'
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   ci:
     name: "Java ${{ matrix.java.version}}"
