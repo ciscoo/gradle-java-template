@@ -48,7 +48,7 @@ public abstract class GenerateSnippets extends SourceTask {
                     .getByType(JavaPluginExtension.class)
                     .getSourceSets()
                     .named(SourceSet.MAIN_SOURCE_SET_NAME)
-                    .map(it -> it.getAllSource()));
+                    .map(SourceSet::getAllSource));
         });
         getOutputDirectory().convention(layout.getBuildDirectory().dir("processed-region-sources"));
     }
@@ -64,7 +64,6 @@ public abstract class GenerateSnippets extends SourceTask {
             try (var br = Files.newBufferedReader(source.toPath())) {
                 boolean shouldPrint = false;
                 String line;
-                int lineNumber = 0;
                 while ((line = br.readLine()) != null) {
                     if (startRegionPattern.matcher(line).find()) {
                         shouldPrint = true;
