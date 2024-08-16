@@ -20,8 +20,6 @@ jobs:
           - id: macos-latest
             name: macOS
         java:
-          - version: 17
-            toolchain: false
           - version: 21
             toolchain: true
           - version: 23
@@ -38,9 +36,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Build
-        uses: ./.github/actions/run-gradle
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
         with:
           java-version: ${{ matrix.java.version }}
-          java-distribution: ${{ matrix.java.distribution || 'temurin' }}
-          java-early-access: ${{ matrix.java.early-access }}
+          java-early-access: ${{ matrix.java.early-access || 'false' }}
+          java-toolchain: ${{ matrix.java.toolchain }}
+      - name: Check
+        shell: bash
+        run: ./gradlew check

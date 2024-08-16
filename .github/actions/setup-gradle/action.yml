@@ -2,11 +2,17 @@ name: Prepare Gradle
 description: Prepares Gradle for a GitHub Action.
 inputs:
   java-version:
-    description: The Java version to compile and test with.
-    required: true
+    description: The Java version to install.
+    required: false
+    default: "21"
   java-distribution:
-    description: The Java distribution to use for the build.
-    required: true
+    description: The Java distribution to install.
+    required: false
+    default: temurin
+  java-early-access:
+    description: Whether the Java distribution is early access.
+    required: false
+    default: "false"
   java-toolchain:
     description: Whether a Java toolchain should be used.
     required: false
@@ -17,7 +23,7 @@ runs:
     - uses: ./.github/actions/setup-java
       id: setup-java
       with:
-        java-version: ${{ inputs.java-version }}
+        java-version: ${{ inputs.java-early-access == 'true' && format('{0}-ea', inputs.java-version) || inputs.java-version }}
         java-distribution: ${{ inputs.java-distribution }}
     - name: Set up Gradle
       uses: gradle/actions/setup-gradle@v4
@@ -29,7 +35,7 @@ runs:
       run: |
         echo systemProp.org.gradle.java.installations.auto-detect=false >> $HOME/.gradle/gradle.properties
         echo systemProp.org.gradle.java.installations.auto-download=false >> $HOME/.gradle/gradle.properties
-        echo "JDK${{ inputs.java-distribution }}=$JAVA_HOME" >> $GITHUB_ENV
+        echo "JDK${{ inputs.java-version }}=$JAVA_HOME" >> $GITHUB_ENV
     - name: Display Java Toolchain Information
       shell: bash
       run: ./gradlew -q javaToolchains

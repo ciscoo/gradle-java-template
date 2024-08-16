@@ -19,12 +19,6 @@ updates:
     labels: [ "type: task" ]
 
   - package-ecosystem: "github-actions"
-    directory: "/.github/actions/run-gradle"
-    schedule:
-      interval: "weekly"
-    labels: [ "type: task" ]
-
-  - package-ecosystem: "github-actions"
     directory: "/.github/actions/setup-gradle"
     schedule:
       interval: "weekly"
