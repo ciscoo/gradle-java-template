@@ -33,7 +33,6 @@ runs:
       if: ${{ inputs.java-toolchain == 'true' }}
       shell: bash
       run: |
-        echo org.gradle.java.installations.auto-detect=false >> $HOME/.gradle/gradle.properties
         echo org.gradle.java.installations.auto-download=false >> $HOME/.gradle/gradle.properties
         echo "JDK${{ inputs.java-version }}=$JAVA_HOME" >> $GITHUB_ENV
         echo $JAVA_HOME
