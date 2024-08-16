@@ -3,8 +3,11 @@ on:
   push:
     branches:
       - main
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  pull_request:
+    branches:
+      - '*'
+permissions:
+  contents: read
 jobs:
   ci:
     name: "${{ matrix.os.name}}"
