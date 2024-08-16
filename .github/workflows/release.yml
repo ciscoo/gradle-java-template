@@ -21,11 +21,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
       - name: Build
-        id: build
-        uses: ./.github/actions/run-gradle
+        shell: bash
+        run: ./gradlew build
       - name: Publish to Maven Central
         if: steps.build.outcome == 'success'
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: publishToSonatype closeSonatypeStagingRepository
+        shell: bash
+        run: ./gradlew publishToSonatype closeSonatypeStagingRepository
