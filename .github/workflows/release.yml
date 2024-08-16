@@ -12,8 +12,10 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 jobs:
-  Linux:
+  build-and-stage-release:
+    name: Build and Stage Release
     runs-on: ubuntu-latest
+    if: ${{ github.repository == 'ciscoo/gradle-java-template' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
