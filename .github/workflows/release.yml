@@ -22,11 +22,8 @@ jobs:
       - name: Build
         id: build
         uses: ./.github/actions/run-gradle
-        with:
-          java-version: '21'
       - name: Publish to Maven Central
         if: steps.build.outcome == 'success'
         uses: ./.github/actions/run-gradle
         with:
-          java-version: '21'
           arguments: publishToSonatype closeSonatypeStagingRepository

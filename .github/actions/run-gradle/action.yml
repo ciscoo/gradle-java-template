@@ -8,7 +8,7 @@ inputs:
   java-version:
     description: The Java version to compile and test with.
     required: false
-    default: "17"
+    default: "21"
   java-distribution:
     description: The Java distribution to use for the build.
     required: false
