@@ -7,7 +7,7 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   ci:
-    name: "${{ matrix.os.name}} | Java ${{ matrix.java.version}}"
+    name: "${{ matrix.os.name}}"
     runs-on: ${{ matrix.os.id }}
     if: ${{ github.repository == 'ciscoo/gradle-java-template' }}
     strategy:
@@ -19,12 +19,6 @@ jobs:
             name: Windows
           - id: macos-latest
             name: macOS
-        java:
-          - version: 21
-            toolchain: false
-          - version: 23
-            toolchain: true
-            early-access: true
     steps:
       - name: Prepare Windows runner
         if: ${{ runner.os == 'Windows' }}
@@ -38,10 +32,6 @@ jobs:
           fetch-depth: 1
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
-        with:
-          java-version: ${{ matrix.java.version }}
-          java-early-access: ${{ matrix.java.early-access || 'false' }}
-          java-toolchain: ${{ matrix.java.toolchain }}
       - name: Check
         shell: bash
         run: ./gradlew check

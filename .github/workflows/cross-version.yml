@@ -1,0 +1,40 @@
+name: Cross Version
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '*'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+jobs:
+  ci:
+    name: "Java ${{ matrix.java.version}}"
+    runs-on: ubuntu-latest
+    if: ${{ github.repository == 'ciscoo/gradle-java-template' }}
+    strategy:
+      matrix:
+        java:
+          - version: 22
+            toolchain: true
+          - version: 23
+            toolchain: true
+            early-access: true
+          - version: 24
+            toolchain: true
+            early-access: true
+    steps:
+      - name: Check Out Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
+        with:
+          java-version: ${{ matrix.java.version }}
+          java-early-access: ${{ matrix.java.early-access || 'false' }}
+          java-toolchain: ${{ matrix.java.toolchain }}
+      - name: Check
+        shell: bash
+        run: ./gradlew check
