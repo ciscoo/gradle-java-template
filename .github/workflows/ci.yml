@@ -21,7 +21,7 @@ jobs:
             name: macOS
         java:
           - version: 21
-            toolchain: true
+            toolchain: false
           - version: 23
             toolchain: true
             early-access: true
