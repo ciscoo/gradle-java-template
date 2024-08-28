@@ -15,13 +15,18 @@
  */
 package io.mateo.build.task;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
+import org.gradle.api.Project;
 import org.gradle.api.file.DirectoryProperty;
 import org.gradle.api.file.ProjectLayout;
 import org.gradle.api.plugins.JavaPluginExtension;
@@ -42,7 +47,7 @@ public abstract class GenerateSnippets extends SourceTask {
 
     @Inject
     public GenerateSnippets(ProjectLayout layout) {
-        var project = getProject();
+        Project project = getProject();
         project.getPluginManager().withPlugin("java", ignored -> {
             source(project.getExtensions()
                     .getByType(JavaPluginExtension.class)
@@ -58,10 +63,10 @@ public abstract class GenerateSnippets extends SourceTask {
 
     @TaskAction
     public void processRegions() throws IOException {
-        for (var source : getSource()) {
-            var parsed = getOutputDirectory().getAsFile().get().toPath().resolve(source.getName());
-            var linesToPrint = new ArrayList<String>();
-            try (var br = Files.newBufferedReader(source.toPath())) {
+        for (File source : getSource()) {
+            Path parsed = getOutputDirectory().getAsFile().get().toPath().resolve(source.getName());
+            List<String> linesToPrint = new ArrayList<>();
+            try (BufferedReader br = Files.newBufferedReader(source.toPath())) {
                 boolean shouldPrint = false;
                 String line;
                 while ((line = br.readLine()) != null) {
@@ -79,7 +84,7 @@ public abstract class GenerateSnippets extends SourceTask {
             if (linesToPrint.isEmpty()) {
                 continue;
             }
-            var content = linesToPrint.stream()
+            String content = linesToPrint.stream()
                     .filter(line -> !startRegionPattern.matcher(line).find())
                     .collect(Collectors.joining(System.lineSeparator()));
 
