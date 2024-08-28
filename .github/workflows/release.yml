@@ -3,30 +3,69 @@ on:
   push:
     tags:
       - v1.0.[0-9]+
-  workflow_dispatch:
-    inputs:
-      version:
-        description: Version of the release; must match the version defined in gradle.properties
-        required: true
-        type: string
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 jobs:
   build-and-stage-release:
     name: Build and Stage Release
     runs-on: ubuntu-latest
     if: ${{ github.repository == 'ciscoo/gradle-java-template' }}
+    outputs:
+      staging-url: ${{ steps.publish.outputs.staging_repo }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Build
         shell: bash
         run: ./gradlew build
       - name: Publish to Maven Central
+        id: publish
         if: steps.build.outcome == 'success'
         shell: bash
-        run: ./gradlew publishToSonatype closeSonatypeStagingRepository
+        run: |
+          ./gradlew publishToSonatype closeSonatypeStagingRepository
+          ./gradlew findSonatypeStagingRepository
+          repo=$(sed -n 's/repo=\(.*\)/\1/p' build/repo.properties)
+          echo "Staging repository is $repo"
+          echo "staging_repo=$repo" >> $GITHUB_OUTPUT
+      - name: Build Documentation
+        shell: bash
+        run: ./gradlew :documentation:vitePressBuild
+      - name: Upload Documentation
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./documentation/build/vitepress-dist
+  verify-release:
+    name: Verify Release
+    runs-on: ubuntu-latest
+    needs: build-and-stage-release
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
+      - name: Run Verification Checks
+        env:
+          STAGING_REPO_URL: ${{ needs.build-and-stage-release.outputs.staging-url }}
+        run: ./gradlew :verification:check
+  release-repo:
+    name: Release Repo
+    runs-on: ubuntu-latest
+    needs:
+      - build-and-stage-release
+      - verify-release
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
+      - name: Release Repo
+        run: ./gradlew findSonatypeStagingRepository releaseSonatypeStagingRepository
+      - name: Deploy Documentation to GitHub Pages
+        uses: actions/deploy-pages@v4
