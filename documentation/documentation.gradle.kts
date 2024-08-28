@@ -59,7 +59,7 @@ tasks {
         delete(vitePressDev)
         delete(vitePressBuild)
         delete(vitePressPreview)
-        delete(layout.buildDirectory.dir("node_modules"))
+        delete(file("node_modules"))
         if (providers.gradleProperty("cleanNode").isPresent) {
             delete(nodeSetup)
             delete(npmSetup)
