@@ -1,0 +1,25 @@
+name: Release Early Access
+on:
+  push:
+    tags:
+      - v1.0.0-beta.[0-9]
+      - v1.0.0-rc.[0-9]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+jobs:
+  build-and-stage-release:
+    name: Build and Stage Release
+    runs-on: ubuntu-latest
+    if: ${{ github.repository == 'ciscoo/gradle-java-template' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
+      - name: Build
+        shell: bash
+        run: ./gradlew build
+      - name: Publish to Maven Central
+        if: steps.build.outcome == 'success'
+        shell: bash
+        run: ./gradlew publishToSonatype closeSonatypeStagingRepository
