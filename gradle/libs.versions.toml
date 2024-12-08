@@ -1,19 +1,19 @@
 [versions]
-spring-boot = "3.4.0"
-spring-cloud = "2023.0.3"
-junit = "5.11.3"
+springBoot = "3.4.0"
+springCloud = "2024.0.0"
+asciidoctor = "4.0.2"
+junit = "5.11.0"
 spotless = "6.25.0"
 ktlint = "1.4.1"
 jacoco = "0.8.12"
 
 [libraries]
-springBootBom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
-springCloudBom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "spring-cloud" }
-junitBom = { module = "org.junit:junit-bom", version.ref = "junit" }
-junitPlatformLauncher = { module = "org.junit.platform:junit-platform-launcher" }
-jacoco = { module = "org.jacoco:org.jacoco.agent", version.ref = "jacoco" }
-assertjCore = { module = "org.assertj:assertj-core", version = "3.26.3" }
-jackson = { module = "com.fasterxml.jackson.core:jackson-databind", version = "2.18.2" }
+springBoot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBoot" }
+springCloud-dependencies = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloud" }
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-platformLauncher = { module = "org.junit.platform:junit-platform-launcher" }
+jacoco-agent = { module = "org.jacoco:org.jacoco.agent", version.ref = "jacoco" }
+assertj-core = { module = "org.assertj:assertj-core", version = "3.26.3" }
 gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 gradle-plantirJavaFormat = { module = "com.palantir.javaformat:palantir-java-format", version = "2.50.0" }
 gradle-ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlint" }
@@ -21,5 +21,6 @@ gradle-ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktl
 [plugins]
 build-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 spotless = { id = "com.diffplug.spotless" }
-gradleGitPublish = { id = "org.ajoberstar.git-publish", version = "4.2.2" }
-node = { id = "com.github.node-gradle.node", version = "7.1.0" }
+asciidoctor-jvmConvert = { id = "org.asciidoctor.jvm.convert", version = "4.0.2" }
+asciidoctor-jvmPdf = { id = "org.asciidoctor.jvm.pdf", version = "4.0.2" }
+asciidoctor-jvmEpub = { id = "org.asciidoctor.jvm.epub", version = "4.0.2" }
