@@ -17,7 +17,6 @@ pluginManager.withPlugin("java") {
             finalizedBy(jacocoTestReport)
         }
         jacocoTestReport {
-
             dependsOn(test)
         }
         jacocoTestCoverageVerification {
