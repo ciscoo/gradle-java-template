@@ -21,9 +21,13 @@ import org.gradle.jvm.toolchain.JavaLanguageVersion;
 
 public abstract class JavaToolchainExtension {
 
+    private static final String DEFAULT_TARGET_VERSION = "21";
+
+    private static final String DEFAULT_RELEASE_VERSION = "17";
+
     public JavaToolchainExtension() {
-        getTargetVersion().convention(JavaLanguageVersion.of(21));
-        getReleaseVersion().convention(JavaLanguageVersion.of(17));
+        getTargetVersion().convention(JavaLanguageVersion.of(DEFAULT_TARGET_VERSION));
+        getReleaseVersion().convention(JavaLanguageVersion.of(DEFAULT_RELEASE_VERSION));
     }
 
     /**
@@ -31,7 +35,7 @@ public abstract class JavaToolchainExtension {
      * language version will also be used for test compilation and
      * {@link org.gradle.api.tasks.JavaExec} task types.
      * <p>
-     * The convention is Java 17.
+     * The convention is Java {@value DEFAULT_TARGET_VERSION}.
      */
     public abstract Property<JavaLanguageVersion> getTargetVersion();
 
@@ -40,7 +44,7 @@ public abstract class JavaToolchainExtension {
      * releasing artifacts that support older versions of Java, then this should be
      * configured to the minimum supported version.
      * <p>
-     * The convention is {@link #getTargetVersion()}.
+     * The convention is Java {@value DEFAULT_RELEASE_VERSION}.
      */
     public abstract Property<JavaLanguageVersion> getReleaseVersion();
 }
