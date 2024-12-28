@@ -17,15 +17,12 @@ pluginManager.withPlugin("java") {
             finalizedBy(jacocoTestReport)
         }
         jacocoTestReport {
-
             dependsOn(test)
         }
         jacocoTestCoverageVerification {
-            violationRules {
-                rule {
-                    limit {
-                        minimum = "0.9".toBigDecimal()
-                    }
+            violationRules.rule {
+                limit {
+                    minimum = "0.9".toBigDecimal()
                 }
             }
         }
