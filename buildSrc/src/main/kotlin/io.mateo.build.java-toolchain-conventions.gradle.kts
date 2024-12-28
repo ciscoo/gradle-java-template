@@ -27,6 +27,14 @@ java {
         languageVersion = javaLanguageVersion
         implementation = jvmImplementation
     }
+    manifest {
+        attributes(
+            "Build-Jdk-Spec" to extension.releaseVersion.get().toString(),
+            "Created-By" to "Gradle ${gradle.gradleVersion}",
+            "Implementation-Title" to project.name,
+            "Implementation-Version" to project.version.toString(),
+        )
+    }
 }
 
 tasks {
