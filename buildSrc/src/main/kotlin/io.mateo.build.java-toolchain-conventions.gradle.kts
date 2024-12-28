@@ -5,13 +5,13 @@ plugins {
 }
 
 val extension = extensions.create("javaToolchainExtension", JavaToolchainExtension::class.java)
-val defaultLanguageVersion = extension.targetVersion
-val javaLanguageVersion =
+val defaultLanguageVersion: Property<JavaLanguageVersion> = extension.targetVersion
+val javaLanguageVersion: Provider<JavaLanguageVersion> =
     providers
         .gradleProperty("javaLanguageVersion")
         .map { JavaLanguageVersion.of(it) }
         .orElse(defaultLanguageVersion)
-val jvmImplementation =
+val jvmImplementation: JvmImplementation =
     providers
         .gradleProperty("jvmImplementation")
         .map { it.uppercase(`java.util`.Locale.US) }
