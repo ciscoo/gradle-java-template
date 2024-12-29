@@ -27,14 +27,12 @@ jobs:
     steps:
       - name: Check Out Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
         with:
           java-version: ${{ matrix.java.version }}
           java-early-access: ${{ matrix.java.early-access || 'false' }}
           java-toolchain: ${{ matrix.java.toolchain }}
-      - name: Check
+      - name: Run Checks
         shell: bash
         run: ./gradlew check

@@ -15,12 +15,14 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-      - name: Publish
-        uses: ./.github/actions/run-gradle
+      - name: Setup Gradle
+        uses: ./.github/actions/setup-gradle
+      - name: Run Checks
+        shell: bash
+        run: ./gradlew check
+      - name: Publish Snapshot Artifacts
         env:
           ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
-#        with: TODO: Enable when project is created
-#          arguments: publishAllPublicationsToSonatypeSnapshotsRepository -x check
+        shell: bash
+        run: ./gradlew publishAllPublicationsToSonatypeSnapshotsRepository

@@ -31,10 +31,8 @@ jobs:
           Stop-Service -name Docker
       - name: Check Out Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
-      - name: Check
+      - name: Run Checks
         shell: bash
         run: ./gradlew check
