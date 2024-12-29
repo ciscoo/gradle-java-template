@@ -5,7 +5,7 @@ plugins {
 spotless {
     format("documentation") {
         target("**/*.md", "**/*.adoc")
-        targetExclude("**/node_modules/**", "**/.gradle/**")
+        targetExclude("**/.gradle/**")
     }
     kotlinGradle {
         endWithNewline()
