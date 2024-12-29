@@ -6,12 +6,6 @@ updates:
       interval: "weekly"
     labels: [ "type: dependency-upgrade" ]
 
-  - package-ecosystem: "npm"
-    directory: "/documentation"
-    schedule:
-      interval: "weekly"
-    labels: [ "type: task" ]
-
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
