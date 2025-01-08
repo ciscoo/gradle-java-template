@@ -20,7 +20,7 @@ spotless {
         removeUnusedImports()
         endWithNewline()
         trimTrailingWhitespace()
-        palantirJavaFormat()
+        palantirJavaFormat(libs.versions.palantirJavaFormat.get())
     }
     kotlin {
         endWithNewline()
