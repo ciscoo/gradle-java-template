@@ -8,6 +8,11 @@ dependencyResolutionManagement {
         maven {
             name = "springMilestone"
             url = uri("https://repo.spring.io/milestone")
+            content {
+                includeGroupAndSubgroups("org.springframework")
+                includeGroupAndSubgroups("io.projectreactor")
+                includeGroupAndSubgroups("io.micrometer")
+            }
         }
     }
 }
