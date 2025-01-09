@@ -28,8 +28,8 @@ pluginManager.withPlugin("java") {
             removeUnusedImports()
             endWithNewline()
             trimTrailingWhitespace()
-            libs.findLibrary("gradle.plantirJavaFormat").ifPresent {
-                palantirJavaFormat(it.get().version)
+            libs.findVersion("plantirJavaFormat").ifPresent {
+                palantirJavaFormat(it.requiredVersion)
             }
         }
     }
