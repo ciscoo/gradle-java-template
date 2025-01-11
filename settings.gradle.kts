@@ -1,3 +1,14 @@
+pluginManagement {
+    includeBuild("gradle/plugins")
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
+plugins {
+    id("io.mateo.build.settings-conventions")
+}
+
 rootProject.name = "gradle-java-template"
 
 include("documentation")

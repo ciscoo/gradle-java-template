@@ -18,10 +18,12 @@ assertj-core = { module = "org.assertj:assertj-core", version = "3.27.2" }
 gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 gradle-plantirJavaFormat = { module = "com.palantir.javaformat:palantir-java-format", version.ref = "palantirJavaFormat" }
 gradle-ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlint" }
+gradle-foojarResolverConvention = { module = "org.gradle.toolchains.foojay-resolver-convention:org.gradle.toolchains.foojay-resolver-convention.gradle.plugin", version = "0.9.0" }
 
 [plugins]
 build-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 spotless = { id = "com.diffplug.spotless" }
+foojay = { id = "org.gradle.toolchains.foojay-resolver-convention" }
 asciidoctor-jvmConvert = { id = "org.asciidoctor.jvm.convert", version = "4.0.4" }
 asciidoctor-jvmPdf = { id = "org.asciidoctor.jvm.pdf", version = "4.0.4" }
 asciidoctor-jvmEpub = { id = "org.asciidoctor.jvm.epub", version = "4.0.4" }
