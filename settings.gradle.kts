@@ -12,6 +12,7 @@ plugins {
 rootProject.name = "gradle-java-template"
 
 include("documentation")
+include("example-api")
 
 dependencyResolutionManagement {
     repositories {
