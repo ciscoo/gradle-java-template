@@ -5,8 +5,8 @@ plugins {
 
 val libs = versionCatalogs.named("libs")
 
-jacoco {
-    libs.findVersion("jacoco").ifPresent {
+libs.findVersion("jacoco").ifPresent {
+    jacoco {
         toolVersion = it.requiredVersion
     }
 }
