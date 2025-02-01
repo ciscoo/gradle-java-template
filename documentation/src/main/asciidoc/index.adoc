@@ -3,8 +3,5 @@
 include::authors.adoc[]
 include::attributes.adoc[]
 
-// include::overview.adoc[leveloffset=+1]
-// include::plugin-configuration.adoc[leveloffset=+1]
-// include::generating-java.adoc[leveloffset=+1]
-// include::generating-javascript.adoc[leveloffset=+1]
-// include::examples.adoc[leveloffset=+1]
+include::overview.adoc[leveloffset=+1]
+include::gradle-conventions.adoc[leveloffset=+1]
