@@ -13,13 +13,10 @@ plugins {
 description = "Gradle Java Template Documentation"
 
 asciidoctorj {
+    setJrubyVersion(libs.jruby.complete.map { it.version as String })
     modules {
         pdf.version(libs.asciidoctorj.pdf.map { it.version as String })
     }
-}
-
-asciidoctorj {
-    setJrubyVersion(libs.jruby.complete.map { it.version as String })
 }
 
 tasks {
