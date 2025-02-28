@@ -38,7 +38,7 @@ val extension = extensions.getByType(JavaToolchainExtension::class.java)
 
 tasks {
     withType<Jar>().configureEach {
-        metaInf.from(rootProject.layout.projectDirectory.file("LICENSE.txt"))
+        metaInf.from(layout.settingsDirectory.file("LICENSE.txt"))
     }
     withType<JavaCompile>().configureEach {
         options.encoding = StandardCharsets.UTF_8.name()
