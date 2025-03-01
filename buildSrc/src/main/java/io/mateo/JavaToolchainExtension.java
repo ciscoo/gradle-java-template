@@ -43,7 +43,7 @@ public abstract class JavaToolchainExtension {
      * Java language version to use for {@link JavaPluginExtension#getToolchain}. The
      * language version will also be used for test compilation and
      * {@link org.gradle.api.tasks.JavaExec} task types.
-     *
+     * <p>
      * The convention is Java {@value DEFAULT_TARGET_VERSION}.
      */
     public Property<JavaLanguageVersion> getTargetVersion() {
@@ -54,7 +54,7 @@ public abstract class JavaToolchainExtension {
      * Java language version to use for compiling artifacts for public consumption. If
      * releasing artifacts that support older versions of Java, then this should be
      * configured to the minimum supported version.
-     *
+     * <p>
      * The convention is Java {@value DEFAULT_RELEASE_VERSION}.
      */
     public Property<JavaLanguageVersion> getReleaseVersion() {
