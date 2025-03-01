@@ -8,7 +8,7 @@ val publicationName = "mavenJava"
 
 publishing {
     publications {
-        register(publicationName, MavenPublication::class) {
+        register<MavenPublication>(publicationName) {
             pom {
                 name = provider { project.name }
                 description =
@@ -41,7 +41,7 @@ publishing {
 }
 
 pluginManager.withPlugin("java") {
-    publishing.publications.named(publicationName, MavenPublication::class) {
+    publishing.publications.named<MavenPublication>(publicationName) {
         from(components["java"])
         versionMapping {
             usage(Usage.JAVA_API) {
@@ -55,7 +55,7 @@ pluginManager.withPlugin("java") {
 }
 
 pluginManager.withPlugin("java-platform") {
-    publishing.publications.named(publicationName, MavenPublication::class) {
+    publishing.publications.named<MavenPublication>(publicationName) {
         from(components["javaPlatform"])
     }
 }

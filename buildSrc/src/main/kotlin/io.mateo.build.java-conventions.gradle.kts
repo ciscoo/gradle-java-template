@@ -33,7 +33,7 @@ val commonCompilerArgs =
         "-Werror",
     )
 
-val extension = extensions.getByType(JavaToolchainExtension::class.java)
+val extension = extensions.getByType<JavaToolchainExtension>()
 
 tasks {
     withType<Jar>().configureEach {
@@ -83,7 +83,7 @@ testing.suites.configureEach {
                 runtimeOnly(it)
             }
         }
-        tasks.named(sources.compileJavaTaskName, JavaCompile::class) {
+        tasks.named<JavaCompile>(sources.compileJavaTaskName) {
             options.release = extension.targetVersion.map { it.asInt() }
             options.compilerArgs.addAll(commonCompilerArgs + "-parameters")
         }
