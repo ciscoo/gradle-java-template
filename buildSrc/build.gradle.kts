@@ -29,6 +29,7 @@ spotless {
         endWithNewline()
         trimTrailingWhitespace()
         targetExclude("**/build/**")
+        target("src/main/kotlin/*.kt")
         ktlint(libs.versions.ktlint.get())
     }
     kotlinGradle {
