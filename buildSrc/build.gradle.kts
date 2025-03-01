@@ -25,6 +25,13 @@ spotless {
         trimTrailingWhitespace()
         palantirJavaFormat(libs.versions.palantirJavaFormat.get())
     }
+    kotlinGradle {
+        endWithNewline()
+        trimTrailingWhitespace()
+        targetExclude("**/build/**")
+        target("**/*.gradle.kts")
+        ktlint(libs.versions.ktlint.get())
+    }
 }
 
 dependencies {

@@ -7,13 +7,6 @@ spotless {
         target("**/*.md", "**/*.adoc")
         targetExclude("**/.gradle/**")
     }
-    kotlin {
-        endWithNewline()
-        trimTrailingWhitespace()
-        libs.findVersion("kitlint").ifPresent {
-            ktlint(it.requiredVersion)
-        }
-    }
     kotlinGradle {
         endWithNewline()
         trimTrailingWhitespace()
@@ -37,6 +30,18 @@ pluginManager.withPlugin("java") {
             trimTrailingWhitespace()
             libs.findVersion("plantirJavaFormat").ifPresent {
                 palantirJavaFormat(it.requiredVersion)
+            }
+        }
+    }
+}
+
+pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+    spotless {
+        kotlin {
+            endWithNewline()
+            trimTrailingWhitespace()
+            libs.findVersion("kitlint").ifPresent {
+                ktlint(it.requiredVersion)
             }
         }
     }
