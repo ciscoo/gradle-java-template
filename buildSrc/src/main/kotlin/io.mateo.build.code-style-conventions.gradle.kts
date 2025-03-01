@@ -7,6 +7,13 @@ spotless {
         target("**/*.md", "**/*.adoc")
         targetExclude("**/.gradle/**")
     }
+    kotlin {
+        endWithNewline()
+        trimTrailingWhitespace()
+        libs.findVersion("kitlint").ifPresent {
+            ktlint(it.requiredVersion)
+        }
+    }
     kotlinGradle {
         endWithNewline()
         trimTrailingWhitespace()
