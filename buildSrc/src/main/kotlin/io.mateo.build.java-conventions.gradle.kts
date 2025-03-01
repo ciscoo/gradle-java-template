@@ -1,4 +1,3 @@
-import io.mateo.build.JavaToolchainExtension
 import java.nio.charset.StandardCharsets
 
 plugins {

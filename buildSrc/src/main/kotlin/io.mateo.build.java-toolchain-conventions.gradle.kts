@@ -1,10 +1,8 @@
-import io.mateo.build.JavaToolchainExtension
-
 plugins {
     id("java") apply false
 }
 
-val extension = extensions.create("javaToolchainExtension", JavaToolchainExtension::class.java)
+val extension = extensions.create<JavaToolchainExtension>("javaToolchainExtension")
 val defaultLanguageVersion: Property<JavaLanguageVersion> = extension.targetVersion
 val javaLanguageVersion: Provider<JavaLanguageVersion> =
     providers
