@@ -16,13 +16,22 @@ repositories {
 
 spotless {
     java {
-        licenseHeaderFile(layout.projectDirectory.file("../gradle/config/spotless/apache-license-2.0.java"), "(package|import|open|module) ")
+        licenseHeaderFile(
+            layout.projectDirectory.file("../gradle/config/spotless/apache-license-2.0.java"),
+            "(package|import|open|module) ",
+        )
         removeUnusedImports()
         endWithNewline()
         trimTrailingWhitespace()
         palantirJavaFormat(libs.versions.palantirJavaFormat.get())
     }
     kotlin {
+        endWithNewline()
+        trimTrailingWhitespace()
+        targetExclude("**/build/**")
+        ktlint(libs.versions.ktlint.get())
+    }
+    kotlinGradle {
         endWithNewline()
         trimTrailingWhitespace()
         targetExclude("**/build/**")
