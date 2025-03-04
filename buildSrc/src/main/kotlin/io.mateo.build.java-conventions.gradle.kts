@@ -53,6 +53,14 @@ val extension = extensions.getByType<JavaToolchainExtension>()
 tasks {
     withType<Jar>().configureEach {
         metaInf.from(layout.settingsDirectory.file("LICENSE.txt"))
+        manifest {
+            attributes(
+                "Build-Jdk-Spec" to extension.releaseVersion.get().toString(),
+                "Created-By" to "Gradle ${gradle.gradleVersion}",
+                "Implementation-Title" to project.name,
+                "Implementation-Version" to project.version.toString(),
+            )
+        }
     }
     withType<JavaCompile>().configureEach {
         options.encoding = StandardCharsets.UTF_8.name()
