@@ -1,5 +1,3 @@
-import io.mateo.JavaToolchainExtension
-
 plugins {
     id("java") apply false
 }

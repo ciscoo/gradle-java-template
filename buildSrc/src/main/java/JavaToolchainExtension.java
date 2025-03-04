@@ -13,10 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.mateo;
-
-import javax.inject.Inject;
-import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.api.provider.Property;
 import org.gradle.jvm.toolchain.JavaLanguageVersion;
@@ -27,28 +23,19 @@ public abstract class JavaToolchainExtension {
 
     private static final String DEFAULT_RELEASE_VERSION = "17";
 
-    private final Property<JavaLanguageVersion> targetVersion;
-
-    private final Property<JavaLanguageVersion> releaseVersion;
-
-    @Inject
-    public JavaToolchainExtension(ObjectFactory objects) {
-        this.targetVersion =
-                objects.property(JavaLanguageVersion.class).convention(JavaLanguageVersion.of(DEFAULT_TARGET_VERSION));
-        this.releaseVersion =
-                objects.property(JavaLanguageVersion.class).convention(JavaLanguageVersion.of(DEFAULT_RELEASE_VERSION));
+    public JavaToolchainExtension() {
+        getTargetVersion().convention(JavaLanguageVersion.of(DEFAULT_TARGET_VERSION));
+        getReleaseVersion().convention(JavaLanguageVersion.of(DEFAULT_RELEASE_VERSION));
     }
 
     /**
-     * Java language version to use for {@link JavaPluginExtension#getToolchain}. The
+     * Java language version to use for {@link JavaPluginExtension#getToolchain()}. The
      * language version will also be used for test compilation and
      * {@link org.gradle.api.tasks.JavaExec} task types.
      * <p>
      * The convention is Java {@value DEFAULT_TARGET_VERSION}.
      */
-    public Property<JavaLanguageVersion> getTargetVersion() {
-        return this.targetVersion;
-    }
+    public abstract Property<JavaLanguageVersion> getTargetVersion();
 
     /**
      * Java language version to use for compiling artifacts for public consumption. If
@@ -57,7 +44,5 @@ public abstract class JavaToolchainExtension {
      * <p>
      * The convention is Java {@value DEFAULT_RELEASE_VERSION}.
      */
-    public Property<JavaLanguageVersion> getReleaseVersion() {
-        return this.releaseVersion;
-    }
+    public abstract Property<JavaLanguageVersion> getReleaseVersion();
 }
