@@ -14,6 +14,7 @@ springCloud-dependencies = { module = "org.springframework.cloud:spring-cloud-de
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
 junit-platformLauncher = { module = "org.junit.platform:junit-platform-launcher" }
 jacoco-agent = { module = "org.jacoco:org.jacoco.agent", version.ref = "jacoco" }
+jspecify = { module = "org.jspecify:jspecify", version = "1.0.0" }
 assertj-core = { module = "org.assertj:assertj-core", version = "3.27.3" }
 asciidoctorj-pdf = { module = "org.asciidoctor:asciidoctorj-pdf", version = "2.3.19" }
 jruby-complete = { module = "org.jruby:jruby-complete", version = "10.0.0.1" }
