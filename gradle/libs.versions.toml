@@ -1,5 +1,5 @@
 [versions]
-springBoot = "3.4.3"
+springBoot = "3.4.4"
 springCloud = "2024.0.0"
 asciidoctor = "4.0.2"
 junit = "5.12.1"
