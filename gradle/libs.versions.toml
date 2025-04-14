@@ -5,7 +5,7 @@ asciidoctor = "4.0.2"
 junit = "5.12.1"
 spotless = "7.0.2"
 ktlint = "1.5.0"
-jacoco = "0.8.12"
+jacoco = "0.8.13"
 palantirJavaFormat = "2.62.0"
 
 [libraries]
