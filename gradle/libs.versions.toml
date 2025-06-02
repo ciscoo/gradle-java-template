@@ -2,7 +2,7 @@
 springBoot = "3.5.0"
 springCloud = "2024.0.1"
 asciidoctor = "4.0.2"
-junit = "5.12.2"
+junit = "5.13.0"
 spotless = "7.0.3"
 ktlint = "1.6.0"
 jacoco = "0.8.13"
