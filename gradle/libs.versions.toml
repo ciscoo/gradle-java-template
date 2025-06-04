@@ -1,6 +1,6 @@
 [versions]
 springBoot = "3.5.0"
-springCloud = "2024.0.1"
+springCloud = "2025.0.0"
 asciidoctor = "4.0.2"
 junit = "5.13.0"
 spotless = "7.0.3"
