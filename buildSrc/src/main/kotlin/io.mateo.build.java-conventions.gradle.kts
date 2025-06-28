@@ -21,8 +21,6 @@ plugins {
     id("io.mateo.build.code-style-conventions")
 }
 
-group = "io.mateo"
-
 repositories {
     mavenCentral()
 }
