@@ -90,23 +90,21 @@ tasks {
 
 val libs = versionCatalogs.named("libs")
 
-testing.suites.configureEach {
-    if (this is JvmTestSuite) {
-        libs.findVersion("junit").ifPresent {
-            // Automatically adds org.junit.jupiter:junit-jupiter to implementation configuration
-            useJUnitJupiter(it.requiredVersion)
+testing.suites.withType<JvmTestSuite>().configureEach {
+    libs.findVersion("junit").ifPresent {
+        // Automatically adds org.junit.jupiter:junit-jupiter to implementation configuration
+        useJUnitJupiter(it.requiredVersion)
+    }
+    dependencies {
+        libs.findLibrary("assertj-core").ifPresent {
+            implementation(it)
         }
-        dependencies {
-            libs.findLibrary("assertj-core").ifPresent {
-                implementation(it)
-            }
-            libs.findLibrary("junit-platformLauncher").ifPresent {
-                runtimeOnly(it)
-            }
+        libs.findLibrary("junit-platformLauncher").ifPresent {
+            runtimeOnly(it)
         }
-        tasks.named<JavaCompile>(sources.compileJavaTaskName) {
-            options.release = extension.targetVersion.map { it.asInt() }
-            options.compilerArgs.addAll(commonCompilerArgs + "-parameters")
-        }
+    }
+    tasks.named<JavaCompile>(sources.compileJavaTaskName) {
+        options.release = extension.targetVersion.map { it.asInt() }
+        options.compilerArgs.addAll(commonCompilerArgs + "-parameters")
     }
 }
