@@ -13,7 +13,7 @@ jobs:
     if: ${{ github.repository == 'ciscoo/gradle-java-template' }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Build
