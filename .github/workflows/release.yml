@@ -38,7 +38,7 @@ jobs:
         shell: bash
         run: ./gradlew :documentation:vitePressBuild
       - name: Upload Documentation
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./documentation/build/vitepress-dist
   verify-release:
