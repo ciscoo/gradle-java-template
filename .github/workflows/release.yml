@@ -18,7 +18,7 @@ jobs:
       staging-url: ${{ steps.publish.outputs.staging_repo }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Build
@@ -47,7 +47,7 @@ jobs:
     needs: build-and-stage-release
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Run Verification Checks
@@ -62,7 +62,7 @@ jobs:
       - verify-release
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Gradle
         uses: ./.github/actions/setup-gradle
       - name: Release Repo
