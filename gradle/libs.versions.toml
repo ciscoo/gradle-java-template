@@ -27,7 +27,7 @@ gradle-foojarResolverConvention = { module = "org.gradle.toolchains.foojay-resol
 build-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 spotless = { id = "com.diffplug.spotless" }
 foojay = { id = "org.gradle.toolchains.foojay-resolver-convention" }
-asciidoctor-jvmConvert = { id = "org.asciidoctor.jvm.convert", version = "4.0.4" }
+asciidoctor-jvmConvert = { id = "org.asciidoctor.jvm.convert", version = "4.0.5" }
 asciidoctor-jvmPdf = { id = "org.asciidoctor.jvm.pdf", version = "4.0.4" }
 asciidoctor-jvmEpub = { id = "org.asciidoctor.jvm.epub", version = "4.0.4" }
 plantuml = { id = "io.freefair.plantuml", version = "8.14" }
