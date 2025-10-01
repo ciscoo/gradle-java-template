@@ -29,5 +29,5 @@ spotless = { id = "com.diffplug.spotless" }
 foojay = { id = "org.gradle.toolchains.foojay-resolver-convention" }
 asciidoctor-jvmConvert = { id = "org.asciidoctor.jvm.convert", version = "4.0.5" }
 asciidoctor-jvmPdf = { id = "org.asciidoctor.jvm.pdf", version = "4.0.5" }
-asciidoctor-jvmEpub = { id = "org.asciidoctor.jvm.epub", version = "4.0.4" }
+asciidoctor-jvmEpub = { id = "org.asciidoctor.jvm.epub", version = "4.0.5" }
 plantuml = { id = "io.freefair.plantuml", version = "9.0.0" }
