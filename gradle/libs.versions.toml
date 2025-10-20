@@ -6,7 +6,7 @@ junit = "6.0.0"
 spotless = "8.0.0"
 ktlint = "1.7.1"
 jacoco = "0.8.13"
-palantirJavaFormat = "2.77.0"
+palantirJavaFormat = "2.80.0"
 
 [libraries]
 springBoot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBoot" }
