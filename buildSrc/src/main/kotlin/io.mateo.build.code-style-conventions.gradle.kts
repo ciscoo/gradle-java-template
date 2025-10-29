@@ -36,7 +36,7 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
         kotlin {
             endWithNewline()
             trimTrailingWhitespace()
-            ktlint(libs.findVersion("kitlint").orElseThrow().requiredVersion)
+            ktlint(libs.findVersion("ktlint").orElseThrow().requiredVersion)
         }
     }
 }
