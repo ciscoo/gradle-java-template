@@ -21,5 +21,4 @@ import org.jspecify.annotations.Nullable;
  * An example record.
  * @param name the name, may be null
  */
-public record Example(@Nullable String name) {
-}
+public record Example(@Nullable String name) {}

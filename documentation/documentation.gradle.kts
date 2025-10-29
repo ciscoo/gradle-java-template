@@ -25,12 +25,14 @@ tasks {
     }
     withType<AbstractAsciidoctorTask>().configureEach {
         baseDirFollowsSourceDir()
-        attributeProviders.add(AsciidoctorAttributeProvider {
-            mapOf(
-                "revnumber" to version,
-                "current-gradle-version" to GradleVersion.current().version
-            )
-        })
+        attributeProviders.add(
+            AsciidoctorAttributeProvider {
+                mapOf(
+                    "revnumber" to version,
+                    "current-gradle-version" to GradleVersion.current().version,
+                )
+            },
+        )
         resources {
             from(plantUml) {
                 into("user-guide/images")

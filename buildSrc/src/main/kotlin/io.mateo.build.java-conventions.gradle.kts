@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import java.nio.charset.StandardCharsets
+import java.util.Locale
 
 plugins {
     java
@@ -78,7 +79,7 @@ tasks {
             header = project.name
             source = extension.releaseVersion.get().toString()
             encoding = StandardCharsets.UTF_8.name()
-            locale = `java.util`.Locale.ENGLISH.language
+            locale = Locale.ENGLISH.language
             this as StandardJavadocDocletOptions
             // https://docs.oracle.com/en/java/javase/17/docs/specs/man/javadoc.html
             addBooleanOption("Xdoclint:all", true)
