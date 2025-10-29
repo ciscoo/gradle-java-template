@@ -3,10 +3,8 @@ plugins {
     checkstyle
 }
 
-versionCatalogs.named("libs").findLibrary("checkstyle").ifPresent {
-    checkstyle {
-        toolVersion = it.get().version as String
-    }
+checkstyle {
+    toolVersion = versionCatalogs.named("libs").findLibrary("checkstyle").orElseThrow().get().version as String
 }
 
 checkstyle {

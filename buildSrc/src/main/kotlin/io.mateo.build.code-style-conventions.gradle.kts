@@ -10,9 +10,7 @@ spotless {
     kotlinGradle {
         endWithNewline()
         trimTrailingWhitespace()
-        libs.findVersion("kitlint").ifPresent {
-            ktlint(it.requiredVersion)
-        }
+        ktlint(libs.findVersion("ktlint").orElseThrow().requiredVersion)
     }
 }
 
@@ -28,9 +26,7 @@ pluginManager.withPlugin("java") {
             removeUnusedImports()
             endWithNewline()
             trimTrailingWhitespace()
-            libs.findVersion("plantirJavaFormat").ifPresent {
-                palantirJavaFormat(it.requiredVersion)
-            }
+            palantirJavaFormat(libs.findVersion("palantirJavaFormat").orElseThrow().requiredVersion)
         }
     }
 }
@@ -40,9 +36,7 @@ pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
         kotlin {
             endWithNewline()
             trimTrailingWhitespace()
-            libs.findVersion("kitlint").ifPresent {
-                ktlint(it.requiredVersion)
-            }
+            ktlint(libs.findVersion("kitlint").orElseThrow().requiredVersion)
         }
     }
 }

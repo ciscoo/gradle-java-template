@@ -91,17 +91,10 @@ tasks {
 val libs = versionCatalogs.named("libs")
 
 testing.suites.withType<JvmTestSuite>().configureEach {
-    libs.findVersion("junit").ifPresent {
-        // Automatically adds org.junit.jupiter:junit-jupiter to implementation configuration
-        useJUnitJupiter(it.requiredVersion)
-    }
+    useJUnitJupiter(libs.findVersion("junit").orElseThrow().requiredVersion)
     dependencies {
-        libs.findLibrary("assertj-core").ifPresent {
-            implementation(it)
-        }
-        libs.findLibrary("junit-platformLauncher").ifPresent {
-            runtimeOnly(it)
-        }
+        implementation(libs.findLibrary("assertj-core").orElseThrow())
+        runtimeOnly(libs.findLibrary("junit-platformLauncher").orElseThrow())
     }
     tasks.named<JavaCompile>(sources.compileJavaTaskName) {
         options.release = extension.targetVersion.map { it.asInt() }
