@@ -9,3 +9,9 @@ java {
     withSourcesJar()
     withJavadocJar()
 }
+
+tasks {
+    checkstyleMain {
+        config = resources.text.fromFile(checkstyle.configDirectory.file("checkstyleMain.xml"))
+    }
+}
