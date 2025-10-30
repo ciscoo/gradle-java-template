@@ -22,10 +22,6 @@ plugins {
     id("io.mateo.build.code-style-conventions")
 }
 
-repositories {
-    mavenCentral()
-}
-
 configurations.configureEach {
     resolutionStrategy {
         cacheDynamicVersionsFor(0, TimeUnit.SECONDS)
