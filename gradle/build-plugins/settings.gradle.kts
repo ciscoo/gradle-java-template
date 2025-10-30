@@ -9,7 +9,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "plugins"
+rootProject.name = "build-plugins"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
