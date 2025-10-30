@@ -9,6 +9,8 @@ plugins {
     id("io.mateo.build.settings-conventions")
 }
 
+includeBuild("gradle/build-logic")
+
 rootProject.name = "gradle-java-template"
 
 include("documentation")
