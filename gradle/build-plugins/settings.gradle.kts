@@ -15,5 +15,4 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include("settings")
 
-startParameter.showStacktrace = ShowStacktrace.ALWAYS_FULL
 startParameter.warningMode = WarningMode.All

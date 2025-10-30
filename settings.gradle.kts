@@ -51,5 +51,4 @@ rootProject.children.forEach {
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
-startParameter.showStacktrace = ShowStacktrace.ALWAYS_FULL
 startParameter.warningMode = WarningMode.All
