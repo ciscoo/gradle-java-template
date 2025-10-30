@@ -1,7 +1,7 @@
 [versions]
 springBoot = "3.5.7"
 springCloud = "2025.0.0"
-asciidoctor = "4.0.2"
+asciidoctor-plugins = "4.0.5"
 junit = "6.0.0"
 spotless = "8.0.0"
 ktlint = "1.7.1"
@@ -28,7 +28,7 @@ gradle-foojarResolverConvention = { module = "org.gradle.toolchains.foojay-resol
 build-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 spotless = { id = "com.diffplug.spotless" }
 foojay = { id = "org.gradle.toolchains.foojay-resolver-convention" }
-asciidoctor-jvmConvert = { id = "org.asciidoctor.jvm.convert", version = "4.0.5" }
-asciidoctor-jvmPdf = { id = "org.asciidoctor.jvm.pdf", version = "4.0.5" }
-asciidoctor-jvmEpub = { id = "org.asciidoctor.jvm.epub", version = "4.0.5" }
+asciidoctor-jvmConvert = { id = "org.asciidoctor.jvm.convert", version.ref = "asciidoctor-plugins" }
+asciidoctor-jvmPdf = { id = "org.asciidoctor.jvm.pdf", version.ref = "asciidoctor-plugins" }
+asciidoctor-jvmEpub = { id = "org.asciidoctor.jvm.epub", version.ref = "asciidoctor-plugins" }
 plantuml = { id = "io.freefair.plantuml", version = "9.0.0" }
