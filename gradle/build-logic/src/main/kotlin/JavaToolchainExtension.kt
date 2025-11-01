@@ -23,7 +23,7 @@ import javax.inject.Inject
 abstract class JavaToolchainExtension @Inject constructor(providers: ProviderFactory) {
 
     companion object {
-        const val DEFAULT_TARGET_VERSION = 24
+        const val DEFAULT_TARGET_VERSION = 25
         private const val DEFAULT_RELEASE_VERSION = 17
     }
 
