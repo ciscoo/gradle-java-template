@@ -17,7 +17,7 @@ repositories {
 spotless {
     java {
         licenseHeaderFile(
-            layout.projectDirectory.file("../gradle/config/spotless/apache-license-2.0.java"),
+            layout.projectDirectory.file("../config/spotless/apache-license-2.0.java"),
             "(package|import|open|module) ",
         )
         removeUnusedImports()
@@ -27,7 +27,7 @@ spotless {
     }
     kotlin {
         licenseHeaderFile(
-            layout.projectDirectory.file("../gradle/config/spotless/apache-license-2.0.java"),
+            layout.projectDirectory.file("../config/spotless/apache-license-2.0.java"),
             "(package|import|open|module) ",
         )
         endWithNewline()
