@@ -16,20 +16,12 @@ repositories {
 
 spotless {
     java {
-        licenseHeaderFile(
-            layout.projectDirectory.file("../config/spotless/apache-license-2.0.java"),
-            "(package|import|open|module) ",
-        )
         removeUnusedImports()
         endWithNewline()
         trimTrailingWhitespace()
         palantirJavaFormat(libs.versions.palantirJavaFormat.get())
     }
     kotlin {
-        licenseHeaderFile(
-            layout.projectDirectory.file("../config/spotless/apache-license-2.0.java"),
-            "(package|import|open|module) ",
-        )
         endWithNewline()
         trimTrailingWhitespace()
         target("**/*.kt")
