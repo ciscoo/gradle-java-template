@@ -1,0 +1,19 @@
+name: Main build
+description: Sets up JDK and runs Gradle
+inputs:
+  arguments:
+    required: true
+    description: Gradle arguments
+    default: build
+runs:
+  using: "composite"
+  steps:
+    - uses: ./.github/actions/run-gradle
+      with:
+        arguments: ${{ inputs.arguments }}
+    - name: Upload Build Reports
+      uses: actions/upload-artifact@v5
+      if: ${{ failure() }}
+      with:
+        name: build-reports
+        path: "**/build/reports/"

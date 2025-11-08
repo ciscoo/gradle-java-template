@@ -1,38 +1,55 @@
 name: Cross Version
+
 on:
+  schedule:
+    - cron: "0 0 * * 1" # Every Monday at 00:00 UTC
   push:
     branches:
       - main
+      - "release/**"
   pull_request:
     branches:
       - '*'
-permissions:
-  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions: {}
+
 jobs:
-  ci:
-    name: "Java ${{ matrix.java.version}}"
-    runs-on: ubuntu-latest
-    if: ${{ github.repository == 'ciscoo/gradle-java-template' }}
+  openjdk:
     strategy:
+      fail-fast: false
       matrix:
         java:
-          - version: 22
-            toolchain: true
-          - version: 23
-            toolchain: true
-            early-access: true
-          - version: 24
-            toolchain: true
-            early-access: true
+          - version: 25
+          - version: 26
+            type: ea
+    name: "OpenJDK ${{ matrix.jdk.version }} (${{ matrix.jdk.release || matrix.jdk.type }})"
+    runs-on: ubuntu-latest
     steps:
       - name: Check Out Repository
         uses: actions/checkout@v5
-      - name: Setup Gradle
-        uses: ./.github/actions/setup-gradle
         with:
-          java-version: ${{ matrix.java.version }}
-          java-early-access: ${{ matrix.java.early-access || 'false' }}
-          java-toolchain: ${{ matrix.java.toolchain }}
-      - name: Run Checks
-        shell: bash
-        run: ./gradlew check
+          fetch-depth: 1
+          persist-credentials: false
+      - name: "Set up JDK ${{ matrix.jdk.version }} (${{ matrix.jdk.distribution || 'EA' }})"
+        if: matrix.jdk.type == 'ea'
+        uses: oracle-actions/setup-java@v1
+        with:
+          website: jdk.java.net
+          release: ${{ matrix.jdk.release || matrix.jdk.version }}
+      - name: "Set up JDK ${{ matrix.jdk.version }} (${{ matrix.jdk.distribution || 'temurin' }})"
+        if: matrix.jdk.type != 'ea'
+        uses: actions/setup-java@v5
+        with:
+          distribution: ${{ matrix.jdk.distribution || 'temurin' }}
+          java-version: ${{ matrix.jdk.version }}
+          check-latest: true
+      - name: Build
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: |
+            -PjavaToolchain.target=${{ matrix.jdk.version }} \
+            build

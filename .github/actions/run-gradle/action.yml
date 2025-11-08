@@ -1,0 +1,25 @@
+name: Run Gradle
+description: Sets up the JDK for Gradle and runs Gradle tasks
+inputs:
+  arguments:
+    required: true
+    description: Gradle arguments
+    default: build
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-java@v5
+      id: setup-gradle-jdk
+      with:
+        distribution: temurin
+        java-version: 25
+        check-latest: true
+    - uses: gradle/actions/setup-gradle@v5
+    - shell: bash
+      env:
+        JAVA_HOME: ${{ steps.setup-gradle-jdk.outputs.path }}
+      run: | # zizmor: ignore[template-injection]
+        ./gradlew \
+        -Porg.gradle.java.installations.auto-download=false \
+        javaToolchains \
+        ${{ inputs.arguments }}
