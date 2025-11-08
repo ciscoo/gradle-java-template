@@ -26,7 +26,7 @@ jobs:
           - version: 25
           - version: 26
             type: ea
-    name: "OpenJDK ${{ matrix.jdk.version }} (${{ matrix.jdk.release || matrix.jdk.type }})"
+    name: "OpenJDK ${{ matrix.java.version }}${{ matrix.java.type != null && format(' ({0})', matrix.java.type) || ''}}"
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Repository
@@ -34,22 +34,22 @@ jobs:
         with:
           fetch-depth: 1
           persist-credentials: false
-      - name: "Set up JDK ${{ matrix.jdk.version }} (${{ matrix.jdk.distribution || 'EA' }})"
-        if: matrix.jdk.type == 'ea'
+      - name: "Set up JDK ${{ matrix.java.version }} (EA)"
+        if: matrix.java.type == 'ea'
         uses: oracle-actions/setup-java@v1
         with:
           website: jdk.java.net
-          release: ${{ matrix.jdk.release || matrix.jdk.version }}
-      - name: "Set up JDK ${{ matrix.jdk.version }} (${{ matrix.jdk.distribution || 'temurin' }})"
-        if: matrix.jdk.type != 'ea'
+          release: ${{ matrix.java.release || matrix.java.version }}
+      - name: "Set up JDK ${{ matrix.java.version }} (${{ matrix.java.distribution || 'Temurin' }})"
+        if: matrix.java.type != 'ea'
         uses: actions/setup-java@v5
         with:
-          distribution: ${{ matrix.jdk.distribution || 'temurin' }}
-          java-version: ${{ matrix.jdk.version }}
+          distribution: ${{ matrix.java.distribution || 'temurin' }}
+          java-version: ${{ matrix.java.version }}
           check-latest: true
       - name: Build
         uses: ./.github/actions/run-gradle
         with:
           arguments: |
-            -PjavaToolchain.target=${{ matrix.jdk.version }} \
+            -PjavaToolchain.target=${{ matrix.java.version }} \
             build
