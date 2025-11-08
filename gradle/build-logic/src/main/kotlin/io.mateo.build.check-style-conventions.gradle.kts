@@ -4,7 +4,13 @@ plugins {
 }
 
 checkstyle {
-    toolVersion = versionCatalogs.named("libs").findLibrary("checkstyle").orElseThrow().get().version as String
+    toolVersion =
+        versionCatalogs
+            .named("libs")
+            .findLibrary("checkstyle")
+            .orElseThrow()
+            .get()
+            .version as String
 }
 
 checkstyle {
