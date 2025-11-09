@@ -39,4 +39,5 @@ spotless {
 
 dependencies {
     implementation(libs.gradle.spotless)
+    implementation(libs.gradle.jreleaser)
 }
