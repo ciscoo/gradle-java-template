@@ -4,6 +4,8 @@ plugins {
     signing
 }
 
+group = "io.mateo"
+
 val publicationName = "mavenJava"
 
 publishing {
