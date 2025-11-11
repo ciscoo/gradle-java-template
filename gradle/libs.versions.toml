@@ -25,4 +25,5 @@ gradle-foojarResolverConvention = { module = "org.gradle.toolchains.foojay-resol
 [plugins]
 build-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 spotless = { id = "com.diffplug.spotless" }
+node = { id = "com.github.node-gradle.node", version = "7.1.0" }
 foojay = { id = "org.gradle.toolchains.foojay-resolver-convention" }
