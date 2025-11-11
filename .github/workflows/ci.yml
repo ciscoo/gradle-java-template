@@ -70,11 +70,3 @@ jobs:
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
         with:
           arguments: publishAllPublicationsToMavenCentralSnapshotsRepository -x check
-      - name: Prepare Artifacts for Attestation
-        uses: ./.github/actions/run-gradle
-        with:
-          arguments: prepareAttestation
-      - name: Generate Build Provenance Attestations
-        uses: actions/attest-build-provenance@v3
-        with:
-          subject-path: documentation/build/attestation/*.jar
