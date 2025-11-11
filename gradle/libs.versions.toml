@@ -1,7 +1,6 @@
 [versions]
 springBoot = "3.5.7"
 springCloud = "2025.0.0"
-asciidoctor-plugins = "4.0.5"
 junit = "6.0.0"
 spotless = "8.0.0"
 ktlint = "1.7.1"
@@ -16,8 +15,6 @@ junit-platformLauncher = { module = "org.junit.platform:junit-platform-launcher"
 jacoco-agent = { module = "org.jacoco:org.jacoco.agent", version.ref = "jacoco" }
 jspecify = { module = "org.jspecify:jspecify", version = "1.0.0" }
 assertj-core = { module = "org.assertj:assertj-core", version = "3.27.6" }
-asciidoctorj-pdf = { module = "org.asciidoctor:asciidoctorj-pdf", version = "2.3.21" }
-jruby-complete = { module = "org.jruby:jruby-complete", version = "10.0.2.0" }
 checkstyle = { module = "com.puppycrawl.tools:checkstyle", version = "12.1.1" }
 gradle-jreleaser = { module = "org.jreleaser:org.jreleaser.gradle.plugin", version = "1.21.0" }
 gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
@@ -29,7 +26,3 @@ gradle-foojarResolverConvention = { module = "org.gradle.toolchains.foojay-resol
 build-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 spotless = { id = "com.diffplug.spotless" }
 foojay = { id = "org.gradle.toolchains.foojay-resolver-convention" }
-asciidoctor-jvmConvert = { id = "org.asciidoctor.jvm.convert", version.ref = "asciidoctor-plugins" }
-asciidoctor-jvmPdf = { id = "org.asciidoctor.jvm.pdf", version.ref = "asciidoctor-plugins" }
-asciidoctor-jvmEpub = { id = "org.asciidoctor.jvm.epub", version.ref = "asciidoctor-plugins" }
-plantuml = { id = "io.freefair.plantuml", version = "9.0.0" }
