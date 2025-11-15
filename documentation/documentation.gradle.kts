@@ -49,13 +49,22 @@ tasks {
     val aggregatedJavadoc by registering(Javadoc::class) {
         description = "Aggregates Javadoc from projects."
         classpath = javadocClasspath
-        source(javadocSources.incoming
-            .files
-            .asFileTree.matching { include("**/*.java") }
+        source(
+            javadocSources.incoming
+                .files
+                .asFileTree
+                .matching { include("**/*.java") },
         )
         options {
-            source = javaToolchainExtension.releaseVersion.get().asInt().toString()
+            source =
+                javaToolchainExtension.releaseVersion
+                    .get()
+                    .asInt()
+                    .toString()
             this as StandardJavadocDocletOptions
+            links("https://jspecify.dev/docs/api")
+        }
+    }
     val vitePressDev by registering(NpmTask::class) {
         inputs.files(aggregatedJavadoc)
         inputs.files(npmInstall)
