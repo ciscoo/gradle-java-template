@@ -77,9 +77,20 @@ tasks {
         inputs.files(npmInstall)
         description = "Build the VitePress site for production."
         npmCommand = listOf("run", "build")
-        outputs.file(layout.buildDirectory.dir("user-guide"))
+        outputs.dir(layout.buildDirectory.dir("user-guide"))
+        outputs.upToDateWhen { false }
+    }
+    val prepareDocsForUpload by registering(Sync::class) {
+        from(aggregatedJavadoc) {
+            into("api")
+        }
+        from(vitePressBuild) {
+            into("user-guide")
+        }
+        into(layout.buildDirectory.dir("docs-upload"))
     }
     clean {
+        delete(prepareDocsForUpload)
         delete(vitePressDev)
         delete(vitePressBuild)
         delete(
