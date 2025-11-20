@@ -1,7 +1,0 @@
-[[overview]]
-= Overview
-
-This project is a template for a Gradle-based Java applications or Java libraries. It includes a number of opinionated
-configurations and conventions that I have gathered from various open source projects and professional work.
-
-This project is primarily for personal projects, but others may find it useful.

@@ -1,7 +1,0 @@
-[[user-guide]]
-= Gradle Java Template User Guide
-include::authors.adoc[]
-include::attributes.adoc[]
-
-include::overview.adoc[leveloffset=+1]
-include::gradle-conventions.adoc[leveloffset=+1]
