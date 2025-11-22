@@ -87,6 +87,23 @@ tasks {
         }
         into(layout.buildDirectory.dir("docs-upload"))
     }
+    val prettierWrite by registering(NpmTask::class) {
+        inputs.files(npmInstall)
+        description = "Format with Prettier."
+        npmCommand = listOf("run", "format:write")
+        outputs.upToDateWhen { false }
+    }
+    val prettierCheck by registering(NpmTask::class) {
+        inputs.files(npmInstall)
+        description = "Check formatting with Prettier."
+        npmCommand = listOf("run", "format:check")
+    }
+    spotlessCheck {
+        finalizedBy(prettierCheck)
+    }
+    spotlessApply {
+        finalizedBy(prettierWrite)
+    }
     clean {
         delete(prepareDocsForUpload)
         delete(vitePressDev)
