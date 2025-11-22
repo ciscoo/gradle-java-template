@@ -46,7 +46,7 @@ dependencies {
 }
 
 tasks {
-    val aggregatedJavadoc by registering(Javadoc::class) {
+    val javadocAggregate by registering(Javadoc::class) {
         description = "Aggregates Javadoc from projects."
         classpath = javadocClasspath
         source(
@@ -79,7 +79,7 @@ tasks {
         outputs.upToDateWhen { false }
     }
     val prepareDocsForUpload by registering(Sync::class) {
-        from(aggregatedJavadoc) {
+        from(javadocAggregate) {
             into("api")
         }
         from(vitePressBuild) {
