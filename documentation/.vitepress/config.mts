@@ -3,7 +3,7 @@ import { defineConfig } from "vitepress";
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "Gradle Java Template",
-  outDir: "build/user-guide",
+  outDir: "build/dist",
   srcExclude: ["**/javadoc/**/*"],
   description: "A template for Java projects with Gradle",
   themeConfig: {
