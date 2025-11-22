@@ -48,6 +48,7 @@ dependencies {
 tasks {
     val javadocAggregate by registering(Javadoc::class) {
         description = "Aggregates Javadoc from projects."
+        destinationDir = layout.projectDirectory.dir("public/javadoc").asFile
         classpath = javadocClasspath
         source(
             javadocSources.incoming
