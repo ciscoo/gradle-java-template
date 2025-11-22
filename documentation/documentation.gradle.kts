@@ -66,13 +66,11 @@ tasks {
         }
     }
     val vitePressDev by registering(NpmTask::class) {
-        inputs.files(npmInstall)
         description = "Start VitePress dev server."
         npmCommand = listOf("run", "dev")
         outputs.file(file(".vitepress/cache"))
     }
     val vitePressBuild by registering(NpmTask::class) {
-        inputs.files(npmInstall)
         description = "Build the VitePress site for production."
         npmCommand = listOf("run", "build")
         outputs.dir(layout.buildDirectory.dir("user-guide"))
