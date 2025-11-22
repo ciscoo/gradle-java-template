@@ -106,6 +106,7 @@ tasks {
         finalizedBy(prettierWrite)
     }
     clean {
+        delete(javadocAggregate)
         delete(prepareDocsForUpload)
         delete(vitePressDev)
         delete(vitePressBuild)
