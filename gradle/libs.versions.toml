@@ -1,5 +1,5 @@
 [versions]
-springBoot = "3.5.7"
+springBoot = "4.0.0"
 springCloud = "2025.0.0"
 junit = "6.0.1"
 spotless = "8.0.0"
