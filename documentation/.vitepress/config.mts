@@ -11,6 +11,7 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "Examples", link: "/markdown-examples" },
+      { text: "Javadoc", link: "/javadoc/index.html", target: "_self" },
     ],
 
     sidebar: [
