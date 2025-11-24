@@ -52,4 +52,4 @@ jobs:
         with:
           arguments: |
             -PjavaToolchain.target=${{ matrix.java.version }} \
-            build
+            build -x :documentation:build
