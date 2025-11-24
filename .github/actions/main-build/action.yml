@@ -4,7 +4,7 @@ inputs:
   arguments:
     required: true
     description: Gradle arguments
-    default: build
+    default: build -x :documentation:build
 runs:
   using: "composite"
   steps:

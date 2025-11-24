@@ -42,9 +42,6 @@ jobs:
           persist-credentials: false
       - name: Build
         uses: ./.github/actions/main-build
-        with:
-          arguments: |
-            build -x :documentation:build
   macOS:
     runs-on: macos-latest
     steps:
@@ -55,9 +52,6 @@ jobs:
           persist-credentials: false
       - name: Build
         uses: ./.github/actions/main-build
-        with:
-          arguments: |
-            build -x :documentation:build
   publish_snapshot:
     name: Publish Snapshot Artifacts
     needs: Linux
