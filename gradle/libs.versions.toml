@@ -2,7 +2,7 @@
 springBoot = "4.0.0"
 springCloud = "2025.0.0"
 junit = "6.0.1"
-spotless = "8.0.0"
+spotless = "8.1.0"
 ktlint = "1.8.0"
 jacoco = "0.8.14"
 palantirJavaFormat = "2.82.0"
