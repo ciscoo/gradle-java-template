@@ -79,15 +79,6 @@ tasks {
         outputs.dir(layout.buildDirectory.dir("user-guide"))
         outputs.upToDateWhen { false }
     }
-    val prepareDocsForUpload by registering(Sync::class) {
-        from(javadocAggregate) {
-            into("api")
-        }
-        from(vitePressBuild) {
-            into("user-guide")
-        }
-        into(layout.buildDirectory.dir("docs-upload"))
-    }
     val prettierWrite by registering(NpmTask::class) {
         inputs.files(npmInstall)
         description = "Format with Prettier."
@@ -107,7 +98,6 @@ tasks {
     }
     clean {
         delete(javadocAggregate)
-        delete(prepareDocsForUpload)
         delete(vitePressDev)
         delete(vitePressBuild)
         delete(
