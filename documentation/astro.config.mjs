@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 
 export default defineConfig({
+  outDir: "build/dist",
   integrations: [
     starlight({
       title: "Example",
@@ -10,15 +11,13 @@ export default defineConfig({
         {
           icon: "open-book",
           label: "Javadoc",
-          // Works
           href: "/javadoc/index.html",
         },
       ],
       sidebar: [
         {
-          label: "Javadoc",
-          // Does not work
-          link: "/javadoc"
+          label: "User Guide",
+          autogenerate: { directory: "user-guide" },
         },
       ],
     }),
