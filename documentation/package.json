@@ -1,13 +1,19 @@
 {
+  "name": "documentation",
+  "type": "module",
   "scripts": {
-    "dev": "vitepress dev",
-    "build": "vitepress build",
-    "preview": "vitepress preview",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
     "format:write": "prettier --write .",
     "format:check": "prettier --check ."
   },
   "devDependencies": {
+    "@astrojs/starlight": "^0.36.3",
+    "astro": "^5.6.1",
     "prettier": "3.6.2",
-    "vitepress": "^2.0.0-alpha.13"
+    "prettier-plugin-astro": "0.14.1",
+    "sharp": "^0.34.2"
   }
 }

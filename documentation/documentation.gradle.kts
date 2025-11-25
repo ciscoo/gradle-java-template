@@ -66,17 +66,17 @@ tasks {
             links("https://jspecify.dev/docs/api")
         }
     }
-    val vitePressDev by registering(NpmTask::class) {
+    val astroDev by registering(NpmTask::class) {
         inputs.files(javadocAggregate, npmInstall)
-        description = "Start VitePress dev server."
+        description = "Runs Astro's development server"
         npmCommand = listOf("run", "dev")
-        outputs.file(file(".vitepress/cache"))
+        outputs.dir(".astro")
     }
-    val vitePressBuild by registering(NpmTask::class) {
+    val astroBuild by registering(NpmTask::class) {
         inputs.files(javadocAggregate, npmInstall)
-        description = "Build the VitePress site for production."
+        description = "Build the Astro site."
         npmCommand = listOf("run", "build")
-        outputs.dir(layout.buildDirectory.dir("user-guide"))
+        outputs.dir(layout.buildDirectory.dir("dist"))
         outputs.upToDateWhen { false }
     }
     val prettierWrite by registering(NpmTask::class) {
@@ -98,8 +98,8 @@ tasks {
     }
     clean {
         delete(javadocAggregate)
-        delete(vitePressDev)
-        delete(vitePressBuild)
+        delete(astroDev)
+        delete(astroBuild)
         delete(
             npmInstall.map {
                 it.outputs.files.filter { file ->
