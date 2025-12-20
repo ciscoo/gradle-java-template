@@ -3,6 +3,7 @@ import org.jreleaser.model.api.deploy.maven.MavenCentralMavenDeployer.Stage
 import java.util.Properties
 
 plugins {
+    `lifecycle-base`
     id("org.jreleaser")
 }
 
@@ -12,8 +13,7 @@ val publishAllModulesToStagingRepository by tasks.registering {
 }
 
 tasks {
-    register<Delete>("cleanStagingRepo") {
-        description = "Deletes the staging repository directory."
+    clean {
         delete(stagingRepoDir)
     }
     jreleaserDeploy {
