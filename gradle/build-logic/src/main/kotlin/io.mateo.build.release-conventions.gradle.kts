@@ -51,7 +51,11 @@ jreleaser {
                     checksums = false
                     verifyPom = false
                     namespace = "io.mateo"
-                    stage = Stage.UPLOAD
+                    stage =
+                        providers
+                            .environmentVariable("JRELEASER_MAVENCENTRAL_STAGE")
+                            .map(Stage::of)
+                            .orElse(Stage.UPLOAD)
                 }
             }
         }
