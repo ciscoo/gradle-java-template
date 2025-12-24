@@ -1,0 +1,104 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseVersion:
+        description: Version to be released (e.g. "1.0.0-rc.1")
+        required: true
+        type: string
+      deploymentId:
+        description: Maven Central Publish Portal deployment ID
+        required: true
+        type: string
+
+permissions: {}
+
+env:
+  RELEASE_TAG: v${{ inputs.releaseVersion }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  close-milestone:
+    name: Close Milestone
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Check Out Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Close Milestone
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const closeGithubMilestone = require('./.github/scripts/close-github-milestone.js');
+            closeGithubMilestone({ github, context });
+
+  publish-release:
+    name: Publish Release
+    needs: close-milestone
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          ref: "refs/tags/${{ env.RELEASE_TAG }}"
+          persist-credentials: false
+      - name: Publish Deployment
+        uses: ./.github/actions/run-gradle
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          JRELEASER_MAVENCENTRAL_STAGE: PUBLISH
+          JRELEASER_MAVENCENTRAL_DEPLOYMENT_ID: ${{ inputs.deploymentId }}
+        with:
+          arguments: jreleaserDeploy
+
+  build-documentation:
+    name: Publish Documentation
+    needs: publish-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          ref: "refs/tags/${{ env.RELEASE_TAG }}"
+          persist-credentials: false
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: "${{ github.workspace }}/documentation/.nvmrc"
+          cache: npm
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Build Documentation
+        uses: ./.github/actions/run-gradle
+        with:
+          arguments: :documentation:astroBuild -q
+      - name: Upload Artifact
+        id: upload
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: documentation/build/dist
+
+  deploy-documentation:
+    name: Deploy Documentation
+    needs: build-documentation
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy Documentation
+        uses: actions/deploy-pages@v4
