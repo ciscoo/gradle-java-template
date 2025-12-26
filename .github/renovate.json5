@@ -3,5 +3,11 @@
   "extends": [
     "config:best-practices"
   ],
-  "platformAutomerge": false
+  "platformAutomerge": false,
+  "packageRules": [
+    {
+      "matchDatasources": ["github-actions"],
+      "abandonmentThreshold": "2 years"
+    }
+  ]
 }
