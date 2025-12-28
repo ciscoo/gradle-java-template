@@ -31,7 +31,7 @@ jobs:
               issue_number = payload.pull_request.number
             }
             github.rest.issues.addLabels({
-              issue_number
+              issue_number,
               owner: repository.owner.login,
               repo: repository.name,
               labels: ["status: new"]
