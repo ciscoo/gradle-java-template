@@ -23,12 +23,15 @@ jobs:
       - uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         with:
           script: |
-            console.log(JSON.stringify(context))
             const { payload } = context
-            const { issue } = payload
-            const { repository } = payload
+            let issue_number
+            if (context.eventName === "issues") {
+              issue_number = payload.issue.number
+            } else {
+              issue_number = payload.pull_request.number
+            }
             github.rest.issues.addLabels({
-              issue_number: issue.number,
+              issue_number
               owner: repository.owner.login,
               repo: repository.name,
               labels: ["status: new"]
