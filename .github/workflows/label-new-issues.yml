@@ -30,6 +30,7 @@ jobs:
             } else {
               issue_number = payload.pull_request.number
             }
+            const { repository } = payload
             github.rest.issues.addLabels({
               issue_number,
               owner: repository.owner.login,
