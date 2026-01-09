@@ -10,7 +10,7 @@
     "format:check": "prettier --check ."
   },
   "devDependencies": {
-    "@astrojs/starlight": "0.37.1",
+    "@astrojs/starlight": "0.37.2",
     "astro": "5.16.6",
     "prettier": "3.7.4",
     "sharp": "0.34.5"
