@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@astrojs/starlight": "0.37.6",
-    "astro": "5.17.1",
+    "astro": "5.17.2",
     "prettier": "3.8.1",
     "sharp": "0.34.5"
   }
