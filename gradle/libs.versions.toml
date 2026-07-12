@@ -1,6 +1,6 @@
 [versions]
 springBoot = "4.0.6"
-springCloud = "2025.1.1"
+springCloud = "2025.1.2"
 junit = "6.1.0"
 spotless = "8.8.0"
 ktlint = "1.8.0"
