@@ -1,45 +1,20 @@
 pluginManagement {
-    includeBuild("gradle/build-plugins")
     repositories {
         gradlePluginPortal()
     }
+    includeBuild("build-logic-settings")
 }
+
+includeBuild("build-logic")
 
 plugins {
-    id("io.mateo.build.settings-conventions")
+    id("settings-conventions")
+    id("central-publishing-conventions")
 }
-
-dependencyResolutionManagement {
-    repositories {
-        mavenCentral()
-    }
-}
-
-includeBuild("gradle/build-logic")
 
 rootProject.name = "gradle-java-template"
 
-include("documentation")
-include("example-api")
-
-fun ProjectDescriptor.ensureBuildFileExists() {
-    buildFileName = "$name.gradle.kts"
-    require(buildFile.isFile) { "$buildFile must exist" }
-}
-
-fun requireBuildFileName(projectDescriptor: ProjectDescriptor) {
-    projectDescriptor.ensureBuildFileExists()
-    projectDescriptor.children.forEach {
-        requireBuildFileName(it)
-    }
-}
-
-rootProject.children.forEach {
-    it.ensureBuildFileExists()
-    requireBuildFileName(it)
-}
-
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-
-startParameter.warningMode = WarningMode.All
+enableFeaturePreview("NO_IMPLICIT_LOOKUP_IN_PARENT_PROJECTS")
+enableFeaturePreview("ENHANCED_GRAPH_ORDERING")

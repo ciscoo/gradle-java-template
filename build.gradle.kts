@@ -1,6 +1,5 @@
 plugins {
-    id("io.mateo.build.release-conventions")
-    id("io.mateo.build.code-style-conventions")
+    base
 }
 
 group = "io.mateo"

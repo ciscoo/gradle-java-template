@@ -1,29 +1,19 @@
 [versions]
-springBoot = "4.1.0"
-springCloud = "2025.1.2"
-junit = "6.1.2"
 spotless = "8.8.0"
-ktlint = "1.8.0"
-jacoco = "0.8.15"
-palantirJavaFormat = "2.96.0"
 
 [libraries]
-springBoot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBoot" }
-springCloud-dependencies = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloud" }
-junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
-junit-platformLauncher = { module = "org.junit.platform:junit-platform-launcher" }
-jacoco-agent = { module = "org.jacoco:org.jacoco.agent", version.ref = "jacoco" }
-jspecify = { module = "org.jspecify:jspecify", version = "1.0.0" }
-assertj-core = { module = "org.assertj:assertj-core", version = "3.27.7" }
+assertj = { module = "org.assertj:assertj-core", version = "3.27.7" }
 checkstyle = { module = "com.puppycrawl.tools:checkstyle", version = "13.8.0" }
-gradle-jreleaser = { module = "org.jreleaser:org.jreleaser.gradle.plugin", version = "1.25.0" }
-gradle-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
-gradle-plantirJavaFormat = { module = "com.palantir.javaformat:palantir-java-format", version.ref = "palantirJavaFormat" }
-gradle-ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlint" }
-gradle-foojarResolverConvention = { module = "org.gradle.toolchains.foojay-resolver-convention:org.gradle.toolchains.foojay-resolver-convention.gradle.plugin", version = "1.0.0" }
+jacoco = { module = "org.jacoco:org.jacoco.agent", version = "0.8.15" }
+jspecify = { module = "org.jspecify:jspecify", version = "1.0.0" }
+junit-bom = { module = "org.junit:junit-bom", version = "6.1.2" }
+junit-platformLauncher = { module = "org.junit.platform:junit-platform-launcher" }
+foojayResolverConvention = { module = "org.gradle.toolchains.foojay-resolver-convention:org.gradle.toolchains.foojay-resolver-convention.gradle.plugin", version = "1.0.0" }
+ktlint = { module = "com.pinterest.ktlint:ktlint-cli", version = "1.8.0" }
+nmcpSettings = { module = "com.gradleup.nmcp.settings:com.gradleup.nmcp.settings.gradle.plugin", version = "1.6.1" }
+palantirJavaFormat = { module = "com.palantir.javaformat:palantir-java-format", version = "2.96.0" }
+spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 
 [plugins]
 build-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 spotless = { id = "com.diffplug.spotless" }
-node = { id = "com.github.node-gradle.node", version = "7.1.0" }
-foojay = { id = "org.gradle.toolchains.foojay-resolver-convention" }
