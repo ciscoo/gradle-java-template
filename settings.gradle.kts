@@ -12,6 +12,12 @@ plugins {
     id("central-publishing-conventions")
 }
 
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
 rootProject.name = "gradle-java-template"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
