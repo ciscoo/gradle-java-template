@@ -3,11 +3,9 @@ plugins {
     signing
 }
 
-val publicationName = "mavenJava"
-
 publishing {
     publications {
-        register<MavenPublication>(publicationName) {
+        register<MavenPublication>("maven") {
             pom {
                 name = provider { project.name }
                 description =
@@ -35,28 +33,24 @@ publishing {
                     }
                 }
             }
-        }
-    }
-}
 
-pluginManager.withPlugin("java") {
-    val sourceSets = the<SourceSetContainer>()
-    publishing.publications.named<MavenPublication>(publicationName) {
-        from(components["java"])
-        versionMapping {
-            usage(Usage.JAVA_API) {
-                fromResolutionOf(sourceSets[SourceSet.MAIN_SOURCE_SET_NAME].runtimeClasspathConfigurationName)
+            pluginManager.withPlugin("java") {
+                val sourceSets = the<SourceSetContainer>()
+                from(components["java"])
+                versionMapping {
+                    usage(Usage.JAVA_API) {
+                        fromResolutionOf(sourceSets[SourceSet.MAIN_SOURCE_SET_NAME].runtimeClasspathConfigurationName)
+                    }
+                    usage(Usage.JAVA_RUNTIME) {
+                        fromResolutionResult()
+                    }
+                }
             }
-            usage(Usage.JAVA_RUNTIME) {
-                fromResolutionResult()
+
+            pluginManager.withPlugin("java-platform") {
+                from(components["javaPlatform"])
             }
         }
-    }
-}
-
-pluginManager.withPlugin("java-platform") {
-    publishing.publications.named<MavenPublication>(publicationName) {
-        from(components["javaPlatform"])
     }
 }
 
