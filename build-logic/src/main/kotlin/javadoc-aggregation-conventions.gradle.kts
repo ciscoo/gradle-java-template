@@ -1,3 +1,6 @@
+import java.nio.charset.StandardCharsets
+import java.util.Locale
+
 val javadoc =
     configurations.dependencyScope("javadoc") {
         description = "Dependencies for Javadoc aggregation."
@@ -38,6 +41,8 @@ val javadocAggregate =
             windowTitle = docTitle
             memberLevel = JavadocMemberLevel.PROTECTED
             outputLevel = JavadocOutputLevel.QUIET
+            encoding = StandardCharsets.UTF_8.name()
+            locale = Locale.ENGLISH.language
             author()
             splitIndex()
             use()
