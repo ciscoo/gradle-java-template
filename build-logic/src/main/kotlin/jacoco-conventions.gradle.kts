@@ -10,7 +10,7 @@ jacoco {
             .findLibrary("jacoco")
             .orElseThrow()
             .get()
-            .version!!
+            .versionConstraint.requiredVersion
 }
 
 pluginManager.withPlugin("java") {
