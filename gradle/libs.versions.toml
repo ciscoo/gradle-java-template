@@ -3,7 +3,7 @@ spotless = "8.8.0"
 
 [libraries]
 assertj = { module = "org.assertj:assertj-core", version = "3.27.7" }
-checkstyle = { module = "com.puppycrawl.tools:checkstyle", version = "13.8.0" }
+checkstyle = { module = "com.puppycrawl.tools:checkstyle", version = "14.1.0" }
 jacoco = { module = "org.jacoco:org.jacoco.agent", version = "0.8.15" }
 jspecify = { module = "org.jspecify:jspecify", version = "1.0.0" }
 junit-bom = { module = "org.junit:junit-bom", version = "6.1.2" }
