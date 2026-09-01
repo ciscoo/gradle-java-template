@@ -54,3 +54,11 @@ pluginManager.withPlugin("lifecycle-base") {
         delete(javadocAggregate)
     }
 }
+
+val publishedProjects: List<Project> = (extra["publishedProjectPaths"] as List<*>).map { project(it as String) }
+
+dependencies {
+    publishedProjects.forEach {
+        javadoc(it)
+    }
+}
