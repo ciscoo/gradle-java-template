@@ -5,5 +5,6 @@ plugins {
 description = "Example project"
 
 dependencies {
-    implementation(libs.jspecify)
+    api(projects.exampleApi)
+    api(libs.jspecify)
 }

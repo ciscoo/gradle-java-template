@@ -17,6 +17,6 @@
 package io.mateo;
 
 /**
- * Example record.
+ * An Example record.
  */
 public record Example() {}

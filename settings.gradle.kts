@@ -35,6 +35,7 @@ run {
 
     includeProject("documentation")
     includeProject("example", published = true)
+    includeProject("example-api", published = true)
 
     gradle.lifecycle.beforeProject {
         extra["publishedProjectPaths"] = publishedProjectPaths.values.toList()
