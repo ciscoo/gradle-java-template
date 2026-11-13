@@ -11,7 +11,7 @@ abstract class JavaToolchainExtension
         providers: ProviderFactory,
     ) {
         companion object {
-            const val DEFAULT_TARGET_VERSION = 25
+            const val DEFAULT_TARGET_VERSION = 27
             private const val DEFAULT_RELEASE_VERSION = 17
         }
 

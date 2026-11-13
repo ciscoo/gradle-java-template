@@ -23,8 +23,8 @@ jobs:
       fail-fast: false
       matrix:
         java:
-          - version: 25
-          - version: 26
+          - version: 27
+          - version: 28
             type: ea
     name: "OpenJDK ${{ matrix.java.version }}${{ matrix.java.type != null && format(' ({0})', matrix.java.type) || ''}}"
     runs-on: ubuntu-latest
