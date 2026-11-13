@@ -55,10 +55,10 @@ pluginManager.withPlugin("lifecycle-base") {
     }
 }
 
-val publishedProjects: List<Project> = (extra["publishedProjectPaths"] as List<*>).map { project(it as String) }
+val publishedProjects: List<String> = (extra["publishedProjectPaths"] as List<*>).map { it as String }
 
 dependencies {
     publishedProjects.forEach {
-        javadoc(it)
+        javadoc(project(it))
     }
 }
