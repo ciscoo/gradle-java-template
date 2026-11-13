@@ -33,7 +33,6 @@ run {
         }
     }
 
-    includeProject("documentation")
     includeProject("example", published = true)
     includeProject("example-api", published = true)
 
