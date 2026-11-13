@@ -56,7 +56,8 @@ jobs:
     name: Publish Snapshot Artifacts
     needs: Linux
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.repository == 'ciscoo/gradle-java-template' && (startsWith(github.ref, 'refs/heads/releases/') || github.ref == 'refs/heads/main')
+#    if: github.event_name == 'push' && github.repository == 'ciscoo/gradle-java-template' && (startsWith(github.ref, 'refs/heads/releases/') || github.ref == 'refs/heads/main')
+    if: false
     steps:
       - name: Check Out Repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
