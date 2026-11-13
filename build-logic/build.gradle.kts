@@ -13,3 +13,9 @@ spotless {
 dependencies {
     implementation(libs.spotless)
 }
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_26
+    }
+}

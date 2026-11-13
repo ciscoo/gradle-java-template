@@ -10,8 +10,14 @@ dependencies {
 
 spotless {
     kotlinGradle {
-//        ktlint(libs.versions.ktlint.get())
+        ktlint(libs.ktlint.get().version)
         target("**/*.settings.gradle.kts")
         target("**/*.gradle.kts")
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_26
     }
 }
