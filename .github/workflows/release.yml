@@ -72,22 +72,23 @@ jobs:
           fetch-depth: 1
           ref: "refs/tags/${{ env.RELEASE_TAG }}"
           persist-credentials: false
-      - name: Setup Node.js
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+      - name: Setup Python
+        uses: actions/setup-python@v6
         with:
-          node-version-file: "${{ github.workspace }}/documentation/.nvmrc"
-          cache: npm
+          python-version-file: 'documentation/.python-version'
       - name: Setup Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
+      - name: Install Zensical
+        run: pip install zensical
       - name: Build Documentation
         uses: ./.github/actions/run-gradle
         with:
-          arguments: :documentation:astroBuild -q
+          arguments: :documentation:prepareDocs -q
       - name: Upload Artifact
         id: upload
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
-          path: documentation/build/dist
+          path: documentation/build/gh-pages
 
   deploy-documentation:
     name: Deploy Documentation
