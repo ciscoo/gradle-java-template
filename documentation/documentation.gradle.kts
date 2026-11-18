@@ -11,15 +11,16 @@ dependencies {
 }
 
 tasks {
-    val docsBuild = register<Exec>("docsBuild") {
-        description = "Builds the Zensical documentation site."
-        inputs.files(javadocAggregate)
-        inputs.dir("docs")
-        inputs.file("zensical.toml")
-        outputs.dir(layout.buildDirectory.dir("site"))
-        executable = "uv"
-        args = listOf("run", "zensical", "build", "--clean")
-    }
+    val docsBuild =
+        register<Exec>("docsBuild") {
+            description = "Builds the Zensical documentation site."
+            inputs.files(javadocAggregate)
+            inputs.dir("docs")
+            inputs.file("zensical.toml")
+            outputs.dir(layout.buildDirectory.dir("site"))
+            executable = "uv"
+            args = listOf("run", "zensical", "build", "--clean")
+        }
     register<Sync>("prepareDocs") {
         description = "Prepares the documentation site for GitHub Pages upload."
         into(layout.buildDirectory.dir("gh-pages"))
