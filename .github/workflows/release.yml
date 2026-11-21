@@ -73,7 +73,7 @@ jobs:
           ref: "refs/tags/${{ env.RELEASE_TAG }}"
           persist-credentials: false
       - name: Setup Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version-file: 'documentation/.python-version'
       - name: Setup Pages
