@@ -5,9 +5,12 @@ plugins {
 
 description = "Gradle Java Template Documentation"
 
+val publishedProjects = extra["publishedProjectPaths"] as List<Any?>
+
 dependencies {
-    javadoc(projects.example)
-    javadoc(projects.exampleApi)
+    publishedProjects.forEach {
+        javadoc(project(it as String))
+    }
 }
 
 tasks {
